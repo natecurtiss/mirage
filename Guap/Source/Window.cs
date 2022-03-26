@@ -1,5 +1,5 @@
-﻿using Silk.NET.Windowing;
-using Native = Silk.NET.Windowing.Window;
+﻿using Silk.NET.Input;
+using Silk.NET.Windowing;
 
 namespace Guap;
 
@@ -19,11 +19,14 @@ public sealed class Window
 
     public void Close() => _native?.Close();
 
-    internal void Load(Action onOpen, Action onClose, Action<float> onUpdate, Action onRender)
+    internal void Load(Action onOpen, Action onClose, Action<float> onUpdate, Action onRender, Action<Guap.Input.Key> onKeyPress, Action<Guap.Input.Key> onKeyRelease)
     {
-        _native = Native.Create(_options);
+        _native = Silk.NET.Windowing.Window.Create(_options);
         _native.Load += () =>
         {
+            var input = _native.CreateInput().Keyboards[0];
+            input.KeyDown += (_, key, _) => onKeyPress((Guap.Input.Key) (int) key);
+            input.KeyUp += (_, key, _) => onKeyRelease((Guap.Input.Key) (int) key);
             _native.Center();
             onOpen();
         };

@@ -20,7 +20,7 @@ public sealed class Game : IDisposable
         
     }
 
-    public void Start() => _window.Load(_world.Start, Dispose, Update, Render);
+    public void Start() => _window.Load(_world.Start, Dispose, Update, Render, _keyboard.Press, _keyboard.Release);
 
     void Update(float dt)
     {
