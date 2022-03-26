@@ -10,11 +10,11 @@ public sealed class Sprite : IDisposable
     internal readonly Texture Texture;
     readonly Entity _entity;
 
-    internal Sprite(Entity entity, GL gl, string path)
+    internal Sprite(GL gl, string path, Entity entity)
     {
-        _entity = entity;
         Shader = new(gl, "Assets/Shaders/sprite.vert".Find(), "Assets/Shaders/sprite.frag".Find());
         Texture = new(gl, path);
+        _entity = entity;
     }
 
     public void Dispose()

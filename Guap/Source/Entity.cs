@@ -18,7 +18,7 @@ public abstract class Entity : IDisposable
     protected string Texture
     {
         get => Sprite.Texture.Path;
-        set => Sprite = new(this, _gl, value);
+        set => Sprite = new(_gl, value, this);
     }
 
     protected World World { get; private set; }
@@ -30,7 +30,11 @@ public abstract class Entity : IDisposable
     protected virtual void OnUpdate(float dt) { }
     protected virtual void OnDestroy() { }
 
-    public void Dispose() => Sprite?.Dispose();
+    public void Dispose()
+    {
+        Sprite?.Dispose();
+        GC.SuppressFinalize(this);
+    }
 
     internal void Initialize(GL gl, World world, Renderer renderer, Camera camera, Window window, Keyboard keyboard)
     {

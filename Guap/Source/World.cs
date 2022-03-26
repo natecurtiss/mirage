@@ -6,16 +6,19 @@ namespace Guap;
 
 public sealed class World : IDisposable
 {
+    readonly List<Entity> _starting = new();
     readonly List<Entity> _entities = new();
-    readonly GL _gl;
+    readonly Graphics _graphics;
     readonly Renderer _renderer;
     readonly Camera _camera;
     readonly Window _window;
     readonly Keyboard _keyboard;
 
+    bool _hasStarted;
+
     public World(Window window, Keyboard keyboard, Graphics graphics, Renderer renderer, Camera camera)
     {
-        _gl = graphics.Lib;
+        _graphics = graphics;
         _renderer = renderer;
         _camera = camera;
         _window = window;
@@ -33,8 +36,10 @@ public sealed class World : IDisposable
     public World Spawn<T>(out T entity) where T : Entity, new()
     {
         entity = new();
-        entity.Initialize(_gl, this, _renderer, _camera, _window, _keyboard);
-        _entities.Add(entity);
+        if (!_hasStarted)
+            _starting.Add(entity);
+        else
+            Create(entity);
         return this;
     }
 
@@ -47,8 +52,10 @@ public sealed class World : IDisposable
 
     internal void Start()
     {
-        foreach (var entity in _entities) 
-            entity.Start();
+        _hasStarted = true;
+        foreach (var entity in _starting) 
+            Create(entity);
+        _starting.Clear();
     }
 
     internal void Update(float dt)
@@ -61,5 +68,13 @@ public sealed class World : IDisposable
     {
         foreach (var entity in _entities)
             entity.Render();
+    }
+
+    void Create(Entity entity)
+    {
+        // TODO: Null object pattern here.
+        entity.Initialize(_graphics.Lib, this, _renderer, _camera, _window, _keyboard);
+        _entities.Add(entity);
+        entity.Start();
     }
 }

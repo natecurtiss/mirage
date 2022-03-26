@@ -1,4 +1,7 @@
-﻿using Silk.NET.OpenGL;
+﻿using System.Drawing;
+using System.Drawing.Imaging;
+using Silk.NET.OpenGL;
+using PixelFormat = Silk.NET.OpenGL.PixelFormat;
 
 namespace Guap.Rendering;
 
@@ -6,20 +9,34 @@ sealed class Texture : IDisposable
 {
     public readonly string Path;
     readonly GL _gl;
-    
+    readonly uint _handle;
+
     public Texture(GL gl, string path)
     {
-        _gl = gl;
         Path = path;
+        _gl = gl;
+
+        using var image = new Bitmap(path);
+        image.RotateFlip(RotateFlipType.RotateNoneFlipY);
+        
+        _handle = _gl.GenTexture();
+        Bind();
+        
+        var rect = new Rectangle(0, 0, image.Width, image.Height);
+        var data = image.LockBits(rect, ImageLockMode.ReadOnly, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+        _gl.TexImage2D(TextureTarget.Texture2D, 0, InternalFormat.Rgba, (uint) image.Width, (uint) image.Height, 0, PixelFormat.Rgba, PixelType.UnsignedByte, data.Scan0);
+        _gl.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapS, (int) GLEnum.Repeat);
+        _gl.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapT, (int) GLEnum.Repeat);
+        _gl.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int) GLEnum.Linear);
+        _gl.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int) GLEnum.Linear);
+        _gl.GenerateMipmap(TextureTarget.Texture2D);
     }
 
-    public void Bind()
+    public void Bind(TextureUnit textureSlot = TextureUnit.Texture0)
     {
-        
+        _gl.ActiveTexture(textureSlot);
+        _gl.BindTexture(TextureTarget.Texture2D, _handle);
     }
 
-    public void Dispose()
-    {
-        
-    }
+    public void Dispose() => _gl.DeleteTexture(_handle);
 }

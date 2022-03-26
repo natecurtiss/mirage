@@ -1,8 +1,6 @@
-﻿using Guap;
+﻿namespace Guap.Input;
 
-namespace Pong;
-
-sealed class InputDebugger : Entity
+public sealed class InputDebugger : Entity
 {
     protected override void OnStart() => Keyboard.OnKeyPress += k => Console.WriteLine(k);
 }
