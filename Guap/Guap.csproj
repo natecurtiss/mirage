@@ -9,7 +9,6 @@
 
     <ItemGroup>
       <PackageReference Include="Silk.NET.Input" Version="2.14.0" />
-      <PackageReference Include="Silk.NET.Input.Common" Version="2.14.0" />
       <PackageReference Include="Silk.NET.OpenGL" Version="2.14.0" />
       <PackageReference Include="Silk.NET.Windowing" Version="2.14.0" />
     </ItemGroup>
