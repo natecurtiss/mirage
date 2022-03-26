@@ -5,8 +5,8 @@ namespace Guap.Input;
 
 public sealed class Keyboard
 {
-    public event Action<Key>? OnKeyPress;
-    public event Action<Key>? OnKeyRelease;
+    public event Action<Key> OnKeyPress;
+    public event Action<Key> OnKeyRelease;
     
     readonly Dictionary<Key, KeyState> _keys = new();
     readonly IEnumerable<Key> _all = Enum.GetValues<Key>();

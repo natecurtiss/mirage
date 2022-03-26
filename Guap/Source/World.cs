@@ -24,6 +24,11 @@ public sealed class World
         return this;
     }
 
+    internal void Start()
+    {
+        
+    }
+
     internal void Update(float dt)
     {
         
