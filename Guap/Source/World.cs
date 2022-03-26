@@ -4,6 +4,12 @@ public sealed class World
 {
     readonly List<Entity> _entities = new();
 
+    public World Spawn<T>(out T entity) where T : Entity, new()
+    {
+        entity = Spawn<T>();
+        return this;
+    }
+
     public T Spawn<T>() where T : Entity, new()
     {
         var e = new T();
@@ -11,10 +17,11 @@ public sealed class World
         return e;
     }
 
-    public void Kill(Entity entity)
+    public World Kill(Entity entity)
     {
         _entities.Remove(entity);
         entity.Destroy();
+        return this;
     }
 
     internal void Update(float dt)
