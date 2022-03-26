@@ -79,6 +79,8 @@ public abstract class Entity : IDisposable
     protected virtual void OnUpdate(float dt) { }
     protected virtual void OnDestroy() { }
 
+    public Bounds Bounds() => new(Position, Scale);
+
     public void Dispose()
     {
         Sprite?.Dispose();
@@ -102,11 +104,13 @@ public abstract class Entity : IDisposable
     }
 
     internal void Update(float dt) => OnUpdate(dt);
+    
     internal void Render()
     {
         if (Sprite is not null)
             _renderer.Queue(Sprite);
     }
+    
     internal void Destroy() => OnDestroy();
 }
 
