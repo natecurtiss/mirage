@@ -14,8 +14,4 @@
       <PackageReference Include="Silk.NET.Windowing" Version="2.14.0" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Assets\Sprites" />
-    </ItemGroup>
-
 </Project>
