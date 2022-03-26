@@ -1,26 +1,42 @@
-﻿using Guap.Input;
+﻿using Guap.Rendering;
+using Guap.Input;
+using Silk.NET.OpenGL;
 
 namespace Guap;
 
-public sealed class Game : IDisposable
+public sealed class Game
 {
+    readonly World _world;
     readonly Window _window;
     readonly Keyboard _keyboard;
-    readonly World _world;
+    readonly Graphics _graphics;
+    readonly Renderer _renderer;
 
-    public Game(Window window, Keyboard keyboard, World world)
+    public GL GL { get; private set; }
+
+    public Game(World world, Window window, Keyboard keyboard, Graphics graphics, Renderer renderer)
     {
+        _world = world;
         _window = window;
         _keyboard = keyboard;
-        _world = world;
+        _graphics = graphics;
+        _renderer = renderer;
     }
     
     public void Dispose()
     {
-        
+        _world.Dispose();
+        _renderer.Dispose();
+        _window.Dispose();
+        _graphics.Dispose();
     }
 
-    public void Start() => _window.Load(_world.Start, Dispose, Update, Render, _keyboard.Press, _keyboard.Release);
+    public void Start() => _window.Load(() =>
+    {
+        _graphics.Lib = _window.CreateGraphicsLibrary();
+        _renderer.Initialize(_graphics.Lib);
+        _world.Start();
+    }, Dispose, Update, Render, _keyboard.Press, _keyboard.Release);
 
     void Update(float dt)
     {
@@ -31,5 +47,6 @@ public sealed class Game : IDisposable
     void Render()
     {
         _world.Render();
+        _renderer.Display();
     }
 }

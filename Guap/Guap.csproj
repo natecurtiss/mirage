@@ -4,6 +4,7 @@
         <TargetFramework>net6.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>disable</Nullable>
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     </PropertyGroup>
 
     <ItemGroup>
@@ -11,6 +12,10 @@
       <PackageReference Include="Silk.NET.Input.Common" Version="2.14.0" />
       <PackageReference Include="Silk.NET.OpenGL" Version="2.14.0" />
       <PackageReference Include="Silk.NET.Windowing" Version="2.14.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Assets\Sprites" />
     </ItemGroup>
 
 </Project>

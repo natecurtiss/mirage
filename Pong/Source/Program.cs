@@ -1,8 +1,12 @@
-﻿using Guap;
+﻿using Pong;
+using Guap;
+using Guap.Rendering;
 using Guap.Input;
-using Pong;
 
 var window = new Window("PONG", 1280, 720);
 var keyboard = new Keyboard();
-var world = new World(keyboard).Spawn<Foo>();
-new Game(window, keyboard, world).Start();
+var graphics = new Graphics();
+var camera = new Camera(window);
+var renderer = new Renderer(camera);
+var world = new World(window, keyboard, graphics, renderer, camera).Spawn<InputDebugger>();
+new Game(world, window, keyboard, graphics, renderer).Start();

@@ -1,15 +1,21 @@
 ﻿using Silk.NET.Input;
+using Silk.NET.OpenGL;
 using Silk.NET.Windowing;
 
 namespace Guap;
 
-public sealed class Window
+public sealed class Window : IDisposable
 {
+    public readonly int Width;
+    public readonly int Height;
     readonly WindowOptions _options;
+    
     IWindow _native;
 
     public Window(string title, uint width, uint height, bool maximized = false, bool resizable = true)
     {
+        Width = (int) width;
+        Height = (int) height;
         _options = WindowOptions.Default;
         _options.Title = title;
         _options.Size = new((int) width, (int) height);
@@ -17,7 +23,11 @@ public sealed class Window
         _options.WindowState = maximized ? WindowState.Maximized : WindowState.Normal;
     }
 
+    public void Dispose() => _native?.Dispose();
+
     public void Close() => _native?.Close();
+
+    internal GL CreateGraphicsLibrary() => _native?.CreateOpenGL();
 
     internal void Load(Action onOpen, Action onClose, Action<float> onUpdate, Action onRender, Action<Guap.Input.Key> onKeyPress, Action<Guap.Input.Key> onKeyRelease)
     {

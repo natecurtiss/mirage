@@ -1,6 +1,6 @@
 namespace Guap.Input;
 
-public enum KeyState
+enum KeyState
 {
     Down, 
     Up, 
