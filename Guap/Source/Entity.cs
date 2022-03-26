@@ -1,4 +1,5 @@
-﻿using System.Numerics;
+﻿using System.Drawing;
+using System.Numerics;
 using Guap.Rendering;
 using Guap.Input;
 using Silk.NET.OpenGL;
@@ -16,22 +17,20 @@ public abstract class Entity : IDisposable
     Camera _camera;
     Window _window;
     Keyboard _keyboard;
-    string _startingTexture;
 
     public Vector2 Position { get; set; }
     public float Rotation { get; set; }
     public Vector2 Scale { get; set; } = Vector2.One;
-    public Sprite Sprite { get; private set; }
+    Sprite _sprite;
     
     protected string Texture
     {
-        get => Sprite.Texture.Path;
+        get => _sprite.Texture.Path;
         set
         {
             if (_gl is null)
-                _startingTexture = value;
-            else
-                Sprite = new(_gl, value, this);
+                throw new NullReferenceException(_nullError.Replace(_variableNameHere, "Entity.Texture"));
+            _sprite = new(_gl, value, this);
         }
     }
     protected World World
@@ -83,7 +82,7 @@ public abstract class Entity : IDisposable
 
     public void Dispose()
     {
-        Sprite?.Dispose();
+        _sprite?.Dispose();
         GC.SuppressFinalize(this);
     }
 
@@ -97,20 +96,13 @@ public abstract class Entity : IDisposable
         Keyboard = keyboard;
     }
     
-    internal void Start()
-    {
-        Texture = _startingTexture;
-        OnStart();
-    }
-
+    internal void Start() => OnStart();
     internal void Update(float dt) => OnUpdate(dt);
-    
     internal void Render()
     {
-        if (Sprite is not null)
-            _renderer.Queue(Sprite);
+        if (_sprite is not null)
+            _renderer.Queue(_sprite);
     }
-    
     internal void Destroy() => OnDestroy();
 }
 

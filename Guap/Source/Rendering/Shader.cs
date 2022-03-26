@@ -54,6 +54,14 @@ sealed class Shader : IDisposable
         _gl.Uniform1(location, value);
     }
 
+    public void SetUniform(string name, Vector4 value)
+    {
+        var location = _gl.GetUniformLocation(_shader, name);
+        if (location == -1)
+            throw new MissingUniformOnShaderException($"{name} uniform not found on shader.");
+        _gl.Uniform4(location, value.X, value.Y, value.Z, value.W);
+    }
+
     uint Load(ShaderType type, string path)
     {
         var source = File.ReadAllText(path);

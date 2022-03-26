@@ -1,4 +1,5 @@
-﻿using Silk.NET.OpenGL;
+﻿using System.Numerics;
+using Silk.NET.OpenGL;
 
 namespace Guap.Rendering;
 
@@ -32,7 +33,7 @@ public sealed class Renderer : IDisposable
         _window = window;
     }
 
-    public void Initialize(GL gl)
+    internal void Initialize(GL gl)
     {
         _gl = gl;
         _vbo = new(_gl, _vertices, BufferTargetARB.ArrayBuffer);
@@ -43,9 +44,9 @@ public sealed class Renderer : IDisposable
         _vao.VertexAttributePointer(1, 2, VertexAttribPointerType.Float, 5, 3);
     }
 
-    public void Queue(Sprite sprite) => _sprites.Add(sprite);
+    internal void Queue(Sprite sprite) => _sprites.Add(sprite);
 
-    public unsafe void Display()
+    internal unsafe void Display()
     {
         _gl.Clear(ClearBufferMask.ColorBufferBit);
         _gl.ClearColor(_window.Background);

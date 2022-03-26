@@ -1,10 +1,11 @@
-﻿using System.Numerics;
+﻿using System.Drawing;
+using System.Numerics;
 using Silk.NET.OpenGL;
 using static System.Numerics.Matrix4x4;
 
 namespace Guap.Rendering;
 
-public sealed class Sprite : IDisposable
+sealed class Sprite : IDisposable
 {
     internal readonly Shader Shader;
     internal readonly Texture Texture;
