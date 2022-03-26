@@ -1,6 +1,5 @@
 ﻿using Guap.Rendering;
 using Guap.Input;
-using Silk.NET.OpenGL;
 
 namespace Guap;
 
@@ -15,6 +14,7 @@ public sealed class World : IDisposable
     readonly Keyboard _keyboard;
 
     bool _hasStarted;
+    Action _onStart;
 
     public World(Window window, Keyboard keyboard, Graphics graphics, Renderer renderer, Camera camera)
     {
@@ -32,7 +32,19 @@ public sealed class World : IDisposable
     }
 
     public World Spawn<T>() where T : Entity, new() => Spawn<T>(out _);
+    public World Spawn<TE, TS>(TS settings) where TE : Entity<TS>, new() => Spawn<TE, TS>(out _, settings);
 
+    public World Spawn<TE, TS>(out TE entity, TS settings) where TE : Entity<TS>, new()
+    {
+        entity = new();
+        entity.Configure(settings);
+        if (!_hasStarted)
+            _starting.Add(entity);
+        else
+            Create(entity);
+        return this;
+    }
+    
     public World Spawn<T>(out T entity) where T : Entity, new()
     {
         entity = new();
@@ -50,12 +62,19 @@ public sealed class World : IDisposable
         return this;
     }
 
+    public World OnStart(Action callback)
+    {
+        _onStart += callback;
+        return this;
+    }
+
     internal void Start()
     {
         _hasStarted = true;
         foreach (var entity in _starting) 
             Create(entity);
         _starting.Clear();
+        _onStart?.Invoke();
     }
 
     internal void Update(float dt)

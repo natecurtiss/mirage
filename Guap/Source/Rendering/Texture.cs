@@ -19,7 +19,7 @@ sealed class Texture : IDisposable
 
         using var image = new Bitmap(path);
         image.RotateFlip(RotateFlipType.RotateNoneFlipY);
-        
+
         _handle = _gl.GenTexture();
         Bind();
         
@@ -27,6 +27,7 @@ sealed class Texture : IDisposable
         var data = image.LockBits(rect, ImageLockMode.ReadOnly, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
         var length = data.Stride * data.Height;
         var bytes = new byte[length];
+        
         Marshal.Copy(data.Scan0, bytes, 0, length);
         image.UnlockBits(data);
 

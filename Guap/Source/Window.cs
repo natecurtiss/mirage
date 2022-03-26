@@ -1,4 +1,5 @@
-﻿using Silk.NET.Input;
+﻿using System.Drawing;
+using Silk.NET.Input;
 using Silk.NET.OpenGL;
 using Silk.NET.Windowing;
 
@@ -9,8 +10,9 @@ public sealed class Window : IDisposable
     public readonly int Width;
     public readonly int Height;
     readonly WindowOptions _options;
-    
     IWindow _native;
+
+    public Color Background { get; set; } = Color.Black;
 
     public Window(string title, uint width, uint height, bool maximized = false, bool resizable = true)
     {

@@ -19,13 +19,18 @@ public sealed class Renderer : IDisposable
         1, 2, 3
     };
     readonly Camera _camera;
+    readonly Window _window;
     
     BufferObject<float> _vbo;
     BufferObject<uint> _ebo;
     VertexArrayObject<float, uint> _vao;
     GL _gl;
 
-    public Renderer(Camera camera) => _camera = camera;
+    public Renderer(Camera camera, Window window)
+    {
+        _camera = camera;
+        _window = window;
+    }
 
     public void Initialize(GL gl)
     {
@@ -43,6 +48,7 @@ public sealed class Renderer : IDisposable
     public unsafe void Display()
     {
         _gl.Clear(ClearBufferMask.ColorBufferBit);
+        _gl.ClearColor(_window.Background);
         _vao.Bind();
 
         foreach (var sprite in _sprites)

@@ -14,12 +14,19 @@ public abstract class Entity : IDisposable
     public float Rotation { get; set; }
     public Vector2 Scale { get; set; } = Vector2.One;
     public Sprite Sprite { get; private set; }
-
+    
     protected string Texture
     {
         get => Sprite.Texture.Path;
-        set => Sprite = new(_gl, value, this);
+        set
+        {
+            if (_gl is null)
+                _startingTexture = value;
+            else
+                Sprite = new(_gl, value, this);
+        }
     }
+    string _startingTexture;
 
     protected World World { get; private set; }
     protected Camera Camera { get; private set; }
@@ -46,12 +53,23 @@ public abstract class Entity : IDisposable
         Keyboard = keyboard;
     }
     
-    internal void Start() => OnStart();
+    internal void Start()
+    {
+        Texture = _startingTexture;
+        OnStart();
+    }
+
     internal void Update(float dt) => OnUpdate(dt);
     internal void Render()
     {
-        if (Sprite != null)
+        if (Sprite is not null)
             _renderer.Queue(Sprite);
     }
     internal void Destroy() => OnDestroy();
+}
+
+public abstract class Entity<T> : Entity
+{
+    protected virtual void OnConfigure(T settings) { }
+    internal void Configure(T settings) => OnConfigure(settings);
 }
