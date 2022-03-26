@@ -2,7 +2,6 @@
 using Guap;
 using Guap.Rendering;
 using Guap.Input;
-using System.Numerics;
 
 var window = new Window("PONG", 1280, 720);
 var keyboard = new Keyboard();
@@ -10,8 +9,8 @@ var graphics = new Graphics();
 var camera = new Camera(window);
 var renderer = new Renderer(camera, window);
 var world = new World(window, keyboard, graphics, renderer, camera)
-    .Spawn<Player, PlayerOptions>(out var player1, Configurations.PlayerOne)
-    .Spawn<Player, PlayerOptions>(out var player2, Configurations.PlayerTwo)
+    .Spawn<Player, PaddleOptions>(out var player1, Configurations.PlayerOne)
+    .Spawn<Player, PaddleOptions>(out var player2, Configurations.PlayerTwo)
     .OnStart(() =>
     {
 

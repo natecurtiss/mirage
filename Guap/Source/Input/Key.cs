@@ -2,6 +2,7 @@
 
 public enum Key
 {
+    None = -100,
     Any = -99,
     Unknown = -1,
     Space = 32,
