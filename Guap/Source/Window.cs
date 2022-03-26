@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using System.Numerics;
 using Silk.NET.Input;
 using Silk.NET.OpenGL;
 using Silk.NET.Windowing;
@@ -28,6 +29,8 @@ public sealed class Window : IDisposable
     public void Dispose() => _native?.Dispose();
 
     public void Close() => _native?.Close();
+
+    public Bounds Bounds() => new(Vector2.Zero, new(Width, Height));
 
     internal GL CreateGraphicsLibrary() => _native?.CreateOpenGL();
 
