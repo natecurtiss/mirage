@@ -91,7 +91,6 @@ public sealed class World : IDisposable
 
     void Create(Entity entity)
     {
-        // TODO: Null object pattern here.
         entity.Initialize(_graphics.Lib, this, _renderer, _camera, _window, _keyboard);
         _entities.Add(entity);
         entity.Start();
