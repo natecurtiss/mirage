@@ -1,6 +1,6 @@
 ﻿namespace Guap;
 
-public sealed class Game
+public sealed class Window
 {
     
 }
