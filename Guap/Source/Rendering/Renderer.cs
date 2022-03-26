@@ -8,10 +8,10 @@ public sealed class Renderer : IDisposable
     readonly float[] _vertices =
     { 
         //X     Y     Z     U   V
-         0.5f,  0.5f, 0.0f, 1f, 0f,
-         0.5f, -0.5f, 0.0f, 1f, 1f,
-        -0.5f, -0.5f, 0.0f, 0f, 1f,
-        -0.5f,  0.5f, 0.0f, 0f, 0f
+         0.5f,  0.5f, 0.0f, 1f, 1f,
+         0.5f, -0.5f, 0.0f, 1f, 0f,
+        -0.5f, -0.5f, 0.0f, 0f, 0f,
+        -0.5f,  0.5f, 0.0f, 0f, 1f
     };
     readonly uint[] _indices =
     {

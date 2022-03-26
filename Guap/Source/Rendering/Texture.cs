@@ -1,5 +1,6 @@
 ﻿using System.Drawing;
 using System.Drawing.Imaging;
+using System.Runtime.InteropServices;
 using Silk.NET.OpenGL;
 using PixelFormat = Silk.NET.OpenGL.PixelFormat;
 
@@ -11,7 +12,7 @@ sealed class Texture : IDisposable
     readonly GL _gl;
     readonly uint _handle;
 
-    public Texture(GL gl, string path)
+    public unsafe Texture(GL gl, string path)
     {
         Path = path;
         _gl = gl;
@@ -24,12 +25,20 @@ sealed class Texture : IDisposable
         
         var rect = new Rectangle(0, 0, image.Width, image.Height);
         var data = image.LockBits(rect, ImageLockMode.ReadOnly, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
-        _gl.TexImage2D(TextureTarget.Texture2D, 0, InternalFormat.Rgba, (uint) image.Width, (uint) image.Height, 0, PixelFormat.Rgba, PixelType.UnsignedByte, data.Scan0);
-        _gl.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapS, (int) GLEnum.Repeat);
-        _gl.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapT, (int) GLEnum.Repeat);
-        _gl.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int) GLEnum.Linear);
-        _gl.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int) GLEnum.Linear);
-        _gl.GenerateMipmap(TextureTarget.Texture2D);
+        var length = data.Stride * data.Height;
+        var bytes = new byte[length];
+        Marshal.Copy(data.Scan0, bytes, 0, length);
+        image.UnlockBits(data);
+
+        fixed (void* pixels = &bytes[0])
+        {
+            _gl.TexImage2D(TextureTarget.Texture2D, 0, InternalFormat.Rgba, (uint) image.Width, (uint) image.Height, 0, PixelFormat.Rgba, PixelType.UnsignedByte, pixels);
+            _gl.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapS, (int) GLEnum.Repeat);
+            _gl.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapT, (int) GLEnum.Repeat);
+            _gl.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int) GLEnum.Linear);
+            _gl.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int) GLEnum.Linear);
+            _gl.GenerateMipmap(TextureTarget.Texture2D);
+        }
     }
 
     public void Bind(TextureUnit textureSlot = TextureUnit.Texture0)
