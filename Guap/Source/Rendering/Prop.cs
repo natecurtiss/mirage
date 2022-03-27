@@ -4,7 +4,7 @@ public sealed class Prop : Entity<PropOptions>
 {
     PropOptions _options;
 
-    protected override void OnConfigure(PropOptions settings) => _options = settings;
+    protected override void OnConfigure(PropOptions config) => _options = config;
 
     protected override void OnStart()
     {

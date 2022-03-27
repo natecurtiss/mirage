@@ -5,9 +5,9 @@ namespace Pong;
 
 sealed class Ball : Entity<BallOptions>
 {
-    public event Action<PlayerNumber> OnScore;
+    public event Action<PlayerIndex> OnScore;
     public event Action OnServe;
-    public event Action<PlayerNumber> OnShouldServe;
+    public event Action<PlayerIndex> OnShouldServe;
     readonly Random _random = new();
     
     BallOptions _settings;
@@ -16,9 +16,9 @@ sealed class Ball : Entity<BallOptions>
     bool _didBounceThisFrame;
     bool _wasServed;
     
-    protected override void OnConfigure(BallOptions settings)
+    protected override void OnConfigure(BallOptions config)
     {
-        _settings = settings;
+        _settings = config;
         _velocity = _settings.Speed;
     }
 
@@ -26,7 +26,7 @@ sealed class Ball : Entity<BallOptions>
     {
         Texture = "Assets/square.png".Find();
         Scale = _settings.Scale;
-        OnShouldServe?.Invoke(PlayerNumber.One);
+        OnShouldServe?.Invoke(PlayerIndex.One);
     }
 
     protected override void OnUpdate(float dt)
@@ -50,16 +50,16 @@ sealed class Ball : Entity<BallOptions>
             Position = Vector2.Zero;
             _wasServed = false;
             _velocity = _settings.Speed;
-            OnScore?.Invoke(PlayerNumber.One);
-            OnShouldServe?.Invoke(PlayerNumber.One);
+            OnScore?.Invoke(PlayerIndex.One);
+            OnShouldServe?.Invoke(PlayerIndex.One);
         }
         else if (Position.X <= Window.Bounds().Left.X)
         {
             Position = Vector2.Zero;
             _wasServed = false;
             _velocity = _settings.Speed;
-            OnScore?.Invoke(PlayerNumber.Two);
-            OnShouldServe?.Invoke(PlayerNumber.Two);
+            OnScore?.Invoke(PlayerIndex.Two);
+            OnShouldServe?.Invoke(PlayerIndex.Two);
         }
     }
 
@@ -71,10 +71,10 @@ sealed class Ball : Entity<BallOptions>
         _direction = new Vector2(-_direction.X, dir * tilt).Normalized() * _settings.Multiplier;
     }
 
-    public void Serve(PlayerNumber server)
+    public void Serve(PlayerIndex server)
     {
         OnServe?.Invoke();
         _wasServed = true;
-        _direction = Vector2.One * (server == PlayerNumber.One ? 1 : -1);
+        _direction = Vector2.One * (server == PlayerIndex.One ? 1 : -1);
     }
 }

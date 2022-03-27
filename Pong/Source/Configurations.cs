@@ -9,7 +9,7 @@ static class Configurations
     static readonly float _spread = 620f;
     static readonly float _speed = 500f;
     static readonly Func<Keyboard, Timer, bool> _playerServe = (keyboard, timer) => timer.IsDone && keyboard.WasPressed(Key.Any);
-    public static readonly PlayerOptions PlayerOne = new(PlayerNumber.One, -_spread, _speed, 0.1f, (keyboard, _, _) =>
+    public static readonly PlayerOptions PlayerOne = new(PlayerIndex.One, -_spread, _speed, 0.1f, (keyboard, _, _) =>
     {
         if (keyboard.IsDown(Key.W))
             return keyboard.IsUp(Key.S) ? 1 : 0;
@@ -17,7 +17,7 @@ static class Configurations
             return -1;
         return 0;
     }, _playerServe);
-    public static readonly PlayerOptions PlayerTwo = new(PlayerNumber.Two, _spread, _speed, 0.1f, (keyboard, _, _) =>
+    public static readonly PlayerOptions PlayerTwo = new(PlayerIndex.Two, _spread, _speed, 0.1f, (keyboard, _, _) =>
     {
         if (keyboard.IsDown(Key.UpArrow))
             return keyboard.IsUp(Key.DownArrow) ? 1 : 0;
@@ -25,7 +25,7 @@ static class Configurations
             return -1;
         return 0;
     }, _playerServe);
-    public static readonly PlayerOptions AI = new(PlayerNumber.Two, _spread, _speed, 1.5f, (_, ball, player) =>
+    public static readonly PlayerOptions AI = new(PlayerIndex.Two, _spread, _speed, 1.5f, (_, ball, player) =>
     {
         var relative = Math.Clamp(ball.Position.Y - player.Position.Y, -1, 1);
         return (int) relative;

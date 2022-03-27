@@ -1,6 +1,6 @@
 ﻿namespace Pong;
 
-enum PlayerNumber
+enum PlayerIndex
 {
     One, Two
 }

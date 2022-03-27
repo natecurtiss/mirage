@@ -108,6 +108,6 @@ public abstract class Entity : IDisposable
 
 public abstract class Entity<T> : Entity
 {
-    protected virtual void OnConfigure(T settings) { }
+    protected virtual void OnConfigure(T config) { }
     internal void Configure(T settings) => OnConfigure(settings);
 }
