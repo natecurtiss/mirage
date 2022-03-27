@@ -5,12 +5,16 @@ namespace Pong;
 
 sealed class Ball : Entity<BallOptions>
 {
+    public event Action<PlayerNumber> OnScore;
+    public event Action OnServe;
+    public event Action<PlayerNumber> OnShouldServe;
     readonly Random _random = new();
-    BallOptions _settings;
     
+    BallOptions _settings;
     Vector2 _direction = Vector2.One;
     float _velocity;
     bool _didBounceThisFrame;
+    bool _wasServed;
     
     protected override void OnConfigure(BallOptions settings)
     {
@@ -22,10 +26,13 @@ sealed class Ball : Entity<BallOptions>
     {
         Texture = "Assets/square.png".Find();
         Scale = _settings.Scale;
+        OnShouldServe?.Invoke(PlayerNumber.One);
     }
 
     protected override void OnUpdate(float dt)
     {
+        if (!_wasServed)
+            return;
         Position += _direction * _velocity * dt;
         if (_didBounceThisFrame)
         {
@@ -37,6 +44,23 @@ sealed class Ball : Entity<BallOptions>
             _direction = new Vector2(_direction.X, -_direction.Y).Normalized();
             _didBounceThisFrame = true;
         }
+
+        if (Position.X >= Window.Bounds().Right.X)
+        {
+            Position = Vector2.Zero;
+            _wasServed = false;
+            _velocity = _settings.Speed;
+            OnScore?.Invoke(PlayerNumber.One);
+            OnShouldServe?.Invoke(PlayerNumber.One);
+        }
+        else if (Position.X <= Window.Bounds().Left.X)
+        {
+            Position = Vector2.Zero;
+            _wasServed = false;
+            _velocity = _settings.Speed;
+            OnScore?.Invoke(PlayerNumber.Two);
+            OnShouldServe?.Invoke(PlayerNumber.Two);
+        }
     }
 
     public void Bounce()
@@ -45,5 +69,12 @@ sealed class Ball : Entity<BallOptions>
         _velocity *= _settings.Multiplier;
         var dir = _direction.Y > 0 ? 1 : -1;
         _direction = new Vector2(-_direction.X, dir * tilt).Normalized() * _settings.Multiplier;
+    }
+
+    public void Serve(PlayerNumber server)
+    {
+        OnServe?.Invoke();
+        _wasServed = true;
+        _direction = Vector2.One * (server == PlayerNumber.One ? 1 : -1);
     }
 }

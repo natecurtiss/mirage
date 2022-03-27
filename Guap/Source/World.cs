@@ -14,6 +14,7 @@ public sealed class World : IDisposable
     readonly Keyboard _keyboard;
 
     bool _hasStarted;
+    Action _onInitialize;
     Action _onStart;
 
     public World(Window window, Keyboard keyboard, Graphics graphics, Renderer renderer, Camera camera)
@@ -61,6 +62,12 @@ public sealed class World : IDisposable
         entity.Destroy();
         return this;
     }
+    
+    public World OnInitialize(Action callback)
+    {
+        _onInitialize += callback;
+        return this;
+    }
 
     public World OnStart(Action callback)
     {
@@ -71,6 +78,7 @@ public sealed class World : IDisposable
     internal void Start()
     {
         _hasStarted = true;
+        _onInitialize?.Invoke();
         foreach (var entity in _starting) 
             Create(entity);
         _starting.Clear();
