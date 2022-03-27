@@ -9,8 +9,10 @@ var graphics = new Graphics();
 var camera = new Camera(window);
 var renderer = new Renderer(camera, window);
 var world = new World(window, keyboard, graphics, renderer, camera)
-    .Spawn<Player, PaddleOptions>(out var player1, Configurations.PlayerOne)
-    .Spawn<Player, PaddleOptions>(out var player2, Configurations.PlayerTwo)
+    .Spawn<Ball, BallOptions>(Configurations.Ball, out var ball)
+    .Spawn<Player, PlayerOptions>(Configurations.PlayerOne.And(ball))
+    // .Spawn<Player, PlayerOptions>(Configurations.PlayerTwo.And(ball))
+    .Spawn<Player, PlayerOptions>(Configurations.AI.And(ball))
     .OnStart(() =>
     {
 

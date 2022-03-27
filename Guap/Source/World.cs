@@ -31,9 +31,8 @@ public sealed class World : IDisposable
             entity.Dispose();
     }
 
-    public World Spawn<T>() where T : Entity, new() => Spawn<T>(out _);
     public World Spawn<TE, TS>(TS settings) where TE : Entity<TS>, new() => Spawn<TE, TS>(out _, settings);
-
+    public World Spawn<TE, TS>(TS settings, out TE entity) where TE : Entity<TS>, new() => Spawn<TE, TS>(out entity, settings);
     public World Spawn<TE, TS>(out TE entity, TS settings) where TE : Entity<TS>, new()
     {
         entity = new();
@@ -45,6 +44,7 @@ public sealed class World : IDisposable
         return this;
     }
     
+    public World Spawn<T>() where T : Entity, new() => Spawn<T>(out _);
     public World Spawn<T>(out T entity) where T : Entity, new()
     {
         entity = new();
