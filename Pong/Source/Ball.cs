@@ -18,7 +18,7 @@ sealed class Ball : Entity<BallOptions>
     float _maxBounceTilt;
     
     float _velocity;
-    Vector2 _direction = Vector2.One;
+    Vector2 _direction;
     bool _didBounceThisFrame;
     bool _wasServed;
     

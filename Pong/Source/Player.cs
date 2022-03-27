@@ -9,11 +9,11 @@ namespace Pong;
 
 sealed class Player : Entity<PlayerOptions>
 {
-    Timer _timer;
+    PlayerIndex _index;
     Ball _ball;
     Vector2 _startingPosition;
     float _moveSpeed;
-    PlayerIndex _index;
+    Timer _timer;
     Func<Keyboard, Ball, Player, int> _directionToMove;
     Func<Keyboard, Timer, bool> _canServe;
 
@@ -22,11 +22,11 @@ sealed class Player : Entity<PlayerOptions>
 
     protected override void OnConfigure(PlayerOptions config)
     {
-        _timer = new(config.ServeDelay);
+        _index = config.Index;
         _ball = config.Ball;
         _startingPosition = config.StartingPosition;
         _moveSpeed = config.Speed;
-        _index = config.Index;
+        _timer = new(config.ServeDelay);
         _directionToMove = config.MoveDirection;
         _canServe = config.ShouldServe;
     }
