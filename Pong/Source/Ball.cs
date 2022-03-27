@@ -1,6 +1,8 @@
-﻿using System.Numerics;
+﻿using System;
+using System.Numerics;
 using Guap;
 using Guap.Utilities;
+using Random = Guap.Utilities.Random;
 
 namespace Pong;
 
@@ -9,9 +11,7 @@ sealed class Ball : Entity<BallOptions>
     public event Action<PlayerIndex> OnScore;
     public event Action OnServe;
     public event Action<PlayerIndex> OnShouldServe;
-    
-    readonly Random _random = new();
-    
+
     float _startingSpeed;
     float _speedMultiplier;
     float _minBounceTilt;
@@ -74,7 +74,7 @@ sealed class Ball : Entity<BallOptions>
 
     public void Bounce()
     {
-        var tilt = _random.Next((int) (_minBounceTilt * 10), (int) (_maxBounceTilt * 10)) / 10f;
+        var tilt = Random.Between(_minBounceTilt, _maxBounceTilt);
         _velocity *= _speedMultiplier * _speedMultiplier;
         var dir = _direction.Y > 0 ? 1 : -1;
         _direction = new Vector2(-_direction.X, dir * tilt).Normalized();

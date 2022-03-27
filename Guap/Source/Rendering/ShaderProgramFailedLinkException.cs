@@ -1,4 +1,6 @@
-﻿namespace Guap.Rendering;
+﻿using System;
+
+namespace Guap.Rendering;
 
 sealed class ShaderProgramFailedLinkException : Exception
 {

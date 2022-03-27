@@ -1,4 +1,6 @@
-﻿namespace Guap.Input;
+﻿using System;
+
+namespace Guap.Input;
 
 public sealed class InputDebugger : Entity
 {

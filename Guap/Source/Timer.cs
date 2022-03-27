@@ -1,4 +1,6 @@
-﻿namespace Guap;
+﻿using System;
+
+namespace Guap;
 
 public sealed class Timer
 {
