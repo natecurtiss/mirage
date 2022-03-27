@@ -28,5 +28,5 @@ static class Configurations
         return (int) relative;
     });
 
-    public static readonly BallOptions Ball = new(10f);
+    public static readonly BallOptions Ball = new(10f, 200f, 1.2f, 0.3f, 1f);
 }

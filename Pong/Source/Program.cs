@@ -11,10 +11,5 @@ var renderer = new Renderer(camera, window);
 var world = new World(window, keyboard, graphics, renderer, camera)
     .Spawn<Ball, BallOptions>(Configurations.Ball, out var ball)
     .Spawn<Player, PlayerOptions>(Configurations.PlayerOne.And(ball))
-    // .Spawn<Player, PlayerOptions>(Configurations.PlayerTwo.And(ball))
-    .Spawn<Player, PlayerOptions>(Configurations.AI.And(ball))
-    .OnStart(() =>
-    {
-
-    });
+    .Spawn<Player, PlayerOptions>(Configurations.AI.And(ball));
 new Game(world, window, keyboard, graphics, renderer).Start();

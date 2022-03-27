@@ -30,7 +30,38 @@ public struct Bounds
         point.X <= Right.X &&
         point.Y >= Bottom.Y &&
         point.Y <= Top.Y;
-    
+
+    public bool Contains(Bounds other)
+    {
+        var bottomLeft1 = new Vector2(Left.X, Bottom.Y);
+        var topRight1 = new Vector2(Right.X, Top.Y);
+        var bottomLeft2 = new Vector2(other.Left.X, other.Bottom.Y);
+        var topRight2 = new Vector2(other.Right.X, other.Top.Y);
+        
+        var oneIsALine = bottomLeft1.X == topRight1.X || bottomLeft1.Y == topRight1.Y || bottomLeft2.X == topRight2.X || bottomLeft2.Y == topRight2.Y;
+        if (oneIsALine)
+        {
+            Console.WriteLine("line");
+            return false;
+        }
+        
+        var oneIsToTheLeft = bottomLeft1.X >= topRight2.X || bottomLeft2.X >= topRight1.X;
+        if (oneIsToTheLeft)
+        {
+            Console.WriteLine("left");
+            return false;
+        }
+
+        var oneIsOnTop = topRight1.Y <= bottomLeft2.Y || topRight2.Y <= bottomLeft1.Y;
+        if (oneIsOnTop)
+        {
+            Console.WriteLine("top");
+            return false;
+        }
+
+        return true;
+    }
+
     public void Add(Vector2 point)
     {
         if (Contains(point)) return;
