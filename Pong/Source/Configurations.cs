@@ -31,5 +31,5 @@ static class Configurations
         return (int) relative;
     }, (_, timer) => timer.IsDone);
 
-    public static readonly BallOptions Ball = new(10f, 200f, 1.2f, 0.3f, 1f);
+    public static readonly BallOptions Ball = new(200f, 1.2f, 0.3f, 1f);
 }

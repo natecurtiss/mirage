@@ -4,18 +4,16 @@ namespace Pong;
 
 readonly struct BallOptions
 {
-    public readonly Vector2 Scale;
     public readonly float Speed;
-    public readonly float Multiplier;
-    public readonly float MinBounce;
-    public readonly float MaxBounce;
+    public readonly float SpeedMultiplier;
+    public readonly float MinBounceTilt;
+    public readonly float MaxBounceTilt;
 
-    public BallOptions(float scale, float speed, float multiplier, float minBounce, float maxBounce)
+    public BallOptions(float speed, float speedMultiplier, float minBounceTilt, float maxBounceTilt)
     {
-        Scale = new(scale);
         Speed = speed;
-        Multiplier = multiplier;
-        MinBounce = minBounce;
-        MaxBounce = maxBounce;
+        SpeedMultiplier = speedMultiplier;
+        MinBounceTilt = minBounceTilt;
+        MaxBounceTilt = maxBounceTilt;
     }
 }

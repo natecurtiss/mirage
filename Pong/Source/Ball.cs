@@ -8,24 +8,32 @@ sealed class Ball : Entity<BallOptions>
     public event Action<PlayerIndex> OnScore;
     public event Action OnServe;
     public event Action<PlayerIndex> OnShouldServe;
+    
     readonly Random _random = new();
     
-    BallOptions _settings;
-    Vector2 _direction = Vector2.One;
+    float _startingSpeed;
+    float _speedMultiplier;
+    float _minBounceTilt;
+    float _maxBounceTilt;
+    
     float _velocity;
+    Vector2 _direction = Vector2.One;
     bool _didBounceThisFrame;
     bool _wasServed;
     
     protected override void OnConfigure(BallOptions config)
     {
-        _settings = config;
-        _velocity = _settings.Speed;
+        _startingSpeed = config.Speed;
+        _speedMultiplier = config.SpeedMultiplier;
+        _minBounceTilt = config.MinBounceTilt;
+        _maxBounceTilt = config.MaxBounceTilt;
     }
 
     protected override void OnStart()
     {
+        _velocity = _startingSpeed;
         Texture = "Assets/square.png".Find();
-        Scale = _settings.Scale;
+        Scale = new(10f);
         OnShouldServe?.Invoke(PlayerIndex.One);
     }
 
@@ -49,7 +57,7 @@ sealed class Ball : Entity<BallOptions>
         {
             Position = Vector2.Zero;
             _wasServed = false;
-            _velocity = _settings.Speed;
+            _velocity = _startingSpeed;
             OnScore?.Invoke(PlayerIndex.One);
             OnShouldServe?.Invoke(PlayerIndex.One);
         }
@@ -57,7 +65,7 @@ sealed class Ball : Entity<BallOptions>
         {
             Position = Vector2.Zero;
             _wasServed = false;
-            _velocity = _settings.Speed;
+            _velocity = _startingSpeed;
             OnScore?.Invoke(PlayerIndex.Two);
             OnShouldServe?.Invoke(PlayerIndex.Two);
         }
@@ -65,10 +73,10 @@ sealed class Ball : Entity<BallOptions>
 
     public void Bounce()
     {
-        var tilt = _random.Next((int) (_settings.MinBounce * 10), (int) (_settings.MaxBounce * 10)) / 10f;
-        _velocity *= _settings.Multiplier;
+        var tilt = _random.Next((int) (_minBounceTilt * 10), (int) (_maxBounceTilt * 10)) / 10f;
+        _velocity *= _speedMultiplier * _speedMultiplier;
         var dir = _direction.Y > 0 ? 1 : -1;
-        _direction = new Vector2(-_direction.X, dir * tilt).Normalized() * _settings.Multiplier;
+        _direction = new Vector2(-_direction.X, dir * tilt).Normalized();
     }
 
     public void Serve(PlayerIndex server)
