@@ -40,26 +40,14 @@ public struct Bounds
         
         var oneIsALine = bottomLeft1.X == topRight1.X || bottomLeft1.Y == topRight1.Y || bottomLeft2.X == topRight2.X || bottomLeft2.Y == topRight2.Y;
         if (oneIsALine)
-        {
-            Console.WriteLine("line");
             return false;
-        }
-        
+
         var oneIsToTheLeft = bottomLeft1.X >= topRight2.X || bottomLeft2.X >= topRight1.X;
         if (oneIsToTheLeft)
-        {
-            Console.WriteLine("left");
             return false;
-        }
 
         var oneIsOnTop = topRight1.Y <= bottomLeft2.Y || topRight2.Y <= bottomLeft1.Y;
-        if (oneIsOnTop)
-        {
-            Console.WriteLine("top");
-            return false;
-        }
-
-        return true;
+        return !oneIsOnTop;
     }
 
     public void Add(Vector2 point)
