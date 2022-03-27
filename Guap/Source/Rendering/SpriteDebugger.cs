@@ -1,4 +1,6 @@
-﻿namespace Guap.Rendering;
+﻿using Guap.Utilities;
+
+namespace Guap.Rendering;
 
 public sealed class SpriteDebugger : Entity
 {

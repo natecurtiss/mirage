@@ -2,9 +2,9 @@
 using static System.IO.Directory;
 using static System.IO.Path;
 
-namespace Guap;
+namespace Guap.Utilities;
 
-public static class Paths
+public static class PathExtensions
 {
     public static string Find(this string path, [CallerFilePath] string caller = "", int iterations = 8)
     {

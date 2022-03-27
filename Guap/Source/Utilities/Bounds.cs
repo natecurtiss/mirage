@@ -1,6 +1,6 @@
 ﻿using System.Numerics;
 
-namespace Guap;
+namespace Guap.Utilities;
 
 public struct Bounds
 {
