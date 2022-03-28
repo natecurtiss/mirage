@@ -1,6 +1,8 @@
 ﻿using Guap;
 using Guap.Utilities;
 using Guap.Utilities.FSM;
+using static Pong.PlayerIndex;
+using static Pong.PlayerState;
 
 namespace Pong;
 
@@ -18,11 +20,11 @@ sealed class Player : Entity<PlayerVariables>
 
     protected override void OnAwake()
     {
-        var first = _index == PlayerIndex.One ? PlayerState.MyServe : PlayerState.TheirServe;
-        _fsm = new(first,
-            (PlayerState.MyServe, new PlayerMyServeState(_config, this, this)),
-            (PlayerState.TheirServe, new PlayerTheirServeState(_config, this)),
-            (PlayerState.Play, new PlayerPlayState(_config, this, this, this)));
+        var first = _index == One ? MyServe : TheirServe;
+        _fsm = new(first, 
+            (MyServe, new PlayerMyServeState(_config, this, this)), 
+            (TheirServe, new PlayerTheirServeState(_config, this)), 
+            (Play, new PlayerPlayState(_config, this, this, this)));
     }
 
     protected override void OnStart()
