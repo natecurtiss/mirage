@@ -2,7 +2,6 @@
 using System.Numerics;
 using Guap;
 using Guap.Utilities;
-using Pong.Players;
 using Random = Guap.Utilities.Random;
 
 namespace Pong;

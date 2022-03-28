@@ -1,4 +1,4 @@
-﻿namespace Pong.Players;
+﻿namespace Pong;
 
 enum PlayerState
 {

@@ -1,6 +1,5 @@
 ﻿using System;
 using Guap.Input;
-using Pong.Players;
 
 namespace Pong;
 

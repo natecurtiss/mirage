@@ -3,7 +3,7 @@ using System.Numerics;
 using Guap;
 using Guap.Utilities.FSM;
 
-namespace Pong.Players;
+namespace Pong;
 
 sealed class PlayerPlayState : State<PlayerState>
 {

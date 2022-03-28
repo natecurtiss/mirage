@@ -4,7 +4,7 @@ using Guap;
 using Guap.Input;
 using Timer = Guap.Timer;
 
-namespace Pong.Players;
+namespace Pong;
 
 readonly struct PlayerVariables
 {

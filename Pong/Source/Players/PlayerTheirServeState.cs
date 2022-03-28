@@ -1,7 +1,7 @@
 ﻿using Guap;
 using Guap.Utilities.FSM;
 
-namespace Pong.Players;
+namespace Pong;
 
 sealed class PlayerTheirServeState : State<PlayerState>
 {

@@ -2,7 +2,6 @@
 using Guap;
 using Guap.Rendering;
 using Guap.Input;
-using Pong.Players;
 
 var window = new Window("PONG", 1280, 720);
 var keyboard = new Keyboard();

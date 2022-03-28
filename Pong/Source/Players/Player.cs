@@ -2,7 +2,7 @@
 using Guap.Utilities;
 using Guap.Utilities.FSM;
 
-namespace Pong.Players;
+namespace Pong;
 
 sealed class Player : Entity<PlayerVariables>
 {
