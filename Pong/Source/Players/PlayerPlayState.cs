@@ -20,11 +20,10 @@ sealed class PlayerPlayState : State<PlayerState>
         _boundable = boundable;
         _modules = modules;
     }
-
-    // TODO: Maybe move this to the constructor.
+    
     void State<PlayerState>.Init(FiniteStateMachine<PlayerState> fsm) => _fsm = fsm;
 
-    void State<PlayerState>.Enter() => _config.Ball.OnShouldServe += OnShouldServe;
+    void State<PlayerState>.Enter() => _config.Ball.OnServeStart += OnScore;
 
     void State<PlayerState>.Update(float dt)
     {
@@ -32,11 +31,11 @@ sealed class PlayerPlayState : State<PlayerState>
         var top = _modules.Window.Bounds().Top.Y - _boundable.Bounds().Extents.Y;
         var bottom = _modules.Window.Bounds().Bottom.Y + _boundable.Bounds().Extents.Y;
         _moveable.Position = new(_moveable.Position.X, Math.Clamp(_moveable.Position.Y, bottom, top));
-        if (_boundable.Bounds().Contains(_config.Ball.Bounds()))
+        if (_boundable.Bounds().Overlaps(_config.Ball.Bounds()))
             _config.Ball.Bounce();
     }
 
-    void State<PlayerState>.Exit() => _config.Ball.OnShouldServe -= OnShouldServe;
+    void State<PlayerState>.Exit() => _config.Ball.OnServeStart -= OnScore;
 
-    void OnShouldServe(PlayerIndex server) => _fsm.SwitchTo(_config.Index == server ? PlayerState.MyServe : PlayerState.TheirServe);
+    void OnScore(PlayerIndex server) => _fsm.SwitchTo(_config.Index == server ? PlayerState.MyServe : PlayerState.TheirServe);
 }

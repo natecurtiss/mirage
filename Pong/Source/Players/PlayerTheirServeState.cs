@@ -20,12 +20,12 @@ sealed class PlayerTheirServeState : State<PlayerState>
     void State<PlayerState>.Enter()
     {
         _moveable.Position = _config.StartingPosition;
-        _config.Ball.OnServe += OnServe;
+        _config.Ball.OnServeEnd += OnServe;
     }
 
     void State<PlayerState>.Update(float dt) { }
 
-    void State<PlayerState>.Exit() => _config.Ball.OnServe -= OnServe;
+    void State<PlayerState>.Exit() => _config.Ball.OnServeEnd -= OnServe;
 
     void OnServe() => _fsm.SwitchTo(PlayerState.Play);
     

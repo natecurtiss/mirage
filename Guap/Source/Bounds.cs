@@ -25,13 +25,13 @@ public struct Bounds
     public void Grow(Vector2 scale) => this = new(Center, Size * scale);
     public void Grow(float scale) => Grow(new Vector2(scale));
 
-    public bool Contains(Vector2 point) =>
+    public bool Overlaps(Vector2 point) =>
         point.X >= Left.X &&
         point.X <= Right.X &&
         point.Y >= Bottom.Y &&
         point.Y <= Top.Y;
 
-    public bool Contains(Bounds other)
+    public bool Overlaps(Bounds other)
     {
         var bottomLeft1 = new Vector2(Left.X, Bottom.Y);
         var topRight1 = new Vector2(Right.X, Top.Y);
@@ -50,9 +50,18 @@ public struct Bounds
         return !oneIsOnTop;
     }
 
+    public bool IsAbove(Bounds other) => Top.Y >= other.Top.Y;
+    public bool IsBelow(Bounds other) => Bottom.Y <= other.Bottom.Y;
+    public bool IsRightOf(Bounds other) => Right.X >= other.Right.X;
+    public bool IsLeftOf(Bounds other) => Left.X <= other.Left.X;
+    public bool IsCompletelyAbove(Bounds other) => Bottom.Y >= other.Top.Y;
+    public bool IsCompletelyBelow(Bounds other) => other.IsCompletelyAbove(this);
+    public bool IsCompletelyRightOf(Bounds other) => Left.X >= other.Right.X;
+    public bool IsCompletelyLeftOf(Bounds other) => other.IsCompletelyRightOf(this);
+
     public void Add(Vector2 point)
     {
-        if (Contains(point)) return;
+        if (Overlaps(point)) return;
         var left = Left.X;
         var right = Right.X;
         var bottom = Bottom.Y;

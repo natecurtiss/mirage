@@ -12,6 +12,7 @@ public sealed class Window : IDisposable, Boundable
     public readonly int Width;
     public readonly int Height;
     readonly WindowOptions _options;
+    
     IWindow _native;
 
     public Color Background { get; set; } = Color.Black;

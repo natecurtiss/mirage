@@ -8,9 +8,8 @@ namespace Pong;
 
 sealed class Ball : Entity<BallVariables>
 {
-    public event Action<PlayerIndex> OnScore;
-    public event Action OnServe;
-    public event Action<PlayerIndex> OnShouldServe;
+    public event Action<PlayerIndex> OnServeStart;
+    public event Action OnServeEnd;
 
     float _startingSpeed;
     float _speedMultiplier;
@@ -37,7 +36,7 @@ sealed class Ball : Entity<BallVariables>
         Scale = new(10f);
     }
 
-    protected override void OnStart() => OnShouldServe?.Invoke(PlayerIndex.One);
+    protected override void OnStart() => OnServeStart?.Invoke(PlayerIndex.One);
 
     protected override void OnUpdate(float dt)
     {
@@ -49,42 +48,42 @@ sealed class Ball : Entity<BallVariables>
             _didBounceThisFrame = false;
             return;
         }
-        if (Bounds().Top.Y >= Window.Bounds().Top.Y || Bounds().Bottom.Y <= Window.Bounds().Bottom.Y)
+        if (Bounds().IsAbove(Window.Bounds()) || Bounds().IsBelow(Window.Bounds()))
         {
             _direction = new Vector2(_direction.X, -_direction.Y).Normalized();
             _didBounceThisFrame = true;
         }
 
-        if (Position.X >= Window.Bounds().Right.X)
+        if (Bounds().IsCompletelyRightOf(Window.Bounds()))
         {
             Position = Vector2.Zero;
             _wasServed = false;
             _velocity = _startingSpeed;
-            OnScore?.Invoke(PlayerIndex.One);
-            OnShouldServe?.Invoke(PlayerIndex.One);
+            OnServeStart?.Invoke(PlayerIndex.One);
         }
-        else if (Position.X <= Window.Bounds().Left.X)
+        else if (Bounds().IsCompletelyLeftOf(Window.Bounds()))
         {
             Position = Vector2.Zero;
             _wasServed = false;
             _velocity = _startingSpeed;
-            OnScore?.Invoke(PlayerIndex.Two);
-            OnShouldServe?.Invoke(PlayerIndex.Two);
+            OnServeStart?.Invoke(PlayerIndex.Two);
         }
     }
 
     public void Bounce()
     {
         var tilt = Random.Between(_minBounceTilt, _maxBounceTilt);
+        var up = _direction.Y > 0 ? 1 : -1;
         _velocity *= _speedMultiplier * _speedMultiplier;
-        var dir = _direction.Y > 0 ? 1 : -1;
-        _direction = new Vector2(-_direction.X, dir * tilt).Normalized();
+        _direction = new Vector2(-_direction.X, up * tilt).Normalized();
     }
 
     public void Serve(PlayerIndex server)
     {
-        OnServe?.Invoke();
+        var tilt = Random.Between(-1f, 1f);
+        var dir = server == PlayerIndex.One ? 1 : -1;
+        _direction = new Vector2(dir, dir * tilt).Normalized();
         _wasServed = true;
-        _direction = Vector2.One * (server == PlayerIndex.One ? 1 : -1);
+        OnServeEnd?.Invoke();
     }
 }
