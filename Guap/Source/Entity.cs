@@ -7,7 +7,7 @@ using Silk.NET.OpenGL;
 
 namespace Guap;
 
-public abstract class Entity : IDisposable
+public abstract class Entity : IDisposable, Moveable, Scalable, Rotateable, Modules, Boundable
 {
     static readonly string _variableNameHere = "<VAR>";
     static readonly string _nullError = $"You can't access {_variableNameHere} before Game.Start() is invoked. Try sticking this in a World.OnAwake() or World.OnStart() callback, or in an Entity event method, e.g, Entity.OnAwake() or Entity.OnStart().";
@@ -23,6 +23,11 @@ public abstract class Entity : IDisposable
     public float Rotation { get; set; }
     public Vector2 Scale { get; set; } = Vector2.One;
     Sprite _sprite;
+
+    World Modules.World => _world;
+    Camera Modules.Camera => _camera;
+    Window Modules.Window => _window;
+    Keyboard Modules.Keyboard => _keyboard;
     
     protected string Texture
     {

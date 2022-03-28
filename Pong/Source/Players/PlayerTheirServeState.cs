@@ -6,17 +6,29 @@ namespace Pong.Players;
 
 sealed class PlayerTheirServeState : State<PlayerState>
 {
-    readonly Entity _entity;
-    readonly Vector2 _startingPosition;
+    readonly PlayerVariables _config;
+    readonly Moveable _moveable;
+    FiniteStateMachine<PlayerState> _fsm;
 
-    public PlayerTheirServeState(Entity entity, Vector2 startingPosition)
+    public PlayerTheirServeState(PlayerVariables config, Moveable moveable)
     {
-        _entity = entity;
-        _startingPosition = startingPosition;
+        _config = config;
+        _moveable = moveable;
     }
-    
-    void State<PlayerState>.Initialize(FiniteStateMachine<PlayerState> fsm) { }
-    void State<PlayerState>.Enter() => _entity.Position = _startingPosition;
+
+    void State<PlayerState>.Initialize(FiniteStateMachine<PlayerState> fsm) => _fsm = fsm;
+
+    void State<PlayerState>.Enter()
+    {
+        _moveable.Position = _config.StartingPosition;
+        _config.Ball.OnServe += OnServe;
+    }
+
     void State<PlayerState>.Update(float dt) { }
-    void State<PlayerState>.Exit() { }
+
+    void State<PlayerState>.Exit() => _config.Ball.OnServe -= OnServe;
+
+    void OnServe() => _fsm.SwitchTo(PlayerState.Play);
+    
+
 }

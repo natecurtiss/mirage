@@ -1,50 +1,42 @@
 ﻿using System;
 using System.Numerics;
 using Guap;
-using Guap.Input;
 using Guap.Utilities.FSM;
 
 namespace Pong.Players;
 
 sealed class PlayerPlayState : State<PlayerState>
 {
-    readonly Func<Keyboard, Ball, Entity, int> _directionToMove;
-    readonly Entity _entity;
-    readonly Ball _ball;
-    readonly Window _window;
-    readonly Keyboard _keyboard;
-    readonly float _moveSpeed;
+    readonly PlayerVariables _config;
+    readonly Moveable _moveable;
+    readonly Boundable _boundable;
+    readonly Modules _modules;
     FiniteStateMachine<PlayerState> _fsm;
 
-    public PlayerPlayState(Func<Keyboard, Ball, Entity, int> directionToMove, Entity entity, Ball ball, Window window, Keyboard keyboard, float moveSpeed)
+    public PlayerPlayState(PlayerVariables config, Moveable moveable, Boundable boundable, Modules modules)
     {
-        _directionToMove = directionToMove;
-        _entity = entity;
-        _ball = ball;
-        _window = window;
-        _keyboard = keyboard;
-        _moveSpeed = moveSpeed;
+        _config = config;
+        _moveable = moveable;
+        _boundable = boundable;
+        _modules = modules;
     }
 
+    // TODO: Maybe move this to the constructor.
     void State<PlayerState>.Initialize(FiniteStateMachine<PlayerState> fsm) => _fsm = fsm;
 
-    void State<PlayerState>.Enter()
-    {
-        
-    }
+    void State<PlayerState>.Enter() => _config.Ball.OnShouldServe += OnShouldServe;
 
     void State<PlayerState>.Update(float dt)
     {
-        _entity.Position += new Vector2(0f, _directionToMove(_keyboard, _ball, _entity) * _moveSpeed * dt);
-        var top = _window.Bounds().Top.Y - _entity.Bounds().Extents.Y;
-        var bottom = _window.Bounds().Bottom.Y + _entity.Bounds().Extents.Y;
-        _entity.Position = new(_entity.Position.X, Math.Clamp(_entity.Position.Y, bottom, top));
-        if (_entity.Bounds().Contains(_ball.Bounds()))
-            _ball.Bounce();
+        _moveable.Position += new Vector2(0f, _config.MoveDirection(_modules.Keyboard, _config.Ball, _moveable) * _config.Speed * dt);
+        var top = _modules.Window.Bounds().Top.Y - _boundable.Bounds().Extents.Y;
+        var bottom = _modules.Window.Bounds().Bottom.Y + _boundable.Bounds().Extents.Y;
+        _moveable.Position = new(_moveable.Position.X, Math.Clamp(_moveable.Position.Y, bottom, top));
+        if (_boundable.Bounds().Contains(_config.Ball.Bounds()))
+            _config.Ball.Bounce();
     }
 
-    void State<PlayerState>.Exit()
-    {
-        
-    }
+    void State<PlayerState>.Exit() => _config.Ball.OnShouldServe -= OnShouldServe;
+
+    void OnShouldServe(PlayerIndex server) => _fsm.SwitchTo(_config.Index == server ? PlayerState.MyServe : PlayerState.TheirServe);
 }

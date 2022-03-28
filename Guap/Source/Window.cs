@@ -8,7 +8,7 @@ using Silk.NET.Windowing;
 
 namespace Guap;
 
-public sealed class Window : IDisposable
+public sealed class Window : IDisposable, Boundable
 {
     public readonly int Width;
     public readonly int Height;
