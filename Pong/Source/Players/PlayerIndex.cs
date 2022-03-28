@@ -1,4 +1,4 @@
-﻿namespace Pong;
+﻿namespace Pong.Players;
 
 enum PlayerIndex
 {

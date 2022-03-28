@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Drawing;
 using System.Numerics;
 using Guap.Rendering;
 using Guap.Input;
@@ -11,7 +10,7 @@ namespace Guap;
 public abstract class Entity : IDisposable
 {
     static readonly string _variableNameHere = "<VAR>";
-    static readonly string _nullError = $"You can't access {_variableNameHere} before Game.Start() is invoked. Try sticking this in a World.OnStart() callback or in an Entity event method, e.g, Entity.OnStart() or Entity.OnUpdate().";
+    static readonly string _nullError = $"You can't access {_variableNameHere} before Game.Start() is invoked. Try sticking this in a World.OnAwake() or World.OnStart() callback, or in an Entity event method, e.g, Entity.OnAwake() or Entity.OnStart().";
     
     GL _gl;
     Renderer _renderer;
@@ -76,6 +75,7 @@ public abstract class Entity : IDisposable
         private set => _keyboard = value;
     }
 
+    protected virtual void OnAwake() { }
     protected virtual void OnStart() { }
     protected virtual void OnUpdate(float dt) { }
     protected virtual void OnDestroy() { }
@@ -97,7 +97,8 @@ public abstract class Entity : IDisposable
         Window = window;
         Keyboard = keyboard;
     }
-    
+
+    internal void Awake() => OnAwake();
     internal void Start() => OnStart();
     internal void Update(float dt) => OnUpdate(dt);
     internal void Render()

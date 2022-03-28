@@ -52,9 +52,16 @@ public sealed class World : IDisposable
     {
         entity = new();
         if (!_hasStarted)
+        {
             _starting.Add(entity);
+        }
         else
-            Create(entity);
+        {
+            entity.Initialize(_graphics.Lib, this, _renderer, _camera, _window, _keyboard);
+            _entities.Add(entity);
+            entity.Awake();
+            entity.Start();
+        }
         return this;
     }
 
@@ -65,7 +72,7 @@ public sealed class World : IDisposable
         return this;
     }
     
-    public World OnInitialize(Action callback)
+    public World OnAwake(Action callback)
     {
         _onInitialize += callback;
         return this;
@@ -81,8 +88,15 @@ public sealed class World : IDisposable
     {
         _hasStarted = true;
         _onInitialize?.Invoke();
-        foreach (var entity in _starting) 
-            Create(entity);
+        foreach (var entity in _starting)
+        {
+            entity.Initialize(_graphics.Lib, this, _renderer, _camera, _window, _keyboard);
+            _entities.Add(entity);
+        }
+        foreach (var entity in _entities) 
+            entity.Awake();
+        foreach (var entity in _entities) 
+            entity.Start();
         _starting.Clear();
         _onStart?.Invoke();
     }

@@ -10,18 +10,22 @@ public sealed class Timer
     
     float _starting;
     float _remaining;
+    bool _restarted;
 
     public float Remaining
     {
         get => _remaining;
         set
         {
+            _restarted = true;
             _starting = Math.Max(0, value);
             _remaining = _starting;
         }
     }
     public bool IsDone => _remaining == 0;
     public bool ShouldResetOnFinish { get; set; }
+    
+    public Timer() { }
 
     public Timer(float starting, bool shouldResetOnFinish = false)
     {
@@ -31,6 +35,7 @@ public sealed class Timer
 
     public void Tick(float t)
     {
+        _restarted = false;
         _remaining = Math.Max(_remaining - t, 0);
         OnTick?.Invoke(t);
         
@@ -44,6 +49,8 @@ public sealed class Timer
 
     public void Reset()
     {
+        if (_restarted)
+            return;
         _remaining = _starting;
         OnReset?.Invoke();
     }

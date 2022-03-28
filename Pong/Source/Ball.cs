@@ -2,6 +2,7 @@
 using System.Numerics;
 using Guap;
 using Guap.Utilities;
+using Pong.Players;
 using Random = Guap.Utilities.Random;
 
 namespace Pong;
@@ -30,13 +31,14 @@ sealed class Ball : Entity<BallOptions>
         _maxBounceTilt = config.MaxBounceTilt;
     }
 
-    protected override void OnStart()
+    protected override void OnAwake()
     {
         _velocity = _startingSpeed;
         Texture = "Assets/square.png".Find();
         Scale = new(10f);
-        OnShouldServe?.Invoke(PlayerIndex.One);
     }
+
+    protected override void OnStart() => OnShouldServe?.Invoke(PlayerIndex.One);
 
     protected override void OnUpdate(float dt)
     {

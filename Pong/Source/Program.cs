@@ -2,6 +2,7 @@
 using Guap;
 using Guap.Rendering;
 using Guap.Input;
+using Pong.Players;
 
 var window = new Window("PONG", 1280, 720);
 var keyboard = new Keyboard();
@@ -12,11 +13,11 @@ var world = new World(window, keyboard, graphics, renderer, camera)
     .Spawn<Ball, BallOptions>(Configurations.Ball, out var ball)
     .Spawn<Player, PlayerOptions>(Configurations.PlayerOne.And(ball), out var player1)
     .Spawn<Player, PlayerOptions>(Configurations.AI.And(ball), out var player2)
-    .OnInitialize(() =>
+    .OnAwake(() =>
     {
-        ball.OnShouldServe += player1.WaitForServe;
-        ball.OnShouldServe += player2.WaitForServe;
-        ball.OnServe += player1.SomeoneServed;
-        ball.OnServe += player2.SomeoneServed;
+        ball.OnShouldServe += player1.OnGoingToServe;
+        ball.OnShouldServe += player2.OnGoingToServe;
+        ball.OnServe += player1.OnWasServed;
+        ball.OnServe += player2.OnWasServed;
     });
 new Game(world, window, keyboard, graphics, renderer).Start();

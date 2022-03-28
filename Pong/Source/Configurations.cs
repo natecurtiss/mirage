@@ -1,6 +1,6 @@
 ﻿using System;
 using Guap.Input;
-using Guap;
+using Pong.Players;
 using Timer = Guap.Timer;
 
 namespace Pong;

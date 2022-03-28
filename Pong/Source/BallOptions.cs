@@ -1,6 +1,4 @@
-﻿using System.Numerics;
-
-namespace Pong;
+﻿namespace Pong;
 
 readonly struct BallOptions
 {

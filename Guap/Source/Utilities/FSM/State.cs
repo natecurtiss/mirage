@@ -1,13 +1,9 @@
-﻿using System;
-
-namespace Guap.Utilities.FSM;
+﻿namespace Guap.Utilities.FSM;
 
 public interface State<T>
 {
-    bool IsOn { get; }
-    
     void Initialize(FiniteStateMachine<T> fsm);
     void Enter();
-    void Update();
+    void Update(float dt);
     void Exit();
 }
