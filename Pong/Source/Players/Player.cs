@@ -22,9 +22,9 @@ sealed class Player : Entity<PlayerVariables>
     {
         var first = _index == One ? MyServe : TheirServe;
         _fsm = new(first, 
-            (MyServe, new PlayerMyServeState(_config, this, this)), 
+            (MyServe, new PlayerMyServeState(_config, this, Keyboard)), 
             (TheirServe, new PlayerTheirServeState(_config, this)), 
-            (Play, new PlayerPlayState(_config, this, this, this)));
+            (Play, new PlayerPlayState(_config, this, this, Window, Keyboard)));
     }
 
     protected override void OnStart()

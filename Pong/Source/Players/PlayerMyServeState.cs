@@ -1,4 +1,5 @@
 ﻿using Guap;
+using Guap.Input;
 using Guap.Utilities.FSM;
 
 namespace Pong;
@@ -6,16 +7,16 @@ namespace Pong;
 sealed class PlayerMyServeState : State<PlayerState>
 {
     readonly PlayerVariables _config;
-    readonly Modules _modules;
     readonly Moveable _moveable;
+    readonly Keyboard _keyboard;
     readonly Timer _timer;
     FiniteStateMachine<PlayerState> _fsm;
 
-    public PlayerMyServeState(PlayerVariables config, Modules modules, Moveable moveable)
+    public PlayerMyServeState(PlayerVariables config, Moveable moveable, Keyboard keyboard)
     {
         _config = config;
-        _modules = modules;
         _moveable = moveable;
+        _keyboard = keyboard;
         _timer = new(_config.ServeDelay);
     }
     
@@ -30,7 +31,7 @@ sealed class PlayerMyServeState : State<PlayerState>
     void State<PlayerState>.Update(float dt)
     {
         _timer.Tick(dt);
-        if (_config.ShouldServe(_modules.Keyboard, _timer))
+        if (_config.ShouldServe(_keyboard, _timer))
         {
             _config.Ball.Serve(_config.Index);
             _fsm.SwitchTo(PlayerState.Play);
