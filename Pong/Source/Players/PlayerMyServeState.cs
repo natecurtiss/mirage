@@ -19,7 +19,7 @@ sealed class PlayerMyServeState : State<PlayerState>
         _timer = new(_config.ServeDelay);
     }
     
-    void State<PlayerState>.Initialize(FiniteStateMachine<PlayerState> fsm) => _fsm = fsm;
+    void State<PlayerState>.Init(FiniteStateMachine<PlayerState> fsm) => _fsm = fsm;
 
     void State<PlayerState>.Enter()
     {

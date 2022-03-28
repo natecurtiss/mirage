@@ -1,5 +1,4 @@
-﻿using System.Numerics;
-using Guap;
+﻿using Guap;
 using Guap.Utilities.FSM;
 
 namespace Pong.Players;
@@ -16,7 +15,7 @@ sealed class PlayerTheirServeState : State<PlayerState>
         _moveable = moveable;
     }
 
-    void State<PlayerState>.Initialize(FiniteStateMachine<PlayerState> fsm) => _fsm = fsm;
+    void State<PlayerState>.Init(FiniteStateMachine<PlayerState> fsm) => _fsm = fsm;
 
     void State<PlayerState>.Enter()
     {

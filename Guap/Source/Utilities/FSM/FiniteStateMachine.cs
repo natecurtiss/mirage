@@ -14,7 +14,7 @@ public sealed class FiniteStateMachine<T>
         foreach (var (key, value) in states) 
             _states.Add(key, value);
         foreach (var (_, value) in _states) 
-            value.Initialize(this);
+            value.Init(this);
         SwitchTo(first);
     }
 

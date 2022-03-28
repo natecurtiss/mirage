@@ -22,7 +22,7 @@ sealed class PlayerPlayState : State<PlayerState>
     }
 
     // TODO: Maybe move this to the constructor.
-    void State<PlayerState>.Initialize(FiniteStateMachine<PlayerState> fsm) => _fsm = fsm;
+    void State<PlayerState>.Init(FiniteStateMachine<PlayerState> fsm) => _fsm = fsm;
 
     void State<PlayerState>.Enter() => _config.Ball.OnShouldServe += OnShouldServe;
 

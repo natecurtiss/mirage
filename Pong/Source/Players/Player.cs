@@ -1,5 +1,4 @@
-﻿using System.Numerics;
-using Guap;
+﻿using Guap;
 using Guap.Utilities;
 using Guap.Utilities.FSM;
 
@@ -19,7 +18,8 @@ sealed class Player : Entity<PlayerVariables>
 
     protected override void OnAwake()
     {
-        _fsm = new(_index == PlayerIndex.One ? PlayerState.MyServe : PlayerState.TheirServe,
+        var first = _index == PlayerIndex.One ? PlayerState.MyServe : PlayerState.TheirServe;
+        _fsm = new(first,
             (PlayerState.MyServe, new PlayerMyServeState(_config, this, this)),
             (PlayerState.TheirServe, new PlayerTheirServeState(_config, this)),
             (PlayerState.Play, new PlayerPlayState(_config, this, this, this)));

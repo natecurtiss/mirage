@@ -2,7 +2,6 @@
 using System.Numerics;
 using Guap.Rendering;
 using Guap.Input;
-using Guap.Utilities;
 using Silk.NET.OpenGL;
 
 namespace Guap;
