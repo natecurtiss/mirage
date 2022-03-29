@@ -7,7 +7,15 @@ public sealed class FiniteStateMachine<T>
     readonly Dictionary<T, State<T>> _states = new();
     State<T> _current = Empty<T>.State;
 
-    public State<T> this[T index] => _states[index];
+    public State<T> this[T index]
+    {
+        get
+        {
+            if (!_states.ContainsKey(index))
+                throw new MissingStateException($"State of type {index} does not exist in Finite State Machine of type {this}!");
+            return _states[index];
+        }
+    }
 
     public FiniteStateMachine(T first, params (T, State<T>)[] states)
     {
