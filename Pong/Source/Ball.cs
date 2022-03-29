@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Numerics;
-using Guap;
-using Guap.Utilities;
-using Random = Guap.Utilities.Random;
+using Mirage;
+using Mirage.Utils;
+using Random = Mirage.Utils.Random;
 
 namespace Pong;
 

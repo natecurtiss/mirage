@@ -1,7 +1,7 @@
-﻿using Pong;
-using Guap;
-using Guap.Input;
-using Guap.Rendering;
+﻿using Mirage;
+using Mirage.Graphics;
+using Mirage.Input;
+using Pong;
 
 var window = new Window("PONG", 1280, 720);
 var keyboard = new Keyboard();

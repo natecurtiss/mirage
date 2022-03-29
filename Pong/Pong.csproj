@@ -6,7 +6,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Guap\Guap.csproj" />
+      <ProjectReference Include="..\Mirage\Mirage.csproj" />
     </ItemGroup>
 
 </Project>
