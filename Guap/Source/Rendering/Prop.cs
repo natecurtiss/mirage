@@ -10,7 +10,7 @@ public sealed class Prop : Entity<PropConfig>
     {
         Texture = _config.Texture;
         Position = _config.Position;
-        Scale = _config.Scale;
+        Size = _config.Scale;
         Rotation = _config.Rotation;
     }
 }

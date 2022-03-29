@@ -29,7 +29,7 @@ sealed class Player : Entity<PlayerConfig>
     protected override void OnStart()
     {
         Texture = "Assets/square.png".Find();
-        Scale = new(10f, 100f);
+        Size = new(10f, 100f);
     }
 
     protected override void OnUpdate(float dt) => _fsm.Update(dt);

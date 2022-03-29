@@ -20,7 +20,8 @@ public abstract class Entity : IDisposable, Moveable, Scalable, Rotateable, Boun
 
     public Vector2 Position { get; set; }
     public float Rotation { get; set; }
-    public Vector2 Scale { get; set; } = Vector2.One;
+    public Vector2 Size { get; set; } = new(1000);
+    public Vector2 Scale { get; set; } = new(1);
     Sprite _sprite;
 
     protected string Texture
@@ -84,7 +85,7 @@ public abstract class Entity : IDisposable, Moveable, Scalable, Rotateable, Boun
     protected virtual void OnUpdate(float dt) { }
     protected virtual void OnDestroy() { }
 
-    public Bounds Bounds() => new(Position, Scale);
+    public Bounds Bounds() => new(Position, Size);
 
     public void Dispose()
     {

@@ -33,7 +33,7 @@ sealed class Ball : Entity<BallConfig>
     {
         _velocity = _startingSpeed;
         Texture = "Assets/square.png".Find();
-        Scale = new(10f);
+        Size = new(10f);
     }
 
     protected override void OnStart() => OnServeStart?.Invoke(PlayerIndex.One);

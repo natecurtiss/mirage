@@ -31,10 +31,10 @@ sealed class PlayerPlayState : State<PlayerState>
     void State<PlayerState>.Update(float dt)
     {
         _moveable.Position += new Vector2(0f, _config.MoveDirection(_keyboard, _config.Ball, _moveable) * _config.Speed * dt);
-        var top = _window.Top.Y - _boundable.Extents.Y;
-        var bottom = _window.Bottom.Y + _boundable.Extents.Y;
+        var top = _window.Bounds().Top.Y - _boundable.Bounds().Extents.Y;
+        var bottom = _window.Bounds().Bottom.Y + _boundable.Bounds().Extents.Y;
         _moveable.Position = new(_moveable.Position.X, Math.Clamp(_moveable.Position.Y, bottom, top));
-        if (_boundable.Overlaps(_config.Ball))
+        if (_boundable.Bounds().Overlaps(_config.Ball.Bounds()))
             _config.Ball.Bounce();
     }
 

@@ -12,7 +12,7 @@ sealed class Sprite : IDisposable
     public readonly Texture Texture;
     readonly Entity _entity;
 
-    public int SortingOrder { get; set; } = 0;
+    public int SortingOrder { get; set; }
 
     public Sprite(GL gl, string path, Entity entity)
     {
@@ -28,7 +28,7 @@ sealed class Sprite : IDisposable
     }
     
     public Matrix4x4 ModelMatrix() => 
-        CreateScale(_entity.Scale.X, _entity.Scale.Y, 1f) * 
+        CreateScale(_entity.Size.X * _entity.Scale.X, _entity.Size.Y * _entity.Scale.Y, 1f) * 
         CreateRotationZ(_entity.Rotation.ToRadians()) * 
         CreateTranslation(_entity.Position.X, _entity.Position.Y, 0f);
 }
