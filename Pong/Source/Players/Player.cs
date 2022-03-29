@@ -6,13 +6,13 @@ using static Pong.PlayerState;
 
 namespace Pong;
 
-sealed class Player : Entity<PlayerVariables>
+sealed class Player : Entity<PlayerConfig>
 {
     FiniteStateMachine<PlayerState> _fsm;
-    PlayerVariables _config;
+    PlayerConfig _config;
     PlayerIndex _index;
 
-    protected override void OnConfigure(PlayerVariables config)
+    protected override void OnConfigure(PlayerConfig config)
     {
         _config = config;
         _index = config.Index;
@@ -21,8 +21,7 @@ sealed class Player : Entity<PlayerVariables>
     protected override void OnAwake()
     {
         var first = _index == One ? MyServe : TheirServe;
-        _fsm = new(first, 
-            (MyServe, new PlayerMyServeState(_config, this, Keyboard)), 
+        _fsm = new(first, (MyServe, new PlayerMyServeState(_config, this, Keyboard)), 
             (TheirServe, new PlayerTheirServeState(_config, this)), 
             (Play, new PlayerPlayState(_config, this, this, Window, Keyboard)));
     }

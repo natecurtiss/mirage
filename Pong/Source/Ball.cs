@@ -6,7 +6,7 @@ using Random = Guap.Utilities.Random;
 
 namespace Pong;
 
-sealed class Ball : Entity<BallVariables>
+sealed class Ball : Entity<BallConfig>
 {
     public event Action<PlayerIndex> OnServeStart;
     public event Action OnServeEnd;
@@ -21,7 +21,7 @@ sealed class Ball : Entity<BallVariables>
     bool _didBounceThisFrame;
     bool _wasServed;
     
-    protected override void OnConfigure(BallVariables config)
+    protected override void OnConfigure(BallConfig config)
     {
         _startingSpeed = config.Speed;
         _speedMultiplier = config.SpeedMultiplier;

@@ -6,13 +6,13 @@ namespace Pong;
 
 sealed class PlayerMyServeState : State<PlayerState>
 {
-    readonly PlayerVariables _config;
+    readonly PlayerConfig _config;
     readonly Moveable _moveable;
     readonly Keyboard _keyboard;
     readonly Timer _timer;
     FiniteStateMachine<PlayerState> _fsm;
 
-    public PlayerMyServeState(PlayerVariables config, Moveable moveable, Keyboard keyboard)
+    public PlayerMyServeState(PlayerConfig config, Moveable moveable, Keyboard keyboard)
     {
         _config = config;
         _moveable = moveable;

@@ -5,11 +5,11 @@ namespace Pong;
 
 sealed class PlayerTheirServeState : State<PlayerState>
 {
-    readonly PlayerVariables _config;
+    readonly PlayerConfig _config;
     readonly Moveable _moveable;
     FiniteStateMachine<PlayerState> _fsm;
 
-    public PlayerTheirServeState(PlayerVariables config, Moveable moveable)
+    public PlayerTheirServeState(PlayerConfig config, Moveable moveable)
     {
         _config = config;
         _moveable = moveable;

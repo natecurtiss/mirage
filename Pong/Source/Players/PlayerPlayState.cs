@@ -8,14 +8,14 @@ namespace Pong;
 
 sealed class PlayerPlayState : State<PlayerState>
 {
-    readonly PlayerVariables _config;
+    readonly PlayerConfig _config;
     readonly Moveable _moveable;
     readonly Boundable _boundable;
     readonly Boundable _window;
     readonly Keyboard _keyboard;
     FiniteStateMachine<PlayerState> _fsm;
 
-    public PlayerPlayState(PlayerVariables config, Moveable moveable, Boundable boundable, Boundable window, Keyboard keyboard)
+    public PlayerPlayState(PlayerConfig config, Moveable moveable, Boundable boundable, Boundable window, Keyboard keyboard)
     {
         _config = config;
         _moveable = moveable;

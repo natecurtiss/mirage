@@ -6,7 +6,7 @@ using Timer = Guap.Timer;
 
 namespace Pong;
 
-readonly struct PlayerVariables
+readonly struct PlayerConfig
 {
     public readonly PlayerIndex Index;
     public readonly Vector2 StartingPosition;
@@ -16,7 +16,7 @@ readonly struct PlayerVariables
     public readonly Func<Keyboard, Timer, bool> ShouldServe;
     public readonly Ball Ball;
 
-    public PlayerVariables(PlayerIndex index, float start, float speed, float serveDelay, Func<Keyboard, Ball, Moveable, int> checkMove,  Func<Keyboard, Timer, bool> checkServe, Ball ball = null)
+    public PlayerConfig(PlayerIndex index, float start, float speed, float serveDelay, Func<Keyboard, Ball, Moveable, int> checkMove,  Func<Keyboard, Timer, bool> checkServe, Ball ball = null)
     {
         Index = index;
         StartingPosition = new(start, 0f);
@@ -27,5 +27,5 @@ readonly struct PlayerVariables
         Ball = ball;
     }
 
-    public PlayerVariables And(Ball ball) => new(Index, StartingPosition.X, Speed, ServeDelay, MoveDirection, ShouldServe, ball);
+    public PlayerConfig And(Ball ball) => new(Index, StartingPosition.X, Speed, ServeDelay, MoveDirection, ShouldServe, ball);
 }
