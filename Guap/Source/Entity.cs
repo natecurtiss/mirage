@@ -33,6 +33,11 @@ public abstract class Entity : IDisposable, Moveable, Scalable, Rotateable, Boun
             _sprite = new(_gl, value, this);
         }
     }
+    protected int SortingOrder
+    {
+        get => _sprite.SortingOrder;
+        set => _sprite.SortingOrder = value;
+    }
     protected World World
     {
         get

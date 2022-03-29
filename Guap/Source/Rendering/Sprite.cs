@@ -8,11 +8,13 @@ namespace Guap.Rendering;
 
 sealed class Sprite : IDisposable
 {
-    internal readonly Shader Shader;
-    internal readonly Texture Texture;
+    public readonly Shader Shader;
+    public readonly Texture Texture;
     readonly Entity _entity;
 
-    internal Sprite(GL gl, string path, Entity entity)
+    public int SortingOrder { get; set; } = 0;
+
+    public Sprite(GL gl, string path, Entity entity)
     {
         Shader = new(gl, "Assets/Shaders/sprite.vert".Find(), "Assets/Shaders/sprite.frag".Find());
         Texture = new(gl, path);

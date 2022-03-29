@@ -1,16 +1,16 @@
 ﻿namespace Guap.Rendering;
 
-public sealed class Prop : Entity<PropOptions>
+public sealed class Prop : Entity<PropConfig>
 {
-    PropOptions _options;
+    PropConfig _config;
 
-    protected override void OnConfigure(PropOptions config) => _options = config;
+    protected override void OnConfigure(PropConfig config) => _config = config;
 
     protected override void OnStart()
     {
-        Texture = _options.Texture;
-        Position = _options.Position;
-        Scale = _options.Scale;
-        Rotation = _options.Rotation;
+        Texture = _config.Texture;
+        Position = _config.Position;
+        Scale = _config.Scale;
+        Rotation = _config.Rotation;
     }
 }

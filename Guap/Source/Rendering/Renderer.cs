@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Silk.NET.OpenGL;
 
 namespace Guap.Rendering;
@@ -52,8 +53,8 @@ public sealed class Renderer : IDisposable
         _gl.Clear(ClearBufferMask.ColorBufferBit);
         _gl.ClearColor(_window.Background);
         _vao.Bind();
-
-        foreach (var sprite in _sprites)
+        
+        foreach (var sprite in _sprites.OrderBy(s => s.SortingOrder).Reverse())
         {
             sprite.Shader.Use();
             sprite.Texture.Bind();

@@ -10,9 +10,9 @@ static class Configurations
 
     public static readonly PlayerConfig PlayerOne = new(PlayerIndex.One, -_spread, _speed, 0.1f, (keyboard, _, _) =>
     {
-        if (keyboard.IsDown(Key.W))
-            return keyboard.IsUp(Key.S) ? 1 : 0;
-        if (keyboard.IsDown(Key.S))
+        if (keyboard.IsDown(Key.W) || keyboard.IsDown(Key.UpArrow))
+            return keyboard.IsUp(Key.S) || keyboard.IsUp(Key.DownArrow) ? 1 : 0;
+        if (keyboard.IsDown(Key.S) || keyboard.IsDown(Key.DownArrow))
             return -1;
         return 0;
     }, (keyboard, timer) => timer.IsDone && keyboard.WasPressed(Key.Any));
