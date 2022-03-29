@@ -3,7 +3,7 @@ using Mirage.Graphics;
 using Mirage.Input;
 using Pong;
 
-var window = new Window("PONG", 1280, 720);
+var window = new Window("Pong // Mirage", 1280, 720, false, false);
 var keyboard = new Keyboard();
 var graphics = new Graphics();
 var camera = new Camera(window);
