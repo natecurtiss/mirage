@@ -10,17 +10,19 @@ sealed class Sprite : IDisposable
 {
     public readonly Shader Shader;
     public readonly Texture Texture;
-    readonly Entity _entity;
+    readonly Transform _transform;
 
     public int SortingOrder { get; set; }
-
-    public Sprite(GL gl, string path, Entity entity)
+    
+    public Sprite(Texture texture, GL gl, Transform transform)
     {
         Shader = new(gl, "Assets/Shaders/sprite.vert".Find(), "Assets/Shaders/sprite.frag".Find());
-        Texture = new(gl, path);
-        _entity = entity;
+        Texture = texture;
+        _transform = transform;
     }
 
+    public Sprite(string path, GL gl, Transform transform) : this(new Texture(gl, path), gl, transform) { }
+    
     public void Dispose()
     {
         Shader.Dispose();
@@ -28,7 +30,7 @@ sealed class Sprite : IDisposable
     }
     
     public Matrix4x4 ModelMatrix() => 
-        CreateScale(_entity.Size.X * _entity.Scale.X, _entity.Size.Y * _entity.Scale.Y, 1f) * 
-        CreateRotationZ(_entity.Rotation.ToRadians()) * 
-        CreateTranslation(_entity.Position.X, _entity.Position.Y, 0f);
+        CreateScale(_transform.Size.X * _transform.Scale.X, _transform.Size.Y * _transform.Scale.Y, 1f) * 
+        CreateRotationZ(_transform.Rotation.ToRadians()) * 
+        CreateTranslation(_transform.Position.X, _transform.Position.Y, 0f);
 }
