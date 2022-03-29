@@ -16,7 +16,7 @@ sealed class Sprite : IDisposable
     
     public Sprite(Texture texture, GL gl, Transform transform)
     {
-        Shader = new(gl, "Assets/Shaders/sprite.vert".Find(), "Assets/Shaders/sprite.frag".Find());
+        Shader = new(gl, "Assets/sprite.vert".Find(), "Assets/sprite.frag".Find());
         Texture = texture;
         _transform = transform;
     }
