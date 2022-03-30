@@ -1,7 +1,7 @@
 ﻿using Mirage;
 using Mirage.Input;
 using Mirage.Rendering;
-using Pong;
+using Samples.Pong;
 
 var window = new Window("Pong // Mirage", 1280, 720, false, false);
 var keyboard = new Keyboard();

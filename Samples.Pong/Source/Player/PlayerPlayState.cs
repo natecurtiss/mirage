@@ -4,7 +4,7 @@ using Mirage;
 using Mirage.Input;
 using Mirage.Utils.FSM;
 
-namespace Pong;
+namespace Samples.Pong;
 
 sealed class PlayerPlayState : State<PlayerState>
 {

@@ -1,7 +1,7 @@
 ﻿using Mirage;
 using Mirage.Utils.FSM;
 
-namespace Pong;
+namespace Samples.Pong;
 
 sealed class PlayerTheirServeState : State<PlayerState>
 {

@@ -1,10 +1,10 @@
 ﻿using Mirage;
 using Mirage.Utils;
 using Mirage.Utils.FSM;
-using static Pong.PlayerIndex;
-using static Pong.PlayerState;
+using static Samples.Pong.PlayerIndex;
+using static Samples.Pong.PlayerState;
 
-namespace Pong;
+namespace Samples.Pong;
 
 sealed class Player : Entity<PlayerConfig>
 {

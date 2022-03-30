@@ -4,7 +4,7 @@ using Mirage;
 using Mirage.Utils;
 using Random = Mirage.Utils.Random;
 
-namespace Pong;
+namespace Samples.Pong;
 
 sealed class Ball : Entity<BallConfig>
 {

@@ -1,7 +1,7 @@
 ﻿using System;
 using Mirage.Input;
 
-namespace Pong;
+namespace Samples.Pong;
 
 static class Configurations
 {

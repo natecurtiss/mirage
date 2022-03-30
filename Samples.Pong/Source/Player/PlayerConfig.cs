@@ -3,7 +3,7 @@ using System.Numerics;
 using Mirage;
 using Mirage.Input;
 
-namespace Pong;
+namespace Samples.Pong;
 
 readonly struct PlayerConfig
 {

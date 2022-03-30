@@ -1,4 +1,4 @@
-﻿namespace Pong;
+﻿namespace Samples.Pong;
 
 readonly struct BallConfig
 {
