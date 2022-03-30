@@ -1,5 +1,8 @@
 ﻿namespace Mirage.Input;
 
+/// <summary>
+/// A <see cref="Key"/> on a <see cref="Keyboard"/>.
+/// </summary>
 public enum Key
 {
     None = -100,
