@@ -1,5 +1,5 @@
-﻿using Mirage.Graphics;
-using Mirage.Input;
+﻿using Mirage.Input;
+using Mirage.Rendering;
 using Silk.NET.OpenGL;
 
 namespace Mirage;
@@ -9,12 +9,12 @@ public sealed class Game
     readonly World _world;
     readonly Window _window;
     readonly Keyboard _keyboard;
-    readonly Graphics.Graphics _graphics;
+    readonly Rendering.Graphics _graphics;
     readonly Renderer _renderer;
 
     public GL GL { get; private set; }
 
-    public Game(World world, Window window, Keyboard keyboard, Graphics.Graphics graphics, Renderer renderer)
+    public Game(World world, Window window, Keyboard keyboard, Rendering.Graphics graphics, Renderer renderer)
     {
         _world = world;
         _window = window;
@@ -33,7 +33,7 @@ public sealed class Game
 
     public void Start() => _window.Load(() =>
     {
-        _graphics.Lib = _window.CreateGraphicsLibrary();
+        _graphics.Lib = _window.CreateGL();
         _renderer.Initialize(_graphics.Lib);
         _world.Start();
     }, Dispose, Update, Render, _keyboard.Press, _keyboard.Release);

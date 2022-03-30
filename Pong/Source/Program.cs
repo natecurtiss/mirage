@@ -1,6 +1,6 @@
 ﻿using Mirage;
-using Mirage.Graphics;
 using Mirage.Input;
+using Mirage.Rendering;
 using Pong;
 
 var window = new Window("Pong // Mirage", 1280, 720, false, false);

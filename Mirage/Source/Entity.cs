@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Numerics;
-using Mirage.Graphics;
 using Mirage.Input;
+using Mirage.Rendering;
 using Silk.NET.OpenGL;
 
 namespace Mirage;

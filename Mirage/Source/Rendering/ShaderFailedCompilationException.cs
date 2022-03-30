@@ -1,7 +1,10 @@
 ﻿using System;
 
-namespace Mirage.Graphics;
+namespace Mirage.Rendering;
 
+/// <summary>
+/// <see cref="Exception"/> thrown when invalid <see cref="Shader"/> source is attempted to be compiled.
+/// </summary>
 sealed class ShaderFailedCompilationException : Exception
 {
     public ShaderFailedCompilationException() { }

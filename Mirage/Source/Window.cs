@@ -51,7 +51,7 @@ public sealed class Window : IDisposable, Boundable
 
     public Bounds Bounds() => new(Vector2.Zero, new(Width, Height));
 
-    internal GL CreateGraphicsLibrary() => _native?.CreateOpenGL();
+    internal GL CreateGL() => _native?.CreateOpenGL();
 
     internal void Load(Action onOpen, Action onClose, Action<float> onUpdate, Action onRender, Action<Key> onKeyPress, Action<Key> onKeyRelease)
     {

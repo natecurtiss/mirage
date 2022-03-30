@@ -1,7 +1,10 @@
 ﻿using System;
 
-namespace Mirage.Graphics;
+namespace Mirage.Rendering;
 
+/// <summary>
+/// <see cref="Exception"/> thrown when OpenGL fails to link a <see cref="Shader"/> program.
+/// </summary>
 sealed class ShaderProgramFailedLinkException : Exception
 {
     public ShaderProgramFailedLinkException() { }

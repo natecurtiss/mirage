@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using Mirage.Graphics;
 using Mirage.Input;
+using Mirage.Rendering;
 
 namespace Mirage;
 
@@ -9,7 +9,7 @@ public sealed class World : IDisposable
 {
     readonly List<Entity> _starting = new();
     readonly List<Entity> _entities = new();
-    readonly Graphics.Graphics _graphics;
+    readonly Rendering.Graphics _graphics;
     readonly Renderer _renderer;
     readonly Camera _camera;
     readonly Window _window;
@@ -19,7 +19,7 @@ public sealed class World : IDisposable
     Action _onInitialize;
     Action _onStart;
 
-    public World(Window window, Keyboard keyboard, Graphics.Graphics graphics, Renderer renderer, Camera camera)
+    public World(Window window, Keyboard keyboard, Rendering.Graphics graphics, Renderer renderer, Camera camera)
     {
         _graphics = graphics;
         _renderer = renderer;
