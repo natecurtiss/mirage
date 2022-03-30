@@ -4,6 +4,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mirage", "Mirage\Mirage.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Samples.Pong", "Samples.Pong\Samples.Pong.csproj", "{6EAFDAB9-2565-4F3E-83CD-05A0F4EC5B9A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Samples.FlappyBird", "Samples.FlappyBird\Samples.FlappyBird.csproj", "{BDED5BC4-59A9-4F56-8A9C-638E690EA6E2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Engine", "Engine", "{47F65B21-89E4-4525-A931-59E0CFBE25B1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{9FC4254A-9297-492E-8FCC-2EF8A5FA48C8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +24,14 @@ Global
 		{6EAFDAB9-2565-4F3E-83CD-05A0F4EC5B9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6EAFDAB9-2565-4F3E-83CD-05A0F4EC5B9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6EAFDAB9-2565-4F3E-83CD-05A0F4EC5B9A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BDED5BC4-59A9-4F56-8A9C-638E690EA6E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BDED5BC4-59A9-4F56-8A9C-638E690EA6E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BDED5BC4-59A9-4F56-8A9C-638E690EA6E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BDED5BC4-59A9-4F56-8A9C-638E690EA6E2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C0B521C8-DA54-4368-89CF-CB0E38388E87} = {47F65B21-89E4-4525-A931-59E0CFBE25B1}
+		{BDED5BC4-59A9-4F56-8A9C-638E690EA6E2} = {9FC4254A-9297-492E-8FCC-2EF8A5FA48C8}
+		{6EAFDAB9-2565-4F3E-83CD-05A0F4EC5B9A} = {9FC4254A-9297-492E-8FCC-2EF8A5FA48C8}
 	EndGlobalSection
 EndGlobal
