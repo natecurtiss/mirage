@@ -12,6 +12,8 @@ Support me: https://www.patreon.com/n8dev
 
 Watch the devlog: https://youtube.con/n8dev
 
+Join my Discord server for help: https://discord.gg/f8B6WW7YrD
+
 ## Specifications
 
 - Runs on Windows exclusively because of [System.Drawing](https://www.nuget.org/packages/System.Drawing.Common/) :/
@@ -31,6 +33,37 @@ Watch the devlog: https://youtube.con/n8dev
 
 ## How to Use
 
+### Creating a Game
+
+After adding the [NuGet package](https://www.nuget.org/packages/NateCurtiss.Mirage/) to your project, create a file called `Program.cs` with either a top-level statement or `Main` method. 
+
+#### Program.cs
+
+```cs
+using System;
+
+Console.WriteLine("Hello Mirage");
+``` 
+#### or Program.cs
+```cs
+using System;
+
+static class Program
+{
+    static void Main()
+    {
+        Console.WriteLine("Hello Mirage");
+    }
+}
+```
+
+## Dependencies
+
+- [Silk.NET.Input](https://www.nuget.org/packages/Silk.NET.Input/)
+- [Silk.NET.Windowing](https://www.nuget.org/packages/Silk.NET.Windowing/)
+- [Silk.NET.OpenGL](https://www.nuget.org/packages/Silk.NET.OpenGL/)
+- [System.Drawing.Common](https://www.nuget.org/packages/System.Drawing.Common/)
+
 ## License
 
-Mirage is under the [MIT License](https://github.com/natecurtiss/mirage/blob/main/LICENSE.md) which gives you the freedom to do pretty much whatever you want with this. Every game you make is 100% yours down to the very last semicolon.
+Mirage is under the [MIT License](https://github.com/natecurtiss/mirage/blob/main/LICENSE.md) which gives you the freedom to do pretty much whatever you want with the engine; every game you make with Mirage is 100% yours down to the very last semicolon.
