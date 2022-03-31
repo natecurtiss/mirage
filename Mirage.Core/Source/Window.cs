@@ -25,7 +25,7 @@ public sealed class Window : IDisposable, Boundable
     public readonly int Height;
     
     readonly WindowOptions _options;
-    readonly Icon _default = new("Mirage.Resources/logo.png".Find());
+    readonly Icon _default = new("Mirage.Resources/logo_square.png".Find());
     
     IWindow _native;
     Icon _icon;
