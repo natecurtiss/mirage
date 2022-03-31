@@ -45,10 +45,11 @@ public sealed class Window : IDisposable, Boundable
     /// <param name="title">The title of the <see cref="Window"/>.</param>
     /// <param name="width">The width in pixels of the <see cref="Window"/>.</param>
     /// <param name="height">The height in pixels of the <see cref="Window"/>.</param>
-    /// <param name="maximized">Maximizes the <see cref="Window"/> if true.</param>
-    /// <param name="resizable">Allows the <see cref="Window"/> to be resizable if true.</param>
-    /// <param name="icon">The path to the image file to use for the <see cref="Icon"/>. Sets to the default <see cref="Icon"/> if null.</param>
-    public Window(string title, uint width, uint height, bool maximized = false, bool resizable = true, string icon = null)
+    /// <param name="maximized">Optionally Maximizes the <see cref="Window"/> if true.</param>
+    /// <param name="resizable">Optionally Allows the <see cref="Window"/> to be resizable if true.</param>
+    /// <param name="background">Optionally provides a background <see cref="Color"/> for the <see cref="Window"/>.</param>
+    /// <param name="icon">Optionally provides the path to a custom image file to use for the <see cref="Icon"/>. Defaults to the default <see cref="Icon"/> if null.</param>
+    public Window(string title, uint width, uint height, bool maximized = false, bool resizable = true, Color background = default, string icon = null)
     {
         Width = (int) width;
         Height = (int) height;
@@ -57,6 +58,7 @@ public sealed class Window : IDisposable, Boundable
         _options.Size = new((int) width, (int) height);
         _options.WindowBorder = resizable ? WindowBorder.Resizable : WindowBorder.Fixed;
         _options.WindowState = maximized ? WindowState.Maximized : WindowState.Normal;
+        Background = background;
         _icon = icon is null ? _default : new(icon);
     }
     
