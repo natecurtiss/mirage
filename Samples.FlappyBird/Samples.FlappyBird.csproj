@@ -10,7 +10,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Mirage.Core\Mirage.Core.csproj" />
+      <ProjectReference Include="..\Mirage\Mirage.csproj" />
     </ItemGroup>
 
 </Project>
