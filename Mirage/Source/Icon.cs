@@ -5,12 +5,30 @@ using System.Runtime.InteropServices;
 
 namespace Mirage;
 
+/// <summary>
+/// A representation of an icon for the <see cref="Window"/>.
+/// </summary>
 public sealed class Icon
 {
+    /// <summary>
+    /// The width in pixels of the <see cref="Icon"/>.
+    /// </summary>
     internal readonly int Width;
+    
+    /// <summary>
+    /// The height in pixels of the <see cref="Icon"/>.
+    /// </summary>
     internal readonly int Height;
+    
+    /// <summary>
+    /// An array of the <see cref="Icon"/>'s pixels.
+    /// </summary>
     internal readonly byte[] Pixels;
 
+    /// <summary>
+    /// Creates a new <see cref="Icon"/>.
+    /// </summary>
+    /// <param name="path">The path to the <see cref="Icon"/>'s image file.</param>
     public Icon(string path)
     {
         using var image = new Bitmap(path);
