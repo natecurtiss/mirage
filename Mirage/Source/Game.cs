@@ -1,20 +1,31 @@
 ﻿using Mirage.Input;
 using Mirage.Rendering;
-using Silk.NET.OpenGL;
 
 namespace Mirage;
 
+/// <summary>
+/// The core class for creating a game with Mirage.
+/// </summary>
+/// <remarks>There should only be one of these created, and it should be the last thing created in the main file.
+/// Make sure to start the game with <see cref="Start">Game.Start()</see>.
+/// Note that nothing after <see cref="Start">Game.Start()</see> will be executed.</remarks>
 public sealed class Game
 {
     readonly World _world;
     readonly Window _window;
     readonly Keyboard _keyboard;
-    readonly Rendering.Graphics _graphics;
+    readonly Graphics _graphics;
     readonly Renderer _renderer;
 
-    public GL GL { get; private set; }
-
-    public Game(World world, Window window, Keyboard keyboard, Rendering.Graphics graphics, Renderer renderer)
+    /// <summary>
+    /// Creates a new <see cref="Game"/>.
+    /// </summary>
+    /// <param name="world">The <see cref="World"/> for the <see cref="Game"/> to use.</param>
+    /// <param name="window">The <see cref="Window"/> for the <see cref="Game"/> to use.</param>
+    /// <param name="keyboard">The <see cref="Keyboard"/> for the <see cref="Game"/> to use.</param>
+    /// <param name="graphics">The <see cref="Graphics"/> object for the <see cref="Game"/> to use.</param>
+    /// <param name="renderer">The <see cref="Renderer"/> for the <see cref="Game"/> to use.</param>
+    public Game(World world, Window window, Keyboard keyboard, Graphics graphics, Renderer renderer)
     {
         _world = world;
         _window = window;
@@ -22,31 +33,29 @@ public sealed class Game
         _graphics = graphics;
         _renderer = renderer;
     }
-    
-    public void Dispose()
-    {
-        _world.Dispose();
-        _renderer.Dispose();
-        _window.Dispose();
-        _graphics.Dispose();
-    }
 
+    /// <summary>
+    /// Starts the <see cref="Game"/>.
+    /// This will never stop executing until the <see cref="Window"/> is closed or the process is terminated.
+    /// </summary>
     public void Start() => _window.Load(() =>
     {
         _graphics.Lib = _window.CreateGL();
         _renderer.Initialize(_graphics.Lib);
         _world.Start();
-    }, Dispose, Update, Render, _keyboard.Press, _keyboard.Release);
-
-    void Update(float dt)
+    }, () =>
+    {
+        _world.Dispose();
+        _renderer.Dispose();
+        _window.Dispose();
+        _graphics.Dispose();
+    }, dt =>
     {
         _keyboard.Update();
         _world.Update(dt);
-    }
-
-    void Render()
+    }, () =>
     {
         _world.Render();
         _renderer.Display();
-    }
+    }, _keyboard.Press, _keyboard.Release);
 }
