@@ -1,6 +1,7 @@
 ﻿using System.Drawing;
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
+using Silk.NET.Core;
 
 namespace Mirage;
 
@@ -18,11 +19,11 @@ public sealed class Icon
     /// The height in pixels of the <see cref="Icon"/>.
     /// </summary>
     internal readonly int Height;
-    
+
     /// <summary>
-    /// An array of the <see cref="Icon"/>'s pixels.
+    /// The <see cref="Icon"/> as a <see cref="RawImage"/>.
     /// </summary>
-    internal readonly byte[] Pixels;
+    internal readonly RawImage Raw;
 
     /// <summary>
     /// Creates a new <see cref="Icon"/>.
@@ -53,6 +54,6 @@ public sealed class Icon
         
         Width = resized.Width;
         Height = resized.Height;
-        Pixels = bytes;
+        Raw = new(Width, Height, bytes);
     }
 }

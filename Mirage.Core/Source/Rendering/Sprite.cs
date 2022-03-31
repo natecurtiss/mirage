@@ -42,7 +42,7 @@ sealed class Sprite : IDisposable
     /// <param name="transform">The <see cref="Transform"/> provided by the <see cref="Entity"/> using the <see cref="Sprite"/>.</param>
     public Sprite(string path, GL gl, Transform transform)
     {
-        Shader = new(gl, "Assets/sprite.vert".Find(), "Assets/sprite.frag".Find());
+        Shader = new(gl, "Assets/Shaders/sprite.vert".Find(), "Assets/Shaders/sprite.frag".Find());
         Texture = new(gl, path);
         _transform = transform;
     }

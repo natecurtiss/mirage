@@ -5,4 +5,12 @@
         <TargetFramework>net6.0</TargetFramework>
     </PropertyGroup>
 
+    <ItemGroup>
+      <Folder Include="Assets" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Mirage.Core\Mirage.Core.csproj" />
+    </ItemGroup>
+
 </Project>

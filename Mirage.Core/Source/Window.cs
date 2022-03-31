@@ -1,6 +1,5 @@
 ﻿using System.Drawing;
 using Mirage.Utils;
-using Silk.NET.Core;
 using Silk.NET.Input;
 using Silk.NET.OpenGL;
 using Silk.NET.Windowing;
@@ -25,7 +24,7 @@ public sealed class Window : IDisposable, Boundable
     public readonly int Height;
     
     readonly WindowOptions _options;
-    readonly Icon _default = new("Mirage.Resources/logo_square.png".Find());
+    readonly Icon _default = new("Assets/Textures/logo_square.png".Find());
     
     IWindow _native;
     Icon _icon;
@@ -44,7 +43,7 @@ public sealed class Window : IDisposable, Boundable
         set
         {
             var icon = value ?? _default;
-            var raw = new RawImage(icon.Width, icon.Height, icon.Pixels);
+            var raw = icon.Raw;
             _native.SetWindowIcon(ref raw);
             _icon = icon;
         }
