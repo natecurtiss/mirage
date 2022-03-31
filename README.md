@@ -126,7 +126,7 @@ class Player : Entity
 }
 ```
 
-Spawning an `Entity` is just as easy. To spawn an `Entity` we need to go through the `World` first, as that's where `Entities` live. Back in our `Program.cs` file we have a reference to the `World`, so let's spawn in our `Player`.
+Spawning an `Entity` is just as easy. To spawn an `Entity` we need to go through the `World` first, as that's where `Entities` live. Back in our `Program.cs` file we have a reference to the `World`, so let's spawn in our `Player` there.
 ```cs
 var world = new World(window, keyboard, graphics, camera, renderer).Spawn<Player>();
 ``` 
@@ -137,7 +137,8 @@ var world = new World(window, keyboard, graphics, camera, renderer)
   .Spawn<Player>()
   .Spawn<Enemy>()
   .Spawn<Enemy>()
-  .Spawn<Floor.()
+  .Spawn<Floor>()
+  .Spawn<GameManager>()
   // ...
 ``` 
 
