@@ -43,7 +43,9 @@ After adding the [NuGet package](https://www.nuget.org/packages/NateCurtiss.Mira
 using System;
 
 Console.WriteLine("Hello Mirage");
-``` or ```cs
+``` 
+or 
+```cs
 // Program.cs
 
 using System;
