@@ -12,7 +12,7 @@
 
 - Runs on Windows exclusively because of [System.Drawing](https://www.nuget.org/packages/System.Drawing.Common/) :/
 - Built and used with C# and .NET 6
-- 2D Sprite rendering with OpenGL ([Silk.NET bindings](https://github.com/dotnet/Silk.NET))
+- 2D sprite rendering with OpenGL ([Silk.NET bindings](https://github.com/dotnet/Silk.NET))
 - Keyboard inputs
 - Lots of extendability
 
