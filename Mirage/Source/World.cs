@@ -21,6 +21,7 @@ public sealed class World : IDisposable
     bool _hasStarted;
     Action _onInitialize;
     Action _onStart;
+    Action _onUpdate;
 
     /// <summary>
     /// Creates a <see cref="World"/>.
@@ -127,10 +128,20 @@ public sealed class World : IDisposable
     /// Called after every <see cref="Entity"/>'s <see cref="Entity.OnStart()"/> method is called.
     /// </summary>
     /// <returns>The <see cref="World"/> for that sweet fluent API.</returns>
-    /// <remarks>Use this for logic that should happen on the first frame, like firing off events.</remarks>
+    /// <remarks>Use this for game logic that should happen on the first frame, like firing off events.</remarks>
     public World OnStart(Action callback)
     {
         _onStart += callback;
+        return this;
+    }
+
+    /// <summary>
+    /// Called after every <see cref="Entity"/>'s <see cref="Entity.OnUpdate(float)"/> method is called.
+    /// </summary>
+    /// <returns>The <see cref="World"/> for that sweet fluent API.</returns>
+    public World OnUpdate(Action callback)
+    {
+        _onUpdate += callback;
         return this;
     }
 
@@ -162,6 +173,7 @@ public sealed class World : IDisposable
     {
         foreach (var entity in _entities.ToArray()) 
             entity.Update(deltaTime);
+        _onUpdate?.Invoke();
     }
 
     /// <summary>
