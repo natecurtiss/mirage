@@ -10,17 +10,37 @@ using Key = Mirage.Input.Key;
 
 namespace Mirage;
 
+/// <summary>
+/// A representation of a <see cref="Window"/>.
+/// </summary>
+/// <remarks>There should only be one <see cref="Window"/> created ever.</remarks>
 public sealed class Window : IDisposable, Boundable
 {
+    /// <summary>
+    /// The width in pixels of the <see cref="Window"/>.
+    /// </summary>
     public readonly int Width;
+    
+    /// <summary>
+    /// The height in pixels of the <see cref="Window"/>.
+    /// </summary>
     public readonly int Height;
+    
     readonly WindowOptions _options;
     readonly Icon _default = new("Resources/logo.png".Find());
     
     IWindow _native;
     Icon _icon;
+    string _title;
 
+    /// <summary>
+    /// The background color of the <see cref="Window"/>.
+    /// </summary>
     public Color Background { get; set; } = Color.Black;
+
+    /// <summary>
+    /// The <see cref="Icon"/> of the <see cref="Window"/>. Uses the default icon if null.
+    /// </summary>
     public Icon Icon
     {
         get => _icon;
@@ -32,8 +52,21 @@ public sealed class Window : IDisposable, Boundable
             _icon = icon;
         }
     }
+    
+    /// <summary>
+    /// The <see cref="Bounds"/> of the <see cref="Window"/>.
+    /// </summary>
     public Bounds Bounds => new(Vector2.Zero, new(Width, Height));
 
+    /// <summary>
+    /// Creates a <see cref="Window"/>.
+    /// </summary>
+    /// <param name="title">The title of the <see cref="Window"/>.</param>
+    /// <param name="width">The width in pixels of the <see cref="Window"/>.</param>
+    /// <param name="height">The height in pixels of the <see cref="Window"/>.</param>
+    /// <param name="maximized">Maximizes the <see cref="Window"/> if true.</param>
+    /// <param name="resizable">Allows the <see cref="Window"/> to be resizable if true.</param>
+    /// <param name="icon">The path to the image file to use for the <see cref="Icon"/>. Sets to the default <see cref="Icon"/> if null.</param>
     public Window(string title, uint width, uint height, bool maximized = false, bool resizable = true, string icon = null)
     {
         Width = (int) width;
@@ -45,13 +78,26 @@ public sealed class Window : IDisposable, Boundable
         _options.WindowState = maximized ? WindowState.Maximized : WindowState.Normal;
         _icon = icon is null ? _default : new(icon);
     }
-
-    public void Dispose() => _native?.Dispose();
-
+    
+    /// <summary>
+    /// Closes the <see cref="Window"/>.
+    /// </summary>
     public void Close() => _native?.Close();
     
+    /// <summary>
+    /// Creates an OpenGL instance from the <see cref="Window"/>.
+    /// </summary>
     internal GL CreateGL() => _native?.CreateOpenGL();
 
+    /// <summary>
+    /// Loads the <see cref="Window"/>.
+    /// </summary>
+    /// <param name="onOpen">Called when the <see cref="Window"/> is first loaded.</param>
+    /// <param name="onClose">Called when the <see cref="Window"/> is closed.</param>
+    /// <param name="onUpdate">Called every <see cref="Window"/> update tick.</param>
+    /// <param name="onRender">Called every <see cref="Window"/> render tick.</param>
+    /// <param name="onKeyPress">Called when a <see cref="Key"/> is pressed.</param>
+    /// <param name="onKeyRelease">Called when a <see cref="Key"/> is released.</param>
     internal void Load(Action onOpen, Action onClose, Action<float> onUpdate, Action onRender, Action<Key> onKeyPress, Action<Key> onKeyRelease)
     {
         _native = Silk.NET.Windowing.Window.Create(_options);
@@ -69,4 +115,7 @@ public sealed class Window : IDisposable, Boundable
         _native.Render += _ => onRender();
         _native.Run();
     }
+    
+    /// <inheritdoc />
+    public void Dispose() => _native?.Dispose();
 }
