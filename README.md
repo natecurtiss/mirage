@@ -57,7 +57,7 @@ static class Program
 }
 ```
 
-The `Game` class takes in a few arguments in its constructor, so let's create those. Start with the `Window`, passing in a `title`, `width`, `height` and optionally whether the path to a custom `Window` `Icon`, and/or whether it should `maximized` and/or `resizable`.
+The `Game` class takes in a few arguments in its constructor, so let's create those. Start with the `Window`, passing in a `title`, `width`, `height` and optionally whether the path to a custom `Window` `Icon`, the `Color` to use the for `Window's` background, and/or whether it should `maximized` and/or `resizable`.
 #### Program.cs
 ```cs
 using Mirage;
