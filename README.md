@@ -154,16 +154,39 @@ var world = new World(window, keyboard, graphics, camera, renderer)
   .Spawn<Player>(out var player);
 ```
 
-We can then do stuff to this `Entity` by chaining a `World.OnAwake()`, `World.OnStart()`, or `World.OnUpdate()` call (generally you'll want to use the first two). These two methods act just like `Entity.OnAwake()` and `Entity.OnStart()`, but are called after every single `Entity` has received the callback for the respective event method.
+We can then do stuff to this `Entity` by chaining a `World.OnAwake()` or `World.OnStart()` call (generally you'll want to use the first two). These two methods act just like `Entity.OnAwake()` `Entity.OnStart()`, but are called after every single `Entity` has received the callback for the respective event method.
 ```cs
 var world = new World(window, keyboard, graphics, camera, renderer)
   .Spawn<Enemy>(out var enemy)
   .Spawn<Player>(out var player)
-  .OnAwake()
+  .OnAwake() // Called after Enemy.OnAwake() and Player.OnAwake().
   {
     enemy.Target = player;
   };
 ```
+
+Note: a `World.OnUpdate(float deltaTime)` callback also exists.
+
+### 2. Before Spawning
+
+Sometimes you'll want to pass in a lot of simple values, and something like 
+```cs
+var world = new World(window, keyboard, graphics, camera, renderer)
+  .Spawn<Player>(out var player)
+  .OnAwake()
+  {
+    player.Speed = 1f;
+    player.Jump = 5.5f;
+    player.Height = 20f;
+    player.ShouldLick = true;
+    player.IsSubscribedToN8Dev = true;
+    player.Pants = new Pants(Jeans.Good);
+    player.EyeColor = Eyes.Green;
+    // ...
+  };
+```
+
+just isn't gonna cut it.
 
 ## Dependencies
 
