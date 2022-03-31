@@ -7,7 +7,7 @@ static class Configurations
 {
     static readonly float _spread = 620f;
     static readonly float _speed = 500f;
-    static readonly Func<Keyboard, bool> _serve = keyboard =>keyboard.WasPressed(Key.Any);
+    static readonly Func<Keyboard, bool> _serve = keyboard => keyboard.WasPressed(Key.Space);
 
     public static readonly PlayerConfig PlayerOne = new(PlayerIndex.One, -_spread, _speed, (keyboard, _, _) =>
     {
