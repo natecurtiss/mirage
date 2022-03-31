@@ -254,6 +254,7 @@ Well, you're right...in a way, but there's a pretty simple workaround. To fix th
 ```cs
 struct WeaponConfig
 {
+  public string Name;
   public float Power;
   public float Range;
   // ...
@@ -271,6 +272,7 @@ class Weapon : Entity<WeaponConfig>
     
   protected override void OnConfigure(WeaponConfig config)
   {
+    _name = config.Name;
     _power = config.Power;
     _range = config.Range;
   }
@@ -294,7 +296,44 @@ var world = new World(window, keyboard, graphics, camera, renderer)
 
 ### To Get you Going...
 
+`Entities` have access to all those modules we created at the start (`Window`, `Keyboard`, etc)
+```cs
+class Player : Entity<float>
+{
+  float _moveSpeed;
+  
+  protected override void OnConfigure(float config)
+  {
+    _moveSpeed = config;
+  }
+  
+  protected override void OnUpdate(float deltaTime)
+  {
+    if (Keyboard.IsDown(Key.RightArrow))
+      Position += _moveSpeed;
+  }
+}
+``` 
 
+There's no physics engine because I wrote this in 24 hours, but you can emulate collisions with `Entity.Bounds`
+```cs
+class Enemy : Entity<Player>
+{
+  Player _player
+  
+  protected override void OnConfigure(Player config)
+  {
+    _player = player;
+  }
+  
+  protected override void OnUpdate(float deltaTime)
+  {
+    if (Bounds.Overlaps(_player.Bounds))
+      World.Kill(_player);
+  }
+}
+``` 
+And...that's about it. Check out the sample projects in the repo for further guidance on the parts of the API I didn't talk about and don't hesitate to ask for help in [my Discord server](https://discord.gg/f8B6WW7Yr).
 
 ## Dependencies
 
