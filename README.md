@@ -2,7 +2,7 @@
 
 <p align="center">
   <a href="https://github.com/natecurtiss/mirage">
-    <img src="Mirage.Resources/logo_wide_transparent.png" width="800" alt="Mirage Logo">
+    <img src="Mirage.Resources/logo_wide_transparent.png" width="500" alt="Mirage Logo">
   </a>
 </p>
 
