@@ -33,4 +33,4 @@ Watch the devlog: https://youtube.con/n8dev
 
 ## License
 
-Mirage is under the [MIT License](https://github.com/natecurtiss/mirage/blob/main/LICENSE.md) which gives you the freedom to do pretty much whatever you want with this. Every game you make is 100% yours down to the very last semicolon.
+Mirage is under the [MIT License](https://github.com/natecurtiss/mirage/blob/main/LICENSE.md) which gives you the freedom to do pretty much whatever you want with the engine; very game you make with Mirage is 100% yours down to the very last semicolon.
