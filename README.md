@@ -167,6 +167,27 @@ var world = new World(window, keyboard, graphics, camera, renderer)
 
 Note: a `World.OnUpdate(float deltaTime)` callback also exists.
 
+### 2. Before Spawning
+
+Sometimes you'll want to pass in a lot of simple values, and something like 
+```cs
+var world = new World(window, keyboard, graphics, camera, renderer)
+  .Spawn<Player>(out var player)
+  .OnAwake()
+  {
+    player.Speed = 1f;
+    player.Jump = 5.5f;
+    player.Height = 20f;
+    player.ShouldLick = true;
+    player.IsSubscribedToN8Dev = true;
+    player.Pants = new Pants(Jeans.Good);
+    player.EyeColor = Eyes.Green;
+    // ...
+  };
+```
+
+just isn't gonna cut it.
+
 ## Dependencies
 
 - [Silk.NET.Input](https://www.nuget.org/packages/Silk.NET.Input/)
