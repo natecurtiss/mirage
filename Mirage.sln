@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mirage", "Mirage\Mirage.csproj", "{C0B521C8-DA54-4368-89CF-CB0E38388E87}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mirage.Core", "Mirage.Core\Mirage.Core.csproj", "{C0B521C8-DA54-4368-89CF-CB0E38388E87}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Samples.Pong", "Samples.Pong\Samples.Pong.csproj", "{6EAFDAB9-2565-4F3E-83CD-05A0F4EC5B9A}"
 EndProject

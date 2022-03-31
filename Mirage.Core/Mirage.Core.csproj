@@ -3,6 +3,7 @@
     <PropertyGroup>
         <TargetFramework>net6.0</TargetFramework>
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+        <RootNamespace>Mirage</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
