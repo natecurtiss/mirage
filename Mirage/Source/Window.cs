@@ -32,6 +32,7 @@ public sealed class Window : IDisposable, Boundable
             _icon = icon;
         }
     }
+    public Bounds Bounds => new(Vector2.Zero, new(Width, Height));
 
     public Window(string title, uint width, uint height, bool maximized = false, bool resizable = true, string icon = null)
     {
@@ -48,9 +49,7 @@ public sealed class Window : IDisposable, Boundable
     public void Dispose() => _native?.Dispose();
 
     public void Close() => _native?.Close();
-
-    public Bounds Bounds() => new(Vector2.Zero, new(Width, Height));
-
+    
     internal GL CreateGL() => _native?.CreateOpenGL();
 
     internal void Load(Action onOpen, Action onClose, Action<float> onUpdate, Action onRender, Action<Key> onKeyPress, Action<Key> onKeyRelease)

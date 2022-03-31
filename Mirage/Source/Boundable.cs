@@ -2,5 +2,5 @@
 
 public interface Boundable
 {
-    Bounds Bounds();
+    Bounds Bounds { get; }
 }

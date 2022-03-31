@@ -48,20 +48,20 @@ sealed class Ball : Entity<BallConfig>
             _didBounceThisFrame = false;
             return;
         }
-        if (Bounds().IsAbove(Window.Bounds()) || Bounds().IsBelow(Window.Bounds()))
+        if (Bounds.IsAbove(Window.Bounds) || Bounds.IsBelow(Window.Bounds))
         {
             _direction = new Vector2(_direction.X, -_direction.Y).Normalized();
             _didBounceThisFrame = true;
         }
 
-        if (Bounds().IsCompletelyRightOf(Window.Bounds()))
+        if (Bounds.IsCompletelyRightOf(Window.Bounds))
         {
             Position = Vector2.Zero;
             _wasServed = false;
             _velocity = _startingSpeed;
             OnServeStart?.Invoke(PlayerIndex.One);
         }
-        else if (Bounds().IsCompletelyLeftOf(Window.Bounds()))
+        else if (Bounds.IsCompletelyLeftOf(Window.Bounds))
         {
             Position = Vector2.Zero;
             _wasServed = false;

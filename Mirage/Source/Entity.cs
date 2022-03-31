@@ -17,12 +17,14 @@ public abstract class Entity : IDisposable, Transform, Boundable
     Camera _camera;
     Window _window;
     Keyboard _keyboard;
+    Sprite _sprite;
 
     public Vector2 Position { get; set; }
     public float Rotation { get; set; }
     public Vector2 Size { get; set; } = new(1000);
     public Vector2 Scale { get; set; } = new(1);
-    Sprite _sprite;
+    public Bounds Bounds => new(Position, Size);
+
 
     protected string Texture
     {
@@ -85,7 +87,6 @@ public abstract class Entity : IDisposable, Transform, Boundable
     protected virtual void OnUpdate(float deltaTime) { }
     protected virtual void OnDestroy() { }
 
-    public Bounds Bounds() => new(Position, Size);
 
     public void Dispose()
     {
