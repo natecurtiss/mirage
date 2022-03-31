@@ -1,13 +1,13 @@
-# mirage
+# Mirage
 
-## specifications
+## Specifications
 
-## how to install
+## How to Install
 
-## how to use
+## How to Use
 
-## api reference
+## Documentation
 
-## license
+## License
 
-## other information
+## Other Information
