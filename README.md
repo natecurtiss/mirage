@@ -44,7 +44,7 @@ using System;
 
 Console.WriteLine("Hello Mirage");
 ``` 
-or 
+### or
 ```cs
 // Program.cs
 
@@ -57,6 +57,7 @@ static class Program
         Console.WriteLine("Hello Mirage");
     }
 }
+```
 
 ## Dependencies
 
