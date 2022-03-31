@@ -37,53 +37,25 @@ Join my Discord server for help: https://discord.gg/f8B6WW7YrD
 
 After adding the [NuGet package](https://www.nuget.org/packages/NateCurtiss.Mirage/) to your project, create a file called `Program.cs` with either a top-level statement or `Main` method, and then create a new `Game` and `Start()` it.
 
-#### Program.cs
-
 ```cs
-using Mirage;
-
 new Game().Start();
 ``` 
-#### or Program.cs
-```cs
-using Mirage;
-
-static class Program
-{
-  static void Main()
-  {
-    new Game().Start();
-  }
-}
-```
 
 The `Game` class takes in a few arguments in its constructor, so let's create those. Start with the `Window`, passing in a `title`, `width`, `height` and optionally whether the path to a custom `Window` `Icon`, the `Color` to use the for `Window's` background, and/or whether it should `maximized` and/or `resizable`.
-#### Program.cs
 ```cs
-using Mirage;
-
 var window = new Window("If you can read this you don't need glasses.", 1920, 1080, maximized: true, resizable: false);
 new Game(window).Start();
 ``` 
 
 Next we'll need the other arguments, so create the `Keyboard`...
-#### Program.cs
 ```cs
-using Mirage;
-using Mirage.Input;
-
 var window = new Window("If you can read this you don't need glasses.", 1920, 1080, maximized: true, resizable: false);
 var keyboard = new Keyboard();
 new Game(window, keyboard).Start();
 ``` 
 
 the `Graphics` object, which acts as the wrapper for OpenGL....
-#### Program.cs
 ```cs
-using Mirage;
-using Mirage.Input;
-using Mirage.Rendering;
-
 var window = new Window("If you can read this you don't need glasses.", 1920, 1080, maximized: true, resizable: false);
 var keyboard = new Keyboard();
 var graphics = new Graphics();
@@ -91,12 +63,7 @@ new Game(window, keyboard, graphics).Start();
 ``` 
 
 the `Camera`, passed in to the `Window`...
-#### Program.cs
 ```cs
-using Mirage;
-using Mirage.Input;
-using Mirage.Rendering;
-
 var window = new Window("If you can read this you don't need glasses.", 1920, 1080, maximized: true, resizable: false);
 var keyboard = new Keyboard();
 var graphics = new Graphics();
@@ -105,12 +72,7 @@ new Game(window, keyboard, graphics, camera).Start();
 ``` 
 
 the `Renderer`, passed in to the `Camera` and the `Window`...
-#### Program.cs
 ```cs
-using Mirage;
-using Mirage.Input;
-using Mirage.Rendering;
-
 var window = new Window("If you can read this you don't need glasses.", 1920, 1080, maximized: true, resizable: false);
 var keyboard = new Keyboard();
 var graphics = new Graphics();
@@ -120,12 +82,7 @@ new Game(window, keyboard, graphics, camera, renderer).Start();
 ``` 
 
 and finally, the `World`, which contains all of the `Entities` in the `Game`. You'll need to pass in everything to this.
-#### Program.cs
 ```cs
-using Mirage;
-using Mirage.Input;
-using Mirage.Rendering;
-
 var window = new Window("If you can read this you don't need glasses.", 1920, 1080, maximized: true, resizable: false);
 var keyboard = new Keyboard();
 var graphics = new Graphics();
@@ -140,10 +97,7 @@ Now if we run our application we should get a blank `Window` with a title and ic
 ### Basics
 
 A "thing" in the `World` is called an `Entity`; let's create one! First let's create a new file in our project called `Player.cs`, and make that class inherit from `Entity`.
-#### Player.cs
 ```cs
-using Mirage;
-
 class Player : Entity
 {
 
@@ -157,11 +111,7 @@ class Player : Entity
 - `OnUpdate(float deltaTime)`: called every frame
 
 Simply override any of the event methods to have your `Entity` receive callbacks.
-#### Example Player.cs
 ```cs
-using Mirage;
-using System;
-
 class Player : Entity
 {
   protected override void OnStart()
@@ -177,13 +127,11 @@ class Player : Entity
 ```
 
 Spawning an `Entity` is just as easy. To spawn an `Entity` we need to go through the `World` first, as that's where `Entities` live. Back in our `Program.cs` file we have a reference to the `World`, so let's spawn in our `Player`.
-#### Program.cs Zoomed-In
 ```cs
 var world = new World(window, keyboard, graphics, camera, renderer).Spawn<Player>();
 ``` 
 
 That's it! The `Spawn<T>()` method takes in a type parameter `T`, which is just the type of `Entity` we'd like to spawn (in this case: `Player`). `World.Spawn<T>()`returns the `World` so that we can chain these as much as we want, which makes it look hella pretty.
-#### Example Program.cs Zoomed-In
 ```cs
 var world = new World(window, keyboard, graphics, camera, renderer)
   .Spawn<Player>()
