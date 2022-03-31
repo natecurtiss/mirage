@@ -28,9 +28,9 @@ public sealed class World : IDisposable
     /// <param name="window">The <see cref="Window"/> used by the <see cref="Game"/>.</param>
     /// <param name="keyboard">The <see cref="Keyboard"/> used by the <see cref="Game"/>.</param>
     /// <param name="graphics">The <see cref="Graphics"/> object used by the <see cref="Game"/>.</param>
-    /// <param name="renderer">The <see cref="Renderer"/> used by the <see cref="Game"/>.</param>
     /// <param name="camera">The <see cref="Camera"/> used by the <see cref="Game"/>.</param>
-    public World(Window window, Keyboard keyboard, Graphics graphics, Renderer renderer, Camera camera)
+    /// <param name="renderer">The <see cref="Renderer"/> used by the <see cref="Game"/>.</param>
+    public World(Window window, Keyboard keyboard, Graphics graphics, Camera camera, Renderer renderer)
     {
         _graphics = graphics;
         _renderer = renderer;
