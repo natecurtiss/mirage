@@ -32,3 +32,5 @@ Watch the devlog: https://youtube.con/n8dev
 ## How to Use
 
 ## License
+
+Mirage is under the [MIT License](https://github.com/natecurtiss/mirage/blob/main/LICENSE.md) which gives you the freedom to do pretty much whatever you want with this. Every game you make is 100% yours down to the very last semicolon.
