@@ -37,14 +37,16 @@ Join my Discord server for help: https://discord.gg/f8B6WW7YrD
 
 After adding the [NuGet package](https://www.nuget.org/packages/NateCurtiss.Mirage/) to your project, create a file called `Program.cs` with either a top-level statement or `Main` method. 
 
-```cs
-// Program.cs
+#### Program.cs
 
+```cs
 using System;
 
 Console.WriteLine("Hello Mirage");
 ``` 
-### or
+#### or
+
+#### Program.cs
 ```cs
 // Program.cs
 
