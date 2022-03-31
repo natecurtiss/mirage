@@ -28,5 +28,3 @@ Watch the devlog: https://youtube.con/n8dev
 ## API Reference
 
 ## License
-
-## Other Information
