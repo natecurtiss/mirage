@@ -139,7 +139,7 @@ Now if we run our application we should get a blank `Window` with a title and ic
 
 ### Basics
 
-A "thing" in the `World` is called an `Entity`. `Entities` can only be created through the `World`. Let's try it! First let's create a new file in our project called `Player.cs`, and make that class inherit from `Entity`.
+A "thing" in the `World` is called an `Entity`; let's create one! First let's create a new file in our project called `Player.cs`, and make that class inherit from `Entity`.
 #### Player.cs
 ```cs
 using Mirage;
@@ -155,6 +155,7 @@ class Player : Entity
 - `OnStart()`: called ON the first frame of the `Entity`'s lifetime; use this for game logic that should run on the first frame
 - `OnDestroy()`: called when the `Entity` is destroyed with `World.Kill()`
 - `OnUpdate(float deltaTime)`: called every frame
+
 Simply override any of the event methods to have your `Entity` receive callbacks.
 #### Example Player.cs
 ```cs
@@ -174,6 +175,23 @@ class Player : Entity
   }
 }
 ```
+
+Spawning an `Entity` is just as easy. To spawn an `Entity` we need to go through the `World` first, as that's where `Entities` live. Back in our `Program.cs` file we have a reference to the `World`, so let's spawn in our `Player`.
+#### Program.cs Zoomed-In
+```cs
+var world = new World(window, keyboard, graphics, camera, renderer).Spawn<Player>();
+``` 
+
+That's it! The `Spawn<T>()` method takes in a type parameter `T`, which is just the type of `Entity` we'd like to spawn (in this case: `Player`). `World.Spawn<T>()`returns the `World` so that we can chain these as much as we want, which makes it look hella pretty.
+#### Example Program.cs Zoomed-In
+```cs
+var world = new World(window, keyboard, graphics, camera, renderer)
+  .Spawn<Player>()
+  .Spawn<Enemy>()
+  .Spawn<Enemy>()
+  .Spawn<Floor.()
+  // ...
+``` 
 
 ## Dependencies
 
