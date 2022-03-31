@@ -46,8 +46,6 @@ Console.WriteLine("Hello Mirage");
 ``` 
 #### or Program.cs
 ```cs
-// Program.cs
-
 using System;
 
 static class Program
