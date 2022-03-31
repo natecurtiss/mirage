@@ -16,10 +16,10 @@ var world = new World(window, keyboard, graphics, camera, renderer)
         if (keyboard.IsDown(Key.S) || keyboard.IsDown(Key.DownArrow))
             return -1;
         return 0;
-    }))
+    }, ball))
     .Spawn<Player, PlayerConfig>(new(PlayerIndex.Two, 620f, my =>
     {
         var relative = Math.Clamp(ball.Position.Y - my.Position.Y, -1, 1);
         return (int) relative;
-    }));
+    }, ball));
 new Game(world, window, keyboard, graphics, renderer).Start();
