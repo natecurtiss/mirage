@@ -292,6 +292,10 @@ var world = new World(window, keyboard, graphics, camera, renderer)
   .Spawn<Player, Weapon>(sword);
 ```
 
+### To Get you Going...
+
+
+
 ## Dependencies
 
 - [Silk.NET.Input](https://www.nuget.org/packages/Silk.NET.Input/)
