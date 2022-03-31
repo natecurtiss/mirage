@@ -2,13 +2,13 @@
 
 namespace Samples.Pong;
 
-sealed class PlayerTheirServeState : State<PlayerState>
+sealed class TheirServe : State<PlayerState>
 {
     readonly PlayerConfig _config;
     readonly Moveable _moveable;
     FiniteStateMachine<PlayerState> _fsm;
 
-    public PlayerTheirServeState(PlayerConfig config, Moveable moveable)
+    public TheirServe(PlayerConfig config, Moveable moveable)
     {
         _config = config;
         _moveable = moveable;

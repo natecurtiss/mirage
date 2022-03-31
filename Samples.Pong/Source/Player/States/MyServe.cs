@@ -3,14 +3,14 @@ using Mirage.Utils.FSM;
 
 namespace Samples.Pong;
 
-sealed class PlayerMyServeState : State<PlayerState>
+sealed class MyServe : State<PlayerState>
 {
     readonly PlayerConfig _config;
     readonly Moveable _moveable;
     readonly Keyboard _keyboard;
     FiniteStateMachine<PlayerState> _fsm;
 
-    public PlayerMyServeState(PlayerConfig config, Moveable moveable, Keyboard keyboard)
+    public MyServe(PlayerConfig config, Moveable moveable, Keyboard keyboard)
     {
         _config = config;
         _moveable = moveable;
@@ -23,7 +23,7 @@ sealed class PlayerMyServeState : State<PlayerState>
 
     void State<PlayerState>.Update(float deltaTime)
     {
-        if (_config.ShouldServe(_keyboard))
+        if (_keyboard.IsDown(Key.Space))
         {
             _config.Ball.Serve(_config.Index);
             _fsm.SwitchTo(PlayerState.Play);
