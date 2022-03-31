@@ -8,8 +8,9 @@
 
 **Mirage is a small 2D game engine written in 24 hours, because why not?** It's definitely not perfect but it's usable, and it's the first complete game engine I've ever made.
 
-- Support me: https://www.patreon.com/n8dev
-- Watch the devlog: https://youtube.con/n8dev
+Support me: https://www.patreon.com/n8dev
+
+Watch the devlog: https://youtube.con/n8dev
 
 ## Specifications
 
