@@ -44,9 +44,7 @@ using System;
 
 Console.WriteLine("Hello Mirage");
 ``` 
-#### or
-
-#### Program.cs
+#### or Program.cs
 ```cs
 // Program.cs
 
