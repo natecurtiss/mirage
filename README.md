@@ -188,6 +188,110 @@ var world = new World(window, keyboard, graphics, camera, renderer)
 
 just isn't gonna cut it.
 
+Instead we can have `Player` inherit from `Entity<T>` like so.
+```cs
+class Player : Entity<float>
+{
+    
+}
+``` 
+
+This gives us an extra method, `OnConfigure(T config)` which looks like this in our `Player`.
+```cs
+class Player : Entity<float>
+{
+  protected override void OnConfigure(float config)
+  {
+  
+  }
+}
+``` 
+
+This method is special because it allows us to pass values in when we spawn in the `Entity`. In this case we're passing in the `_moveSpeed` of the player, so we'd use it like this.
+```cs
+class Player : Entity<float>
+{
+  float _moveSpeed;
+  
+  protected override void OnConfigure(float config)
+  {
+    _moveSpeed = config;
+  }
+}
+``` 
+
+To pass in our `_moveSpeed` we'll need to go back to our main file and use a different overload of the `Spawn<T>()` method.
+```cs
+var world = new World(window, keyboard, graphics, camera, renderer)
+  .Spawn<Player, float>(5f);
+```
+
+All we're doing here is telling the `World` that 
+- A: we're spawning in an `Entity` of type `Player`
+- B: we're passing in a `float` to its `OnConfigure` method
+- and C: we want that `float` to be equal to 5
+
+And now we've given our `Player` a speed of 5! So now if we have multiple `Players` we can easily tweak values to our liking.
+```cs
+var world = new World(window, keyboard, graphics, camera, renderer)
+  .Spawn<Player, float>(1f)
+  .Spawn<Player, float>(0.5f); // Player 2 will be slower.
+  .Spawn<Player, float(100f); // Player 3 just drank some Red Bull.
+```
+
+Here's that example with the enemy from earlier.
+```cs
+var world = new World(window, keyboard, graphics, camera, renderer)
+  .Spawn<Player>(out var player)
+  .Spawn<Enemy, Player>(player);
+```
+
+Much more elegant.
+
+"But Nate..." I hear you ask, "What if I have, for example, a bunch of weapons that have multiple properties I'd like to tweak per instance? This way only allows me to pass in a single argument to an `Entity`." 
+
+Well, you're right...in a way, but there's a pretty simple workaround. To fix this we can just create a struct that's something like this.
+```cs
+struct WeaponConfig
+{
+  public float Power;
+  public float Range;
+  // ...
+}
+```
+
+And pass THAT into our `Entity`.
+
+```cs
+class Weapon : Entity<WeaponConfig>
+{
+  float _name;
+  float _power;
+  float _range;
+    
+  protected override void OnConfigure(WeaponConfig config)
+  {
+    _power = config.Power;
+    _range = config.Range;
+  }
+}
+```
+
+```cs
+var world = new World(window, keyboard, graphics, camera, renderer)
+  .Spawn<Weapon, WeaponConfig>(new("sword", 100f, 5f))
+  .Spawn<Weapon, WeaponConfig>(new("spear", 30f, 30f))
+  .Spawn<Weapon, WeaponConfig>(new("club", 200f, 2f))
+  // ...
+```
+
+Even better, we can still get the `Entity` spawned through another overload of the `Spawn<TE, TC>()` method.
+```cs
+var world = new World(window, keyboard, graphics, camera, renderer)
+  .Spawn<Weapon, WeaponConfig>(new("sword", 100f, 5f), out var sword)
+  .Spawn<Player, Weapon>(sword);
+```
+
 ## Dependencies
 
 - [Silk.NET.Input](https://www.nuget.org/packages/Silk.NET.Input/)
