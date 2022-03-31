@@ -158,11 +158,11 @@ public sealed class World : IDisposable
     /// <summary>
     /// Updates every <see cref="Entity"/>.
     /// </summary>
-    /// <param name="dt"></param>
-    internal void Update(float dt)
+    /// <param name="deltaTime"></param>
+    internal void Update(float deltaTime)
     {
         foreach (var entity in _entities) 
-            entity.Update(dt);
+            entity.Update(deltaTime);
     }
 
     /// <summary>
