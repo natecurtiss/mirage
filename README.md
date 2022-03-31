@@ -33,6 +33,29 @@ Join my Discord server for help: https://discord.gg/f8B6WW7YrD
 
 ## How to Use
 
+### Creating a Game
+
+After adding the [NuGet package](https://www.nuget.org/packages/NateCurtiss.Mirage/) to your project, create a file called `Program.cs` with either a top-level statement or `Main` method. 
+
+```cs
+// Program.cs
+
+using System;
+
+Console.WriteLine("Hello Mirage");
+``` or ```cs
+// Program.cs
+
+using System;
+
+static class Program
+{
+    static void Main()
+    {
+        Console.WriteLine("Hello Mirage");
+    }
+}
+
 ## Dependencies
 
 - [Silk.NET.Input](https://www.nuget.org/packages/Silk.NET.Input/)
