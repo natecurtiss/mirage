@@ -161,7 +161,7 @@ public sealed class World : IDisposable
     /// <param name="deltaTime"></param>
     internal void Update(float deltaTime)
     {
-        foreach (var entity in _entities) 
+        foreach (var entity in _entities.ToArray()) 
             entity.Update(deltaTime);
     }
 
@@ -170,7 +170,7 @@ public sealed class World : IDisposable
     /// </summary>
     internal void Render()
     {
-        foreach (var entity in _entities)
+        foreach (var entity in _entities.ToArray())
             entity.Render();
     }
 
