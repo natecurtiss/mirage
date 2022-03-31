@@ -6,7 +6,7 @@
 
 ## Mirage
 
-A small 2D game engine written in 24 hours, because why not? It's definitely not perfect but it's usable and it's the first complete game engine I've ever made.
+**Mirage is a small 2D game engine written in 24 hours, because why not?** It's definitely not perfect but it's usable and it's the first complete game engine I've ever made.
 
 ## Specifications
 
