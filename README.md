@@ -1,6 +1,6 @@
 # Mirage
 
-A small 2D game engine written in 24 hours because why not.
+A small 2D game engine written in 24 hours, because why not?
 
 ## Specifications
 
