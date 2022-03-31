@@ -25,7 +25,7 @@ Watch the devlog: https://youtube.con/n8dev
 
 1. Create a new .NET 6 Console application ([here's how if you don't know](https://docs.microsoft.com/en-us/dotnet/core/tutorials/with-visual-studio?pivots=dotnet-6-0))
 
-2. Install the [NuGet package](https://www.nuget.org/packages/NateCurtiss.Mirage/)
+2. Install the [NateCurtiss.Mirage NuGet package](https://www.nuget.org/packages/NateCurtiss.Mirage/) ([here's how if you've never done this](https://www.youtube.com/watch?v=ohaz_sPLp4Y))
 
 3. You're done :D
 
