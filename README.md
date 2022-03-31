@@ -35,27 +35,107 @@ Join my Discord server for help: https://discord.gg/f8B6WW7YrD
 
 ### Creating a Game
 
-After adding the [NuGet package](https://www.nuget.org/packages/NateCurtiss.Mirage/) to your project, create a file called `Program.cs` with either a top-level statement or `Main` method. 
+After adding the [NuGet package](https://www.nuget.org/packages/NateCurtiss.Mirage/) to your project, create a file called `Program.cs` with either a top-level statement or `Main` method, and then create a new `Game` and `Start()` it.
 
 #### Program.cs
 
 ```cs
-using System;
+using Mirage;
 
-Console.WriteLine("Hello Mirage");
+new Game().Start();
 ``` 
 #### or Program.cs
 ```cs
-using System;
+using Mirage;
 
 static class Program
 {
     static void Main()
     {
-        Console.WriteLine("Hello Mirage");
+        new Game().Start();
     }
 }
 ```
+
+The `Game` class takes in a few arguments in its constructor, so let's create those. Start with the `Window`, passing in a `title`, `width`, `height` and optionally whether the path to a custom `Window` `Icon`, and/or whether it should `maximized` and/or `resizable`.
+#### Program.cs
+```cs
+using Mirage;
+
+var window = new Window("If you can read this you don't need glasses.", 1920, 1080, maximized: true, resizable: false);
+new Game(window).Start();
+``` 
+
+Next we'll need the other arguments, so create the `Keyboard`...
+#### Program.cs
+```cs
+using Mirage;
+using Mirage.Input;
+
+var window = new Window("If you can read this you don't need glasses.", 1920, 1080, maximized: true, resizable: false);
+var keyboard = new Keyboard();
+new Game(window, keyboard).Start();
+``` 
+
+the `Graphics` object, which acts as the wrapper for OpenGL....
+#### Program.cs
+```cs
+using Mirage;
+using Mirage.Input;
+using Mirage.Rendering;
+
+var window = new Window("If you can read this you don't need glasses.", 1920, 1080, maximized: true, resizable: false);
+var keyboard = new Keyboard();
+var graphics = new Graphics();
+new Game(window, keyboard, graphics).Start();
+``` 
+
+the `Camera`, passing in the `Window`...
+#### Program.cs
+```cs
+using Mirage;
+using Mirage.Input;
+using Mirage.Rendering;
+
+var window = new Window("If you can read this you don't need glasses.", 1920, 1080, maximized: true, resizable: false);
+var keyboard = new Keyboard();
+var graphics = new Graphics();
+var camera = new Camera(window);
+new Game(window, keyboard, graphics, camera).Start();
+``` 
+
+the `Renderer`, passing in the `Camera` and the `Window`...
+#### Program.cs
+```cs
+using Mirage;
+using Mirage.Input;
+using Mirage.Rendering;
+
+var window = new Window("If you can read this you don't need glasses.", 1920, 1080, maximized: true, resizable: false);
+var keyboard = new Keyboard();
+var graphics = new Graphics();
+var camera = new Camera(window);
+var renderer = new Renderer(camera, window);
+new Game(window, keyboard, graphics, camera, renderer).Start();
+``` 
+
+and finally, the `World`, which contains all of the `Entities` in the `Game`. You'll need to pass in everything to this.
+#### Program.cs
+```cs
+using Mirage;
+using Mirage.Input;
+using Mirage.Rendering;
+
+var window = new Window("If you can read this you don't need glasses.", 1920, 1080, maximized: true, resizable: false);
+var keyboard = new Keyboard();
+var graphics = new Graphics();
+var camera = new Camera(window);
+var renderer = new Renderer(camera, window);
+var world = new World(window, keyboard, graphics, camera, renderer);
+new Game(window, keyboard, graphics, camera, renderer, world).Start();
+``` 
+
+Now if we run our application we should get a blank `Window` with a title!
 
 ## Dependencies
 
