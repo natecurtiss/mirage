@@ -25,7 +25,6 @@ public abstract class Entity : IDisposable, Transform, Boundable
     public Vector2 Scale { get; set; } = new(1);
     public Bounds Bounds => new(Position, Size);
 
-
     protected string Texture
     {
         get => _sprite.Texture.Path;
