@@ -23,6 +23,12 @@ Watch the devlog: https://youtube.con/n8dev
 
 ## How to Install
 
+1. Create a new .NET 6 console application
+
+2. Install the [NuGet package](https://www.nuget.org/packages/NateCurtiss.Mirage/)
+
+3. You're done :D
+
 ## How to Use
 
 ## License
