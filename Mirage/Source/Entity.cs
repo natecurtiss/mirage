@@ -67,7 +67,10 @@ public abstract class Entity : IDisposable, Transform, Boundable
         {
             if (_gl is null)
                 throw new InvalidOperationException(_nullError.Replace(_variableNameHere, "Entity.Texture"));
-            _sprite = new(value, _gl, this);
+            if (value is null)
+                _sprite = null;
+            else
+                _sprite = new(value, _gl, this);
         }
     }
 
