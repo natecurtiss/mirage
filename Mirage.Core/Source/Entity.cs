@@ -1,6 +1,4 @@
-﻿using System;
-using System.Numerics;
-using Mirage.Input;
+﻿using Mirage.Input;
 using Mirage.Rendering;
 using Silk.NET.OpenGL;
 

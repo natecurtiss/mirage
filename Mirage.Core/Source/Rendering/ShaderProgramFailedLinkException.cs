@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Mirage.Rendering;
+﻿namespace Mirage.Rendering;
 
 /// <summary>
 /// <see cref="Exception"/> thrown when OpenGL fails to link a <see cref="Shader"/> program.

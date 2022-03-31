@@ -1,5 +1,4 @@
-﻿using Mirage;
-using Mirage.Input;
+﻿using Mirage.Input;
 using Mirage.Rendering;
 using Samples.Pong;
 

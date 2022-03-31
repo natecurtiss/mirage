@@ -1,6 +1,4 @@
-﻿using System.Numerics;
-
-namespace Mirage;
+﻿namespace Mirage;
 
 /// <summary>
 /// An abstraction that represents an object with a <see cref="Size"/> and <see cref="Scale"/>.

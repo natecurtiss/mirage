@@ -1,5 +1,4 @@
-﻿using System;
-using Silk.NET.OpenGL;
+﻿using Silk.NET.OpenGL;
 
 namespace Mirage.Rendering;
 

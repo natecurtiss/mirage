@@ -1,8 +1,4 @@
-﻿using System;
-using System.Numerics;
-using Mirage;
-using Mirage.Utils;
-using Random = Mirage.Utils.Random;
+﻿using Mirage.Utils;
 
 namespace Samples.Pong;
 
@@ -72,7 +68,7 @@ sealed class Ball : Entity<BallConfig>
 
     public void Bounce()
     {
-        var tilt = Random.Between(_minBounceTilt, _maxBounceTilt);
+        var tilt = RandomNumber.Between(_minBounceTilt, _maxBounceTilt);
         var up = _direction.Y > 0 ? 1 : -1;
         _velocity *= _speedMultiplier * _speedMultiplier;
         _direction = new Vector2(-_direction.X, up * tilt).Normalized();
@@ -80,7 +76,7 @@ sealed class Ball : Entity<BallConfig>
 
     public void Serve(PlayerIndex server)
     {
-        var tilt = Random.Between(-1f, 1f);
+        var tilt = RandomNumber.Between(-1f, 1f);
         var dir = server == PlayerIndex.One ? 1 : -1;
         _direction = new Vector2(dir, dir * tilt).Normalized();
         _wasServed = true;

@@ -8,7 +8,7 @@ namespace Mirage.Utils;
 /// <summary>
 /// Helper functions for searching paths and directories.
 /// </summary>
-public static class PathExtensions
+public static class PathHelper
 {
     /// <summary>
     /// Looks upwards from the current directory for the specified path.

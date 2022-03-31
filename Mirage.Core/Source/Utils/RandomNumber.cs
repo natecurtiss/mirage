@@ -3,7 +3,7 @@
 /// <summary>
 /// Helper functions for generating random numbers.
 /// </summary>
-public static class Random
+public static class RandomNumber
 {
     static readonly int _magicToInt = 1000000000;
     static readonly System.Random _random = new();

@@ -1,12 +1,9 @@
-﻿using System;
-using System.Numerics;
-
-namespace Mirage.Utils;
+﻿namespace Mirage.Utils;
 
 /// <summary>
 /// Mathematical helper functions.
 /// </summary>
-public static class MathExtensions
+public static class MathHelper
 {
     /// <summary>
     /// Returns the degrees passed in as radians.

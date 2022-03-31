@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Mirage.Rendering;
+﻿namespace Mirage.Rendering;
 
 /// <summary>
 /// <see cref="Exception"/> thrown when invalid <see cref="Shader"/> source is attempted to be compiled.

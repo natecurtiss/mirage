@@ -1,6 +1,4 @@
-﻿using System.Numerics;
-
-namespace Mirage.Rendering;
+﻿namespace Mirage.Rendering;
 
 /// <summary>
 /// A <see cref="Camera"/> that sees the <see cref="World"/>; can zoom in/out and move.

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Numerics;
-using Mirage.Utils;
+﻿using Mirage.Utils;
 using Silk.NET.OpenGL;
 using static System.Numerics.Matrix4x4;
 

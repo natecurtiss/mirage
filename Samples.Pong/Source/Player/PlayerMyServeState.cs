@@ -1,5 +1,4 @@
-﻿using Mirage;
-using Mirage.Input;
+﻿using Mirage.Input;
 using Mirage.Utils.FSM;
 
 namespace Samples.Pong;

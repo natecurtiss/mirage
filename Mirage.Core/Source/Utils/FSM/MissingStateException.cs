@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Mirage.Utils.FSM;
+﻿namespace Mirage.Utils.FSM;
 
 /// <summary>
 /// <see cref="Exception"/> thrown when a <see cref="State{T}"/> with the specified key does not exist in the specified <see cref="FiniteStateMachine{T}"/>.

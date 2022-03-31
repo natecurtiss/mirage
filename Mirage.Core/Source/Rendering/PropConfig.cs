@@ -1,6 +1,4 @@
-﻿using System.Numerics;
-
-namespace Mirage.Rendering;
+﻿namespace Mirage.Rendering;
 
 /// <summary>
 /// The configuration for a <see cref="Prop"/>.

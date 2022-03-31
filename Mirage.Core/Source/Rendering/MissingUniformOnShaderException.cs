@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Mirage.Rendering;
+﻿namespace Mirage.Rendering;
 
 /// <summary>
 /// <see cref="Exception"/> thrown when the user tries to set a non-existent uniform on a <see cref="Shader"/> with any of the <see cref="Shader">Shader.SetUniform()</see> overloads.

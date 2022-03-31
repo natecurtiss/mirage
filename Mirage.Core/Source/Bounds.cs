@@ -1,6 +1,4 @@
-﻿using System.Numerics;
-
-namespace Mirage;
+﻿namespace Mirage;
 
 /// <summary>
 /// A representation of a bounding-box with a position and size.

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Numerics;
-using Mirage;
-using Mirage.Input;
+﻿using Mirage.Input;
 
 namespace Samples.Pong;
 
