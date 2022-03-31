@@ -22,7 +22,7 @@ sealed class PlayerMyServeState : State<PlayerState>
 
     void State<PlayerState>.Enter() => _moveable.Position = _config.StartingPosition;
 
-    void State<PlayerState>.Update(float dt)
+    void State<PlayerState>.Update(float deltaTime)
     {
         if (_config.ShouldServe(_keyboard))
         {

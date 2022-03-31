@@ -82,7 +82,7 @@ public abstract class Entity : IDisposable, Transform, Boundable
 
     protected virtual void OnAwake() { }
     protected virtual void OnStart() { }
-    protected virtual void OnUpdate(float dt) { }
+    protected virtual void OnUpdate(float deltaTime) { }
     protected virtual void OnDestroy() { }
 
     public Bounds Bounds() => new(Position, Size);
@@ -105,7 +105,7 @@ public abstract class Entity : IDisposable, Transform, Boundable
 
     internal void Awake() => OnAwake();
     internal void Start() => OnStart();
-    internal void Update(float dt) => OnUpdate(dt);
+    internal void Update(float deltaTime) => OnUpdate(deltaTime);
     internal void Render()
     {
         if (_sprite is not null)

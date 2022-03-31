@@ -32,5 +32,5 @@ sealed class Player : Entity<PlayerConfig>
         Size = new(10f, 100f);
     }
 
-    protected override void OnUpdate(float dt) => _fsm.Update(dt);
+    protected override void OnUpdate(float deltaTime) => _fsm.Update(deltaTime);
 }

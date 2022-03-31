@@ -28,9 +28,9 @@ sealed class PlayerPlayState : State<PlayerState>
 
     void State<PlayerState>.Enter() => _config.Ball.OnServeStart += OnScore;
 
-    void State<PlayerState>.Update(float dt)
+    void State<PlayerState>.Update(float deltaTime)
     {
-        _moveable.Position += new Vector2(0f, _config.MoveDirection(_keyboard, _config.Ball, _moveable) * _config.Speed * dt);
+        _moveable.Position += new Vector2(0f, _config.MoveDirection(_keyboard, _config.Ball, _moveable) * _config.Speed * deltaTime);
         var top = _window.Bounds().Top.Y - _boundable.Bounds().Extents.Y;
         var bottom = _window.Bounds().Bottom.Y + _boundable.Bounds().Extents.Y;
         _moveable.Position = new(_moveable.Position.X, Math.Clamp(_moveable.Position.Y, bottom, top));

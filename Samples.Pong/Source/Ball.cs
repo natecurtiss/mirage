@@ -38,11 +38,11 @@ sealed class Ball : Entity<BallConfig>
 
     protected override void OnStart() => OnServeStart?.Invoke(PlayerIndex.One);
 
-    protected override void OnUpdate(float dt)
+    protected override void OnUpdate(float deltaTime)
     {
         if (!_wasServed)
             return;
-        Position += _direction * _velocity * dt;
+        Position += _direction * _velocity * deltaTime;
         if (_didBounceThisFrame)
         {
             _didBounceThisFrame = false;

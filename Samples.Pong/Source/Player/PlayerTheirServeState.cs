@@ -23,7 +23,7 @@ sealed class PlayerTheirServeState : State<PlayerState>
         _config.Ball.OnServeEnd += OnServe;
     }
 
-    void State<PlayerState>.Update(float dt) { }
+    void State<PlayerState>.Update(float deltaTime) { }
 
     void State<PlayerState>.Exit() => _config.Ball.OnServeEnd -= OnServe;
 
