@@ -27,28 +27,13 @@ public sealed class Window : IDisposable, Boundable
     readonly Icon _default = new("Assets/Textures/logo_square.png".Find());
     
     IWindow _native;
-    Icon _icon;
+    readonly Icon _icon;
 
     /// <summary>
     /// The background color of the <see cref="Window"/>.
     /// </summary>
     public Color Background { get; set; } = Color.Black;
 
-    /// <summary>
-    /// The <see cref="Icon"/> of the <see cref="Window"/>. Uses the default icon if null.
-    /// </summary>
-    public Icon Icon
-    {
-        get => _icon;
-        set
-        {
-            var icon = value ?? _default;
-            var raw = icon.Raw;
-            _native.SetWindowIcon(ref raw);
-            _icon = icon;
-        }
-    }
-    
     /// <summary>
     /// The <see cref="Bounds"/> of the <see cref="Window"/>.
     /// </summary>
@@ -103,7 +88,8 @@ public sealed class Window : IDisposable, Boundable
             input.KeyDown += (_, key, _) => onKeyPress((Key) (int) key);
             input.KeyUp += (_, key, _) => onKeyRelease((Key) (int) key);
             _native.Center();
-            Icon = _icon;
+            var raw = _icon.Raw;  
+            _native.SetWindowIcon(ref raw);
             onOpen();
         };
         _native.Closing += onClose;
