@@ -90,7 +90,7 @@ var graphics = new Graphics();
 new Game(window, keyboard, graphics).Start();
 ``` 
 
-the `Camera`, passing in the `Window`...
+the `Camera`, passed in to the `Window`...
 #### Program.cs
 ```cs
 using Mirage;
@@ -104,7 +104,7 @@ var camera = new Camera(window);
 new Game(window, keyboard, graphics, camera).Start();
 ``` 
 
-the `Renderer`, passing in the `Camera` and the `Window`...
+the `Renderer`, passed in to the `Camera` and the `Window`...
 #### Program.cs
 ```cs
 using Mirage;
@@ -135,7 +135,20 @@ var world = new World(window, keyboard, graphics, camera, renderer);
 new Game(window, keyboard, graphics, camera, renderer, world).Start();
 ``` 
 
-Now if we run our application we should get a blank `Window` with a title!
+Now if we run our application we should get a blank `Window` with a title and icon!
+
+### Basics
+
+A "thing" in the `World` is called an `Entity`. `Entities` can only be created through the `World`. Let's try it! First let's create a new file in our project called `Player.cs`, and make that class inherit from `Entity`.
+#### Player.cs
+```cs
+using Mirage;
+
+class Player : Entity
+{
+
+}
+```
 
 ## Dependencies
 
