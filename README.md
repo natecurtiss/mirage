@@ -12,7 +12,7 @@ Support me: https://www.patreon.com/n8dev
 
 Watch the devlog: https://youtube.con/n8dev
 
-Join my discord for help: https://discord.gg/f8B6WW7YrD
+Join my Discord server for help: https://discord.gg/f8B6WW7YrD
 
 ## Specifications
 
