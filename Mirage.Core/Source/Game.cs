@@ -36,8 +36,8 @@ public sealed class Game
 
     /// <summary>
     /// Starts the <see cref="Game"/>.
-    /// This will never stop executing until the <see cref="Window"/> is closed or the process is terminated.
     /// </summary>
+    /// <remarks>This will never stop executing until the <see cref="Window"/> is closed or the process is terminated.</remarks>
     public void Start() => _window.Load(() =>
     {
         _graphics.Lib = _window.CreateGL();
