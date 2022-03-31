@@ -14,7 +14,8 @@
 - Built and used with C# and .NET 6
 - 2D sprite rendering with OpenGL ([Silk.NET bindings](https://github.com/dotnet/Silk.NET))
 - Keyboard inputs
-- Lots of extendability
+- A beautiful and easy-to-use API
+- An API that's also very extendable if you wanna put in the work
 
 ## How to Install
 
