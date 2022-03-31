@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://github.com/natecurtiss/mirage">
-    <img src="Mirage/Textures/logo_wide_transparent.png" width="750" alt="Mirage Logo">
+    <img src="Mirage/Assets/Textures/logo_wide_transparent.png" width="750" alt="Mirage Logo">
   </a>
 </p>
 
