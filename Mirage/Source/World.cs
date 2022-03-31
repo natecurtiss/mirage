@@ -9,6 +9,7 @@ public sealed class World : IDisposable
 {
     readonly List<Entity> _starting = new();
     readonly List<Entity> _entities = new();
+    readonly List<Entity> _destroyed = new();
     readonly Rendering.Graphics _graphics;
     readonly Renderer _renderer;
     readonly Camera _camera;
@@ -32,10 +33,12 @@ public sealed class World : IDisposable
     {
         foreach (var entity in _entities.ToArray()) 
             entity.Dispose();
+        foreach (var entity in _destroyed) 
+            entity.Dispose();
     }
 
     public World Spawn<TE, TS>(TS settings) where TE : Entity<TS>, new() => Spawn<TE, TS>(out _, settings);
-    public World Spawn<TE, TS>(TS settings, out TE entity) where TE : Entity<TS>, new() => Spawn<TE, TS>(out entity, settings);
+    public World Spawn<TE, TS>(TS settings, out TE entity) where TE : Entity<TS>, new() => Spawn(out entity, settings);
     public World Spawn<TE, TS>(out TE entity, TS settings) where TE : Entity<TS>, new()
     {
         entity = new();
@@ -68,6 +71,7 @@ public sealed class World : IDisposable
     public World Kill(Entity entity)
     {
         _entities.Remove(entity);
+        _destroyed.Add(entity);
         entity.Destroy();
         return this;
     }
