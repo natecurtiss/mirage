@@ -23,7 +23,7 @@ Watch the devlog: https://youtube.con/n8dev
 
 ## How to Install
 
-1. Create a new .NET 6 console application
+1. Create a new .NET 6 Console application ([How To](https://docs.microsoft.com/en-us/dotnet/core/tutorials/with-visual-studio?pivots=dotnet-6-0)])
 
 2. Install the [NuGet package](https://www.nuget.org/packages/NateCurtiss.Mirage/)
 
