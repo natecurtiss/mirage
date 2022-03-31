@@ -145,7 +145,7 @@ var world = new World(window, keyboard, graphics, camera, renderer)
 ### Resolving Dependencies
 In literally every single video game ever developed, objects depend on each other. Mirage is code-only, so there's no drag-and-drop visual editor like Unity or Godot, but there are still a few good ways to resolve dependencies.
 
-### 1. After Spawning
+1. After Spawning
 
 There's an overload for `World.Spawn<T>()` that takes in an argument to output the spawned `Entity` of type `T`.
 ```cs
@@ -167,7 +167,7 @@ var world = new World(window, keyboard, graphics, camera, renderer)
 
 Note: a `World.OnUpdate(float deltaTime)` callback also exists.
 
-### 2. Before Spawning
+2. Before Spawning
 
 Sometimes you'll want to pass in a lot of simple values, and something like 
 ```cs
