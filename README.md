@@ -6,7 +6,7 @@
 
 ## How to Use
 
-## Documentation
+## API Reference
 
 ## License
 
