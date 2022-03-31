@@ -45,19 +45,19 @@ public sealed class World : IDisposable
     /// </summary>
     /// <param name="config">The configuration to pass in.</param>
     /// <typeparam name="TE">The type of <see cref="Entity{T}"/> to spawn in.</typeparam>
-    /// <typeparam name="TS">The type of configuration to pass in.</typeparam>
+    /// <typeparam name="TC">The type of configuration to pass in.</typeparam>
     /// <returns>The <see cref="World"/> to give us that sweet fluent API.</returns>
-    public World Spawn<TE, TS>(TS config) where TE : Entity<TS>, new() => Spawn<TE, TS>(out _, config);
+    public World Spawn<TE, TC>(TC config) where TE : Entity<TC>, new() => Spawn<TE, TC>(out _, config);
     
     /// <param name="config">The configuration to pass in.</param>
     /// <param name="entity">The <see cref="Entity{T}"/> that gets spawned.</param>
-    /// <inheritdoc cref="Spawn{TE,TS}(TS)"/>
-    public World Spawn<TE, TS>(TS config, out TE entity) where TE : Entity<TS>, new() => Spawn(out entity, config);
+    /// <inheritdoc cref="Spawn{TE,TC}(TC)"/>
+    public World Spawn<TE, TC>(TC config, out TE entity) where TE : Entity<TC>, new() => Spawn(out entity, config);
     
     /// <param name="entity">The <see cref="Entity{T}"/> that gets spawned.</param>
     /// <param name="config">The configuration to pass in.</param>
-    /// <inheritdoc cref="Spawn{TE,TS}(TS)"/>
-    public World Spawn<TE, TS>(out TE entity, TS config) where TE : Entity<TS>, new()
+    /// <inheritdoc cref="Spawn{TE,TC}(TC)"/>
+    public World Spawn<TE, TC>(out TE entity, TC config) where TE : Entity<TC>, new()
     {
         entity = new();
         entity.Configure(config);
