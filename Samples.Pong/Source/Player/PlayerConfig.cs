@@ -7,11 +7,11 @@ readonly struct PlayerConfig
     public readonly Func<Moveable, int> MoveDirection;
     public readonly Ball Ball;
 
-    public PlayerConfig(PlayerIndex index, float start, Func<Moveable, int> checkMove, Ball ball = null)
+    public PlayerConfig(PlayerIndex index, float startingX, Func<Moveable, int> input, Ball ball = null)
     {
         Index = index;
-        StartingPosition = new(start, 0f);
-        MoveDirection = checkMove;
+        StartingPosition = new(startingX, 0f);
+        MoveDirection = input;
         Ball = ball;
     }
 
