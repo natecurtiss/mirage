@@ -1,6 +1,6 @@
 # Mirage
 
-A small 2D engine written in 24 hours as fun challenge.
+A small 2D engine written in 24 hours because why not.
 
 ## Specifications
 
