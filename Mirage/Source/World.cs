@@ -21,7 +21,7 @@ public sealed class World : IDisposable
     bool _hasStarted;
     Action _onInitialize;
     Action _onStart;
-    Action _onUpdate;
+    Action<float> _onUpdate;
 
     /// <summary>
     /// Creates a <see cref="World"/>.
@@ -139,7 +139,7 @@ public sealed class World : IDisposable
     /// Called after every <see cref="Entity"/>'s <see cref="Entity.OnUpdate(float)"/> method is called.
     /// </summary>
     /// <returns>The <see cref="World"/> for that sweet fluent API.</returns>
-    public World OnUpdate(Action callback)
+    public World OnUpdate(Action<float> callback)
     {
         _onUpdate += callback;
         return this;
@@ -173,7 +173,7 @@ public sealed class World : IDisposable
     {
         foreach (var entity in _entities.ToArray()) 
             entity.Update(deltaTime);
-        _onUpdate?.Invoke();
+        _onUpdate?.Invoke(deltaTime);
     }
 
     /// <summary>
