@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://github.com/natecurtiss/mirage">
-    <img src="Mirage.Resources/logo_wide_transparent.png" width="750" alt="Mirage Logo">
+    <img src="Mirage/Assets/Textures/logo_wide_transparent.png" width="750" alt="Mirage Logo">
   </a>
 </p>
 
@@ -23,6 +23,14 @@ Watch the devlog: https://youtube.con/n8dev
 
 ## How to Install
 
+1. Create a new .NET 6 Console application ([here's how if you don't know](https://docs.microsoft.com/en-us/dotnet/core/tutorials/with-visual-studio?pivots=dotnet-6-0))
+
+2. Install the [NateCurtiss.Mirage](https://www.nuget.org/packages/NateCurtiss.Mirage/) NuGet package ([here's how if you've never installed NuGet packages before](https://www.youtube.com/watch?v=ohaz_sPLp4Y))
+
+3. You're done :D
+
 ## How to Use
 
 ## License
+
+Mirage is under the [MIT License](https://github.com/natecurtiss/mirage/blob/main/LICENSE.md) which gives you the freedom to do pretty much whatever you want with this. Every game you make is 100% yours down to the very last semicolon.
