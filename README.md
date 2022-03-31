@@ -254,6 +254,7 @@ Well, you're right...in a way, but there's a pretty simple workaround. To fix th
 ```cs
 struct WeaponConfig
 {
+  public string Name;
   public float Power;
   public float Range;
   // ...
@@ -271,6 +272,7 @@ class Weapon : Entity<WeaponConfig>
     
   protected override void OnConfigure(WeaponConfig config)
   {
+    _name = config.Name;
     _power = config.Power;
     _range = config.Range;
   }
