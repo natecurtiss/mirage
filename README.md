@@ -31,6 +31,13 @@ Watch the devlog: https://youtube.con/n8dev
 
 ## How to Use
 
+## Dependencies
+
+- [Silk.NET.Input](https://www.nuget.org/packages/Silk.NET.Input/)
+- [Silk.NET.Windowing](https://www.nuget.org/packages/Silk.NET.Windowing/)
+- [Silk.NET.OpenGL](https://www.nuget.org/packages/Silk.NET.OpenGL/)
+- [System.Drawing.Common](https://www.nuget.org/packages/System.Drawing.Common/)
+
 ## License
 
 Mirage is under the [MIT License](https://github.com/natecurtiss/mirage/blob/main/LICENSE.md) which gives you the freedom to do pretty much whatever you want with the engine; every game you make with Mirage is 100% yours down to the very last semicolon.
