@@ -142,6 +142,29 @@ var world = new World(window, keyboard, graphics, camera, renderer)
   // ...
 ``` 
 
+### Resolving Dependencies
+In literally every single video game ever developed, objects depend on each other. Mirage is code-only, so there's no drag-and-drop visual editor like Unity or Godot, but there are still a few good ways to resolve dependencies.
+
+### 1. After Spawning
+
+There's an overload for `World.Spawn<T>()` that takes in an argument to output the spawned `Entity` of type `T`.
+```cs
+var world = new World(window, keyboard, graphics, camera, renderer)
+  .Spawn<Enemy>(out var enemy) // The Enemy needs to know where the Player is to follow them.
+  .Spawn<Player>(out var player);
+```
+
+We can then do stuff to this `Entity` by chaining a `World.OnAwake()`, `World.OnStart()`, or `World.OnUpdate()` call (generally you'll want to use the first two). These two methods act just like `Entity.OnAwake()` and `Entity.OnStart()`, but are called after every single `Entity` has received the callback for the respective event method.
+```cs
+var world = new World(window, keyboard, graphics, camera, renderer)
+  .Spawn<Enemy>(out var enemy)
+  .Spawn<Player>(out var player)
+  .OnAwake()
+  {
+    enemy.Target = player;
+  };
+```
+
 ## Dependencies
 
 - [Silk.NET.Input](https://www.nuget.org/packages/Silk.NET.Input/)
