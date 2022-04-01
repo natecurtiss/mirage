@@ -14,6 +14,16 @@ Watch the devlog: https://youtube.con/n8dev
 
 Join my Discord server for help: https://discord.gg/f8B6WW7YrD
 
+## Screenshots
+
+<a href="Samples.FlappyBird/" target="_blank">
+<img src="Samples.FlappyBird/Assets/sprites.png" width="48%">
+</a>
+
+<a href="Samples.Pong/" target="_blank">
+<img src="Samples.Pong/Assets/sprites.png" width="48%">
+</a>
+
 ## Specifications
 
 - Runs on Windows exclusively because of [System.Drawing](https://www.nuget.org/packages/System.Drawing.Common/) :/
