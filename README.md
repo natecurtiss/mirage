@@ -33,7 +33,7 @@ Join my Discord server for help: https://discord.gg/f8B6WW7YrD
 
 ## Examples
 
-You'll find some sample projects in the repository, prefixed with `Sample.`. For now there's Flappy Bird and Pong. 
+You'll find some sample projects in the repository, prefixed with `Sample`. For now there's Flappy Bird and Pong. 
 
 Controls for both are pretty self-explanatory - just use WASD/Arrows and Space for everything.
 
