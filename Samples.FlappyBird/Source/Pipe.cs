@@ -8,6 +8,7 @@ sealed class Pipe : Entity<PipeConfig>
     
     Player _player;
     Direction _direction;
+    bool _isEnabled = true;
 
     protected override void OnConfigure(PipeConfig config)
     {
@@ -26,10 +27,14 @@ sealed class Pipe : Entity<PipeConfig>
 
     protected override void OnUpdate(float deltaTime)
     {
+        if (!_isEnabled)
+            return;
         Position -= new Vector2(SPEED * deltaTime, 0f);
         if (Bounds.Overlaps(_player.Bounds))
             _player.Die();
         else if (Bounds.IsCompletelyLeftOf(Window.Bounds)) 
             World.Kill(this);
     }
+
+    public void Stop() => _isEnabled = false;
 }

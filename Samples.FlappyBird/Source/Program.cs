@@ -14,6 +14,7 @@ var world = new World(window, keyboard, graphics, camera, renderer)
     .Spawn<Player>(out var player)
     .Spawn<PipeSpawner, Player>(player, out var spawner)
     .Spawn<Prop, PropConfig>(new("Assets/bg_sky.png".Find(), new(1280, 720), new(1f), -5))
+    .Spawn<Transition>(out var transition)
     .OnStart(world =>
     {
         BG.Create(window, world, "bottom", -2, new(1280, 277), 1f, out var bg1);
@@ -22,12 +23,15 @@ var world = new World(window, keyboard, graphics, camera, renderer)
         bg1.Concat(bg2).Concat(bg3).ToList().ForEach(bg =>
         {
             events.OnStart += bg.Start;
-            events.OnReset += bg.Reset;
+            transition.OnCover += bg.Reset;
         });
+        events.OnReset += transition.Do;
         events.OnStart += player.Start;
-        events.OnReset += player.Reset;
         events.OnStart += spawner.Start;
-        events.OnReset += spawner.Reset;
+        events.OnReset += player.Stop;
+        events.OnReset += spawner.Stop;
+        transition.OnCover += player.Reset;
+        transition.OnCover += spawner.Reset;
         player.OnDie += events.Reset;
     });
 new Game(world, window, keyboard, graphics, renderer).Start();

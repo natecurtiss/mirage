@@ -37,12 +37,13 @@ sealed class Player : Entity
 
     public void Die() => OnDie?.Invoke();
 
-    public void Reset()
+    public void Stop()
     {
-        Position = new(STARTING_POSITION, 0f);
         _velocity = 0f;
         _isEnabled = false;
     }
-    
+
+    public void Reset() => Position = new(STARTING_POSITION, 0f);
+
     public void Start() => _isEnabled = true;
 }

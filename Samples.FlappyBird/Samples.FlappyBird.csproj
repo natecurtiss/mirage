@@ -6,10 +6,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Assets" />
-    </ItemGroup>
-
-    <ItemGroup>
       <ProjectReference Include="..\Mirage\Mirage.csproj" />
     </ItemGroup>
 

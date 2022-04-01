@@ -6,8 +6,8 @@ namespace Samples.FlappyBird;
 sealed class PipeSpawner : Entity<Player>
 {
     const float SPREAD = 600f;
-    const float MIN_Y = -120f;
-    const float MAX_Y = 120f;
+    const float MIN_Y = -100f;
+    const float MAX_Y = 10f;
     const float DELAY = 2f;
 
     readonly List<Pipe> _activePipes = new();
@@ -41,9 +41,15 @@ sealed class PipeSpawner : Entity<Player>
 
     public void Start() => _isEnabled = true;
 
-    public void Reset()
+    public void Stop()
     {
         _isEnabled = false;
+        foreach (var pipe in _activePipes) 
+            pipe.Stop();
+    }
+
+    public void Reset()
+    {
         foreach (var pipe in _activePipes.ToArray()) 
             World.Kill(pipe);
     }

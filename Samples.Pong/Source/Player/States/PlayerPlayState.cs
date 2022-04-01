@@ -2,7 +2,7 @@
 
 namespace Samples.Pong;
 
-sealed class Playing : State<PlayerState>
+sealed class PlayerPlayState : State<PlayerState>
 {
     const float SPEED = 500f;
     
@@ -12,7 +12,7 @@ sealed class Playing : State<PlayerState>
     readonly Boundable _window;
     FiniteStateMachine<PlayerState> _fsm;
 
-    public Playing(PlayerConfig config, Moveable moveable, Boundable boundable, Boundable window)
+    public PlayerPlayState(PlayerConfig config, Moveable moveable, Boundable boundable, Boundable window)
     {
         _config = config;
         _moveable = moveable;
@@ -20,11 +20,11 @@ sealed class Playing : State<PlayerState>
         _window = window;
     }
     
-    void State<PlayerState>.Init(FiniteStateMachine<PlayerState> fsm) => _fsm = fsm;
+    public void Init(FiniteStateMachine<PlayerState> fsm) => _fsm = fsm;
 
-    void State<PlayerState>.Enter() => _config.Ball.OnServeStart += OnScore;
+    public void Enter() => _config.Ball.OnServeStart += OnScore;
 
-    void State<PlayerState>.Update(float deltaTime)
+    public void Update(float deltaTime)
     {
         _moveable.Position += new Vector2(0f, _config.MoveDirection(_moveable) * SPEED * deltaTime);
         var top = _window.Bounds.Top.Y - _boundable.Bounds.Extents.Y;
@@ -34,7 +34,7 @@ sealed class Playing : State<PlayerState>
             _config.Ball.Hit();
     }
 
-    void State<PlayerState>.Exit() => _config.Ball.OnServeStart -= OnScore;
+    public void Exit() => _config.Ball.OnServeStart -= OnScore;
 
     void OnScore(PlayerIndex server) => _fsm.SwitchTo(_config.Index == server ? PlayerState.MyServe : PlayerState.TheirServe);
 }

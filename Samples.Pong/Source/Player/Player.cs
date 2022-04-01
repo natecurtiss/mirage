@@ -21,9 +21,9 @@ sealed class Player : Entity<PlayerConfig>
     {
         var first = _index == One ? PlayerState.MyServe : PlayerState.TheirServe;
         _fsm = new(first, 
-            (PlayerState.MyServe, new MyServe(_config, this, Keyboard)), 
-            (PlayerState.TheirServe, new TheirServe(_config, this)), 
-            (Play, new Playing(_config, this, this, Window)));
+            (PlayerState.MyServe, new PlayerMyServeState(_config, this, Keyboard)), 
+            (PlayerState.TheirServe, new PlayerTheirServeState(_config, this)), 
+            (Play, new PlayerPlayState(_config, this, this, Window)));
     }
 
     protected override void OnStart()
