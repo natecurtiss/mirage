@@ -43,20 +43,20 @@ new Game().Start();
 
 The `Game` class takes in a few arguments in its constructor, so let's create those. Start with the `Window`, passing in a `title`, `width`, `height` and optionally whether the path to a custom `Window` `Icon`, the `Color` to use the for `Window's` background, and/or whether it should `maximized` and/or `resizable`.
 ```cs
-var window = new Window("If you can read this you don't need glasses.", 1920, 1080, maximized: true, resizable: false);
+var window = new Window("If you can read this you don't need glasses.", 1920, 1080, maximized: true);
 new Game(window).Start();
 ``` 
 
 Next we'll need the other arguments, so create the `Keyboard`...
 ```cs
-var window = new Window("If you can read this you don't need glasses.", 1920, 1080, maximized: true, resizable: false);
+var window = new Window("If you can read this you don't need glasses.", 1920, 1080, maximized: true);
 var keyboard = new Keyboard();
 new Game(window, keyboard).Start();
 ``` 
 
 the `Graphics` object, which acts as the wrapper for OpenGL....
 ```cs
-var window = new Window("If you can read this you don't need glasses.", 1920, 1080, maximized: true, resizable: false);
+var window = new Window("If you can read this you don't need glasses.", 1920, 1080, maximized: true);
 var keyboard = new Keyboard();
 var graphics = new Graphics();
 new Game(window, keyboard, graphics).Start();
@@ -64,7 +64,7 @@ new Game(window, keyboard, graphics).Start();
 
 the `Camera`, passed in to the `Window`...
 ```cs
-var window = new Window("If you can read this you don't need glasses.", 1920, 1080, maximized: true, resizable: false);
+var window = new Window("If you can read this you don't need glasses.", 1920, 1080, maximized: true);
 var keyboard = new Keyboard();
 var graphics = new Graphics();
 var camera = new Camera(window);
@@ -73,7 +73,7 @@ new Game(window, keyboard, graphics, camera).Start();
 
 the `Renderer`, passed in to the `Camera` and the `Window`...
 ```cs
-var window = new Window("If you can read this you don't need glasses.", 1920, 1080, maximized: true, resizable: false);
+var window = new Window("If you can read this you don't need glasses.", 1920, 1080, maximized: true);
 var keyboard = new Keyboard();
 var graphics = new Graphics();
 var camera = new Camera(window);
@@ -83,7 +83,7 @@ new Game(window, keyboard, graphics, camera, renderer).Start();
 
 and finally, the `World`, which contains all of the `Entities` in the `Game`. You'll need to pass in everything to this.
 ```cs
-var window = new Window("If you can read this you don't need glasses.", 1920, 1080, maximized: true, resizable: false);
+var window = new Window("If you can read this you don't need glasses.", 1920, 1080, maximized: true);
 var keyboard = new Keyboard();
 var graphics = new Graphics();
 var camera = new Camera(window);
@@ -131,7 +131,7 @@ Spawning an `Entity` is just as easy. To spawn an `Entity` we need to go through
 var world = new World(window, keyboard, graphics, camera, renderer).Spawn<Player>();
 ``` 
 
-That's it! The `Spawn<T>()` method takes in a type parameter `T`, which is just the type of `Entity` we'd like to spawn (in this case: `Player`). `World.Spawn<T>()`returns the `World` so that we can chain these as much as we want, which makes it look hella pretty.
+That's it! The `Spawn<T>()` method takes in a type parameter `T`, which is just the type of `Entity` we'd like to spawn (in this case: `Player`). `World.Spawn<T>()` returns the `World` so that we can chain these as much as we want, which makes it look hella pretty.
 ```cs
 var world = new World(window, keyboard, graphics, camera, renderer)
   .Spawn<Player>()
@@ -154,7 +154,7 @@ var world = new World(window, keyboard, graphics, camera, renderer)
   .Spawn<Player>(out var player);
 ```
 
-We can then do stuff to this `Entity` by chaining a `World.OnAwake()` or `World.OnStart()` call (generally you'll want to use the first two). These two methods act just like `Entity.OnAwake()` `Entity.OnStart()`, but are called after every single `Entity` has received the callback for the respective event method.
+We can then do stuff to this `Entity` by chaining a `World.OnAwake()` or `World.OnStart()` call. These two methods act just like `Entity.OnAwake()` `Entity.OnStart()`, but are called after every single `Entity` has received the callback for the corresponding event method.
 ```cs
 var world = new World(window, keyboard, graphics, camera, renderer)
   .Spawn<Enemy>(out var enemy)
