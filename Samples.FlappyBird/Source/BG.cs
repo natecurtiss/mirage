@@ -20,7 +20,7 @@ sealed class BG : Entity<BGConfig>
         _scrollSpeed = config.ScrollSpeed;
     }
 
-    protected override void OnStart()
+    protected override void OnAwake()
     {
         Texture = _texture;
         SortingOrder = _sortingOrder;

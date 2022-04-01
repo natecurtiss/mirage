@@ -6,7 +6,8 @@ sealed class TransitionCoveringState : State<TransitionState>
 {
     readonly Action _onEnter;
     readonly Action _onExit;
-    
+    readonly float _delay;
+
     FiniteStateMachine<TransitionState> _fsm;
     float _timer;
 
@@ -14,12 +15,16 @@ sealed class TransitionCoveringState : State<TransitionState>
     {
         _onEnter = onEnter;
         _onExit = onExit;
-        _timer = delay;
+        _delay = delay;
     }
 
     public void Init(FiniteStateMachine<TransitionState> fsm) => _fsm = fsm;
 
-    public void Enter() => _onEnter();
+    public void Enter()
+    {
+        _timer = _delay;
+        _onEnter();
+    }
 
     public void Update(float deltaTime)
     {

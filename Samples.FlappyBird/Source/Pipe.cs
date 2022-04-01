@@ -16,7 +16,7 @@ sealed class Pipe : Entity<PipeConfig>
         _direction = config.Direction;
     }
 
-    protected override void OnStart()
+    protected override void OnAwake()
     {
         var dir = _direction == Direction.Up ? "u" : "d";
         Texture = $"Assets/pipe_{dir}.png".Find();

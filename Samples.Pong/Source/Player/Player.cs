@@ -19,15 +19,12 @@ sealed class Player : Entity<PlayerConfig>
 
     protected override void OnAwake()
     {
-        var first = _index == One ? PlayerState.MyServe : PlayerState.TheirServe;
+        var first = _index == One ? MyServe : TheirServe;
         _fsm = new(first, 
-            (PlayerState.MyServe, new PlayerMyServeState(_config, this, Keyboard)), 
-            (PlayerState.TheirServe, new PlayerTheirServeState(_config, this)), 
-            (Play, new PlayerPlayState(_config, this, this, Window)));
-    }
-
-    protected override void OnStart()
-    {
+            (MyServe, new PlayerMyServeState(_config, this, Keyboard)), 
+            (TheirServe, new PlayerTheirServeState(_config, this)), 
+            (Play, new PlayerPlayState(_config, this, this, Window))
+        );
         Texture = "Assets/square.png".Find();
         Size = new(10f, 100f);
     }

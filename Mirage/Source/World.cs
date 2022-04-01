@@ -71,6 +71,7 @@ public sealed class World : IDisposable
         {
             entity.Initialize(_graphics.Lib, this, _renderer, _camera, _window, _keyboard);
             _entities.Add(entity);
+            entity.Awake();
             entity.Start();
         }
         return this;

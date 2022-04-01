@@ -14,7 +14,7 @@ sealed class Player : Entity
     bool _isEnabled;
     float _velocity;
 
-    protected override void OnStart()
+    protected override void OnAwake()
     {
         Texture = "Assets/player.png".Find();
         Size = new(203, 184);
