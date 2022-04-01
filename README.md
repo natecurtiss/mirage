@@ -310,7 +310,7 @@ class Player : Entity<float>
   protected override void OnUpdate(float deltaTime)
   {
     if (Keyboard.IsDown(Key.RightArrow))
-      Position += _moveSpeed;
+      Position += new Vector2(_moveSpeed, 0f);
   }
 }
 ``` 
