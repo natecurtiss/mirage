@@ -107,7 +107,7 @@ class Player : Entity
 `Entities` have a set of "event methods" called at different times at different frequencies that can be overriden. Here's a brief explanation of all of them.
 - `OnAwake()`: called BEFORE the first frame of the `Entity`'s lifetime; use this for initializing variables and event handling
 - `OnStart()`: called ON the first frame of the `Entity`'s lifetime; use this for game logic that should run on the first frame
-- `OnDestroy()`: called when the `Entity` is destroyed with `World.Kill()`
+- `OnKill()`: called when the `Entity` is killed.`
 - `OnUpdate(float deltaTime)`: called every frame
 
 Simply override any of the event methods to have your `Entity` receive callbacks.
