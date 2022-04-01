@@ -131,7 +131,7 @@ Spawning an `Entity` is just as easy. To spawn an `Entity` we need to go through
 var world = new World(window, keyboard, graphics, camera, renderer).Spawn<Player>();
 ``` 
 
-That's it! The `Spawn<T>()` method takes in a type parameter `T`, which is just the type of `Entity` we'd like to spawn (in this case: `Player`). `World.Spawn<T>()`returns the `World` so that we can chain these as much as we want, which makes it look hella pretty.
+That's it! The `Spawn<T>()` method takes in a type parameter `T`, which is just the type of `Entity` we'd like to spawn (in this case: `Player`). `World.Spawn<T>()` returns the `World` so that we can chain these as much as we want, which makes it look hella pretty.
 ```cs
 var world = new World(window, keyboard, graphics, camera, renderer)
   .Spawn<Player>()
