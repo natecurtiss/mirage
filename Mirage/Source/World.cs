@@ -123,6 +123,17 @@ public sealed class World : IDisposable
         _onAwake += callback;
         return this;
     }
+    
+    /// <summary>
+    /// Called after every <see cref="Entity"/>'s <see cref="Entity.OnAwake()"/> method is called.
+    /// </summary>
+    /// <returns>The <see cref="World"/> for that sweet fluent API.</returns>
+    /// <remarks>Use this for things like subscribing/unsubscribing to/from events and resolving dependencies.</remarks>
+    public World OnAwake(Action callback)
+    {
+        _onAwake += _ => callback();
+        return this;
+    }
 
     /// <summary>
     /// Called after every <see cref="Entity"/>'s <see cref="Entity.OnStart()"/> method is called.
@@ -134,6 +145,17 @@ public sealed class World : IDisposable
         _onStart += callback;
         return this;
     }
+    
+    /// <summary>
+    /// Called after every <see cref="Entity"/>'s <see cref="Entity.OnStart()"/> method is called.
+    /// </summary>
+    /// <returns>The <see cref="World"/> for that sweet fluent API.</returns>
+    /// <remarks>Use this for game logic that should happen on the first frame, like firing off events.</remarks>
+    public World OnStart(Action callback)
+    {
+        _onStart += _ => callback();
+        return this;
+    }
 
     /// <summary>
     /// Called after every <see cref="Entity"/>'s <see cref="Entity.OnUpdate(float)"/> method is called.
@@ -142,6 +164,26 @@ public sealed class World : IDisposable
     public World OnUpdate(Action<World, float> callback)
     {
         _onUpdate += callback;
+        return this;
+    }
+    
+    /// <summary>
+    /// Called after every <see cref="Entity"/>'s <see cref="Entity.OnUpdate(float)"/> method is called.
+    /// </summary>
+    /// <returns>The <see cref="World"/> for that sweet fluent API.</returns>
+    public World OnUpdate(Action<float> callback)
+    {
+        _onUpdate += (_, dt) => callback(dt);
+        return this;
+    }
+    
+    /// <summary>
+    /// Called after every <see cref="Entity"/>'s <see cref="Entity.OnUpdate(float)"/> method is called.
+    /// </summary>
+    /// <returns>The <see cref="World"/> for that sweet fluent API.</returns>
+    public World OnUpdate(Action<World> callback)
+    {
+        _onUpdate += (world, _) => callback(world);
         return this;
     }
 
