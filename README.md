@@ -33,9 +33,9 @@ Join my Discord server for help: https://discord.gg/f8B6WW7YrD
 
 ## Examples
 
-You'll find some sample projects in the repository, prefixed with `Sample`. For now there's Flappy Bird and Pong. 
+You'll find some sample projects in the repository, prefixed with `Sample`. For now there's Flappy Bird and Pong. Controls for both are pretty self-explanatory - just use WASD/Arrows and Space for everything.
 
-Controls for both are pretty self-explanatory - just use WASD/Arrows and Space for everything.
+Just like everything else, the game art and color palettes are under the [MIT License](https://github.com/natecurtiss/mirage/blob/main/LICENSE.md) so feel free to use those for whatever you want WITH or WITHOUT credit - it's up to you (although credit is always nice :p).
 
 ## How to Use
 
