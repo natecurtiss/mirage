@@ -154,7 +154,7 @@ var world = new World(window, keyboard, graphics, camera, renderer)
   .Spawn<Player>(out var player);
 ```
 
-We can then do stuff to this `Entity` by chaining a `World.OnAwake()` or `World.OnStart()` call (generally you'll want to use the first two). These two methods act just like `Entity.OnAwake()` `Entity.OnStart()`, but are called after every single `Entity` has received the callback for the respective event method.
+We can then do stuff to this `Entity` by chaining a `World.OnAwake()` or `World.OnStart()` call. These two methods act just like `Entity.OnAwake()` `Entity.OnStart()`, but are called after every single `Entity` has received the callback for the respective event method.
 ```cs
 var world = new World(window, keyboard, graphics, camera, renderer)
   .Spawn<Enemy>(out var enemy)
