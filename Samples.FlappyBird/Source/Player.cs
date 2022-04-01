@@ -5,6 +5,8 @@ namespace Samples.FlappyBird;
 
 sealed class Player : Entity
 {
+    public event Action OnDie;
+    
     const float STARTING_POSITION = -500f;
     const float JUMP = 700f;
     const float GRAVITY = -1200f;
@@ -29,7 +31,11 @@ sealed class Player : Entity
         else 
             _velocity += GRAVITY * deltaTime;
         Position += new Vector2(0, 1) * _velocity * deltaTime;
+        if (!Bounds.Overlaps(Window.Bounds))
+            Die();
     }
+
+    public void Die() => OnDie?.Invoke();
 
     public void Reset()
     {
