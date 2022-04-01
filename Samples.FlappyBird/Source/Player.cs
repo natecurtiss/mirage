@@ -18,7 +18,7 @@ sealed class Player : Entity
     {
         Texture = "Assets/player.png".Find();
         Size = new(203, 184);
-        Scale = new(0.5f);
+        Scale = new(0.4f);
         Reset();
     }
 

@@ -5,7 +5,7 @@
 /// </summary>
 public static class RandomNumber
 {
-    static readonly int _magicToInt = 1000000000;
+    static readonly int _magicToInt = 10000;
     static readonly System.Random _random = new();
     
     /// <summary>

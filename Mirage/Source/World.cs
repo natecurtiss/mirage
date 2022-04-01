@@ -9,9 +9,11 @@ namespace Mirage;
 /// </summary>
 public sealed class World : IDisposable
 {
+    public event Action<Entity> OnKill;
+    
     readonly List<Entity> _starting = new();
     readonly List<Entity> _entities = new();
-    readonly List<Entity> _destroyed = new();
+    readonly List<Entity> _killed = new();
     readonly Graphics _graphics;
     readonly Renderer _renderer;
     readonly Camera _camera;
@@ -107,9 +109,13 @@ public sealed class World : IDisposable
     /// <returns>The <see cref="World"/> for that sweet fluent API.</returns>
     public World Kill(Entity entity)
     {
-        _entities.Remove(entity);
-        _destroyed.Add(entity);
-        entity.Destroy();
+        if (_entities.Contains(entity))
+        {
+            _entities.Remove(entity);
+            _killed.Add(entity);
+            entity.Kill();
+            OnKill?.Invoke(entity);
+        }
         return this;
     }
     
@@ -230,9 +236,12 @@ public sealed class World : IDisposable
     /// <inheritdoc />
     public void Dispose()
     {
-        foreach (var entity in _entities.ToArray()) 
+        foreach (var entity in _entities.ToArray())
+        {
+            entity.Kill();
             entity.Dispose();
-        foreach (var entity in _destroyed) 
+        }
+        foreach (var entity in _killed) 
             entity.Dispose();
     }
 }

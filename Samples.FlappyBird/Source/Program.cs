@@ -12,6 +12,7 @@ var renderer = new Renderer(camera, window);
 var world = new World(window, keyboard, graphics, camera, renderer)
     .Spawn<Events>(out var events)
     .Spawn<Player>(out var player)
+    .Spawn<PipeSpawner, Player>(player, out var spawner)
     .Spawn<Prop, PropConfig>(new("Assets/bg_sky.png".Find(), new(1280, 720), new(1f), -5))
     .OnStart(world =>
     {
@@ -25,6 +26,8 @@ var world = new World(window, keyboard, graphics, camera, renderer)
         });
         events.OnStart += player.Start;
         events.OnReset += player.Reset;
+        events.OnStart += spawner.Start;
+        events.OnReset += spawner.Reset;
         player.OnDie += events.Reset;
     });
 new Game(world, window, keyboard, graphics, renderer).Start();

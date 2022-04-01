@@ -49,7 +49,7 @@ public abstract class Entity : IDisposable, Transform, Boundable
     /// <summary>
     /// The <see cref="Bounds"/> of the <see cref="Entity"/>'s <see cref="Sprite"/>.
     /// </summary>
-    public Bounds Bounds => new(Position, Size);
+    public Bounds Bounds => new(Position, Size * Scale);
 
     /// <summary>
     /// The path to the <see cref="Texture"/> used by the <see cref="Entity"/>'s <see cref="Sprite"/>.
@@ -175,7 +175,7 @@ public abstract class Entity : IDisposable, Transform, Boundable
     /// <summary>
     /// Called before the <see cref="Entity"/> is killed.
     /// </summary>
-    protected virtual void OnDestroy() { }
+    protected virtual void OnKill() { }
 
     /// <summary>
     /// Populates the <see cref="Entity"/>'s properties meant to be obtained from the <see cref="Game"/>.
@@ -224,7 +224,7 @@ public abstract class Entity : IDisposable, Transform, Boundable
     /// <summary>
     /// Called when the <see cref="Entity"/> is killed by the <see cref="World"/>.
     /// </summary>
-    internal void Destroy() => OnDestroy();
+    internal void Kill() => OnKill();
     
     /// <inheritdoc />
     public void Dispose()
