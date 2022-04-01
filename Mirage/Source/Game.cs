@@ -51,8 +51,8 @@ public sealed class Game
         _graphics.Dispose();
     }, dt =>
     {
-        _keyboard.Update();
         _world.Update(dt);
+        _keyboard.Update();
     }, () =>
     {
         _world.Render();

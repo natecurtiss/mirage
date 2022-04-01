@@ -72,8 +72,7 @@ public sealed class Renderer : IDisposable
         _gl.Clear(ClearBufferMask.ColorBufferBit);
         _gl.ClearColor(_window.Background);
         _vao.Bind();
-        
-        foreach (var sprite in _sprites.OrderBy(s => s.SortingOrder).Reverse())
+        foreach (var sprite in _sprites.OrderBy(s => s.SortingOrder))
         {
             sprite.Shader.Use();
             sprite.Texture.Bind();

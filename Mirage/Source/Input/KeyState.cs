@@ -5,8 +5,8 @@ namespace Mirage.Input;
 /// </summary>
 enum KeyState
 {
-    Down, 
-    Up, 
-    Pressed, 
-    Released
+    Up = 0,
+    Down = 1, 
+    Released = 2,
+    Pressed = 3 
 }

@@ -120,8 +120,11 @@ public sealed class Keyboard
     internal void Press(Key key)
     {
         if (key == Unknown) return;
-        _keys[key] = Pressed;
-        OnKeyPress?.Invoke(key);
+        if (_keys[key] != Pressed && _keys[key] != Down)
+        {
+            _keys[key] = Pressed;
+            OnKeyPress?.Invoke(key);   
+        }
     }
 
     /// <summary>
@@ -131,8 +134,11 @@ public sealed class Keyboard
     internal void Release(Key key)
     {
         if (key == Unknown) return;
-        _keys[key] = Released;
-        OnKeyRelease?.Invoke(key);
+        if (_keys[key] != Released && _keys[key] != Up)
+        {
+            _keys[key] = Released;
+            OnKeyRelease?.Invoke(key);
+        }
     }
 
     /// <summary>
@@ -140,15 +146,14 @@ public sealed class Keyboard
     /// </summary>
     internal void Update()
     {
-        _keys.Where((_, status) => status == (int) Pressed).ToList().ForEach(p =>
+        foreach (var (key, state) in _keys)
         {
-            var key = p.Key;
-            _keys[key] = Down;
-        });
-        _keys.Where((_, status) => status == (int) Released).ToList().ForEach(p =>
-        {
-            var key = p.Key;
-            _keys[key] = Up;
-        });
+            _keys[key] = state switch
+            {
+                Pressed => Down,
+                Released => Up,
+                _ => _keys[key]
+            };
+        }
     }
 }

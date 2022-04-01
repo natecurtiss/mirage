@@ -19,9 +19,9 @@ public sealed class World : IDisposable
     readonly Keyboard _keyboard;
 
     bool _hasStarted;
-    Action _onInitialize;
-    Action _onStart;
-    Action<float> _onUpdate;
+    Action<World> _onAwake;
+    Action<World> _onStart;
+    Action<World, float> _onUpdate;
 
     /// <summary>
     /// Creates a <see cref="World"/>.
@@ -118,9 +118,9 @@ public sealed class World : IDisposable
     /// </summary>
     /// <returns>The <see cref="World"/> for that sweet fluent API.</returns>
     /// <remarks>Use this for things like subscribing/unsubscribing to/from events and resolving dependencies.</remarks>
-    public World OnAwake(Action callback)
+    public World OnAwake(Action<World> callback)
     {
-        _onInitialize += callback;
+        _onAwake += callback;
         return this;
     }
 
@@ -129,7 +129,7 @@ public sealed class World : IDisposable
     /// </summary>
     /// <returns>The <see cref="World"/> for that sweet fluent API.</returns>
     /// <remarks>Use this for game logic that should happen on the first frame, like firing off events.</remarks>
-    public World OnStart(Action callback)
+    public World OnStart(Action<World> callback)
     {
         _onStart += callback;
         return this;
@@ -139,7 +139,7 @@ public sealed class World : IDisposable
     /// Called after every <see cref="Entity"/>'s <see cref="Entity.OnUpdate(float)"/> method is called.
     /// </summary>
     /// <returns>The <see cref="World"/> for that sweet fluent API.</returns>
-    public World OnUpdate(Action<float> callback)
+    public World OnUpdate(Action<World, float> callback)
     {
         _onUpdate += callback;
         return this;
@@ -151,7 +151,7 @@ public sealed class World : IDisposable
     internal void Start()
     {
         _hasStarted = true;
-        _onInitialize?.Invoke();
+        _onAwake?.Invoke(this);
         foreach (var entity in _starting)
         {
             entity.Initialize(_graphics.Lib, this, _renderer, _camera, _window, _keyboard);
@@ -162,7 +162,7 @@ public sealed class World : IDisposable
         foreach (var entity in _entities) 
             entity.Start();
         _starting.Clear();
-        _onStart?.Invoke();
+        _onStart?.Invoke(this);
     }
 
     /// <summary>
@@ -173,7 +173,7 @@ public sealed class World : IDisposable
     {
         foreach (var entity in _entities.ToArray()) 
             entity.Update(deltaTime);
-        _onUpdate?.Invoke(deltaTime);
+        _onUpdate?.Invoke(this, deltaTime);
     }
 
     /// <summary>

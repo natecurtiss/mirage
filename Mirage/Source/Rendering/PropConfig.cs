@@ -11,6 +11,8 @@ public struct PropConfig
     public readonly int SortingOrder;
     /// <inheritdoc cref="Entity{T}.Position"/>
     public readonly Vector2 Position;
+    /// <inheritdoc cref="Entity{T}.Size"/>
+    public readonly Vector2 Size;
     /// <inheritdoc cref="Entity{T}.Scale"/>
     public readonly Vector2 Scale;
     /// <inheritdoc cref="Entity{T}.Rotation"/>
@@ -19,37 +21,13 @@ public struct PropConfig
     /// <summary>
     /// Creates a new <see cref="PropConfig"/> with specified values.
     /// </summary>
-    public PropConfig(string texture, int sortingOrder, Vector2 position, Vector2 scale, float rotation)
+    public PropConfig(string texture, Vector2 size, Vector2 scale, int sortingOrder = 0, Vector2 position = default, float rotation = 0f)
     {
         Texture = texture;
         SortingOrder = sortingOrder;
         Position = position;
+        Size = size;
         Scale = scale;
         Rotation = rotation;
     }
-
-    /// <summary>
-    /// Returns a copy of the <see cref="PropConfig"/> with a specified <see cref="Texture"/>.
-    /// </summary>
-    public PropConfig WithTexture(string texture) => this = new(texture, SortingOrder, Position, Scale, Rotation);
-    
-    /// <summary>
-    /// Returns a copy of the <see cref="PropConfig"/> with a specified <see cref="SortingOrder"/>.
-    /// </summary>
-    public PropConfig WithSortingOrder(int sortingOrder) => this = new(Texture, sortingOrder, Position, Scale, Rotation);
-    
-    /// <summary>
-    /// Returns a copy of the <see cref="PropConfig"/> with a specified <see cref="Position"/>.
-    /// </summary>
-    public PropConfig AtPosition(Vector2 position) => this = new(Texture, SortingOrder, position, Scale, Rotation);
-    
-    /// <summary>
-    /// Returns a copy of the <see cref="PropConfig"/> with a specified <see cref="Scale"/>.
-    /// </summary>
-    public PropConfig WithScale(Vector2 scale) => this = new(Texture, SortingOrder, Position, scale, Rotation);
-    
-    /// <summary>
-    /// Returns a copy of the <see cref="PropConfig"/> with a specified <see cref="Rotation"/>.
-    /// </summary>
-    public PropConfig WithRotation(float rotation) => this = new(Texture, SortingOrder, Position, Scale, rotation);
 }

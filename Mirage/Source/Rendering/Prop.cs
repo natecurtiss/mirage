@@ -14,8 +14,10 @@ public sealed class Prop : Entity<PropConfig>
     protected override void OnStart()
     {
         Texture = _config.Texture;
+        SortingOrder = _config.SortingOrder;
         Position = _config.Position;
-        Size = _config.Scale;
+        Size = _config.Size;
+        Scale = _config.Scale;
         Rotation = _config.Rotation;
     }
 }
