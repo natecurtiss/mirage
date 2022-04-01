@@ -236,7 +236,7 @@ And now we've given our `Player` a speed of 5! So now if we have multiple `Playe
 var world = new World(window, keyboard, graphics, camera, renderer)
   .Spawn<Player, float>(1f)
   .Spawn<Player, float>(0.5f); // Player 2 will be slower.
-  .Spawn<Player, float(100f); // Player 3 just drank some Red Bull.
+  .Spawn<Player, float>(100f); // Player 3 just drank some Red Bull.
 ```
 
 Here's that example with the enemy from earlier.
@@ -310,7 +310,7 @@ class Player : Entity<float>
   protected override void OnUpdate(float deltaTime)
   {
     if (Keyboard.IsDown(Key.RightArrow))
-      Position += _moveSpeed;
+      Position += new Vector2(_moveSpeed, 0f);
   }
 }
 ``` 
