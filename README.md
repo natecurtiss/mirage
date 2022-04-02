@@ -76,7 +76,7 @@ var graphics = new Graphics();
 new Game(window, keyboard, graphics).Start();
 ``` 
 
-the `Camera`, passed in to the `Window`...
+the `Camera`, passing in the `Window`...
 ```cs
 var window = new Window("If you can read this you don't need glasses.", 1920, 1080, maximized: true);
 var keyboard = new Keyboard();
@@ -85,7 +85,7 @@ var camera = new Camera(window);
 new Game(window, keyboard, graphics, camera).Start();
 ``` 
 
-the `Renderer`, passed in to the `Camera` and the `Window`...
+the `Renderer`, passing in the `Camera` and the `Window`...
 ```cs
 var window = new Window("If you can read this you don't need glasses.", 1920, 1080, maximized: true);
 var keyboard = new Keyboard();
