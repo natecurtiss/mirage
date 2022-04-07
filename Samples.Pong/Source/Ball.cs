@@ -8,9 +8,10 @@ sealed class Ball : Entity
     public event Action OnServeEnd;
 
     const float STARTING_SPEED = 400f;
-    const float SPEED_MULTIPLIER = 1.1f;
+    const float SPEED_MULTIPLIER = 1.05f;
     const float MIN_BOUNCE_TILT = 0.3f;
     const float MAX_BOUNCE_TILT = 1f;
+    const int BOUNCE_BUFFER = 2;
     
     float _velocity;
     Vector2 _direction;
@@ -31,15 +32,15 @@ sealed class Ball : Entity
         if (!_wasServed)
             return;
         Position += _direction * _velocity * deltaTime;
-        if (_bounceDelayBuffer == 1)
+        if (_bounceDelayBuffer != 0)
         {
-            _bounceDelayBuffer = 0;
+            _bounceDelayBuffer--;
             return;
         }
         if (Bounds.IsAbove(Window.Bounds) || Bounds.IsBelow(Window.Bounds))
         {
             _direction = new Vector2(_direction.X, -_direction.Y).Normalized();
-            _bounceDelayBuffer = 1;
+            _bounceDelayBuffer = BOUNCE_BUFFER;
         }
 
         if (Bounds.IsCompletelyRightOf(Window.Bounds))
@@ -64,12 +65,14 @@ sealed class Ball : Entity
         var up = _direction.Y > 0 ? 1 : -1;
         _velocity *= SPEED_MULTIPLIER * SPEED_MULTIPLIER;
         _direction = new Vector2(-_direction.X, up * tilt).Normalized();
+        _bounceDelayBuffer = BOUNCE_BUFFER;
     }
 
     public void Serve(PlayerIndex server)
     {
         var tilt = RandomNumber.Between(-1f, 1f);
         var dir = server == PlayerIndex.One ? 1 : -1;
+        _velocity = STARTING_SPEED;
         _direction = new Vector2(dir, dir * tilt).Normalized();
         _wasServed = true;
         OnServeEnd?.Invoke();
