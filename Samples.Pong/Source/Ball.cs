@@ -75,6 +75,7 @@ sealed class Ball : Entity
         _velocity = STARTING_SPEED;
         _direction = new Vector2(dir, dir * tilt).Normalized();
         _wasServed = true;
+        _bounceDelayBuffer = 0;
         OnServeEnd?.Invoke();
     }
 }
