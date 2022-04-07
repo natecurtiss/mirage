@@ -8,6 +8,7 @@ sealed class Events : Entity
     public event Action OnReset;
 
     bool _hasStarted;
+    
 
     protected override void OnUpdate(float deltaTime)
     {
@@ -20,9 +21,7 @@ sealed class Events : Entity
         }
     }
 
-    public void Reset()
-    {
-        _hasStarted = false;
-        OnReset?.Invoke();
-    }
+    public void Reset() => OnReset?.Invoke();
+
+    public void AllowStart() => _hasStarted = false;
 }

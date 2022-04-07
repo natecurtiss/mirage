@@ -32,6 +32,7 @@ var world = new World(window, keyboard, graphics, camera, renderer)
         events.OnReset += spawner.Stop;
         transition.OnCover += player.Reset;
         transition.OnCover += spawner.Reset;
+        transition.OnFinish += events.AllowStart;
         player.OnDie += events.Reset;
     });
 new Game(world, window, keyboard, graphics, renderer).Start();

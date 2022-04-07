@@ -5,7 +5,7 @@ namespace Samples.FlappyBird;
 
 sealed class PipeSpawner : Entity<Player>
 {
-    const float SPREAD = 600f;
+    const float SPREAD = 615f;
     const float MIN_Y = -100f;
     const float MAX_Y = 10f;
     const float DELAY = 2f;
