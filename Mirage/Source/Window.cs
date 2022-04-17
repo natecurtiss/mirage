@@ -59,7 +59,7 @@ public sealed class Window : IDisposable, Boundable
         _options.WindowBorder = resizable ? WindowBorder.Resizable : WindowBorder.Fixed;
         _options.WindowState = maximized ? WindowState.Maximized : WindowState.Normal;
         Background = background;
-        _icon = icon is null ? _default : new(icon);
+        _icon = icon is null ? null : new(icon);
     }
     
     /// <summary>
@@ -90,8 +90,11 @@ public sealed class Window : IDisposable, Boundable
             input.KeyDown += (_, key, _) => onKeyPress((Key) (int) key);
             input.KeyUp += (_, key, _) => onKeyRelease((Key) (int) key);
             _native.Center();
-            var raw = _icon.Raw;  
-            _native.SetWindowIcon(ref raw);
+            if (_icon is not null)
+            {
+                var raw = _icon.Raw;  
+                _native.SetWindowIcon(ref raw);
+            }
             onOpen();
         };
         _native.Closing += onClose;
