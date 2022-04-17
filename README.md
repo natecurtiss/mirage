@@ -82,7 +82,7 @@ var window = new Window("If you can read this you don't need glasses.", 1920, 10
 var keyboard = new Keyboard();
 var graphics = new Graphics();
 var camera = new Camera(window);
-new Game(window, keyboard, graphics, camera).Start();
+new Game(window, keyboard, graphics).Start();
 ``` 
 
 the `Renderer`, passing in the `Camera` and the `Window`...
@@ -92,7 +92,7 @@ var keyboard = new Keyboard();
 var graphics = new Graphics();
 var camera = new Camera(window);
 var renderer = new Renderer(camera, window);
-new Game(window, keyboard, graphics, camera, renderer).Start();
+new Game(window, keyboard, graphics, renderer).Start();
 ``` 
 
 and finally, the `World`, which contains all of the `Entities` in the `Game`. You'll need to pass in everything to this.
@@ -103,7 +103,7 @@ var graphics = new Graphics();
 var camera = new Camera(window);
 var renderer = new Renderer(camera, window);
 var world = new World(window, keyboard, graphics, camera, renderer);
-new Game(window, keyboard, graphics, camera, renderer, world).Start();
+new Game(world, window, keyboard, graphics, renderer).Start();
 ``` 
 
 Now if we run our application we should get a blank `Window` with a title and icon!
