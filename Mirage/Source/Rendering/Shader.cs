@@ -15,14 +15,14 @@ sealed class Shader : IDisposable
     /// Creates a new <see cref="Shader"/>.
     /// </summary>
     /// <param name="gl">The OpenGL instance provided by the <see cref="Graphics"/> object.</param>
-    /// <param name="vertexPath">The path to the vertex shader file.</param>
-    /// <param name="fragmentPath">The path to the fragment shader file.</param>
+    /// <param name="vertexSource">The vertex shader source code.</param>
+    /// <param name="fragmentSource">The fragment shader source code.</param>
     /// <exception cref="ShaderProgramFailedLinkException">Thrown if OpenGL fails to link the <see cref="Shader"/> program.</exception>
-    public Shader(GL gl, string vertexPath, string fragmentPath)
+    public Shader(GL gl, string vertexSource, string fragmentSource)
     {
         _gl = gl;
-        var vertex = Load(ShaderType.VertexShader, vertexPath);
-        var fragment = Load(ShaderType.FragmentShader, fragmentPath);
+        var vertex = Load(ShaderType.VertexShader, vertexSource);
+        var fragment = Load(ShaderType.FragmentShader, fragmentSource);
         _shader = _gl.CreateProgram();
         _gl.AttachShader(_shader, vertex);
         _gl.AttachShader(_shader, fragment);
@@ -109,9 +109,8 @@ sealed class Shader : IDisposable
         _gl.Uniform4(location, value.X, value.Y, value.Z, value.W);
     }
 
-    uint Load(ShaderType type, string path)
+    uint Load(ShaderType type, string source)
     {
-        var source = File.ReadAllText(path);
         var loaded = _gl.CreateShader(type);
         _gl.ShaderSource(loaded, source);
         _gl.CompileShader(loaded);
