@@ -5,7 +5,7 @@
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
         <RootNamespace>Mirage</RootNamespace>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <PackageVersion>0.9.9</PackageVersion>
+        <PackageVersion>1.0.0</PackageVersion>
         <Title>Mirage</Title>
         <Authors>Nate Curtiss</Authors>
         <Description>A small, 2D C# game engine written in 24 hours.</Description>

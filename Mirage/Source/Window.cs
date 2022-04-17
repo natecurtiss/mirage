@@ -24,8 +24,7 @@ public sealed class Window : IDisposable, Boundable
     public readonly int Height;
     
     readonly WindowOptions _options;
-    readonly Icon _default = new("Assets/Textures/logo_square.png".Find());
-    
+
     IWindow _native;
     readonly Icon _icon;
 
