@@ -133,7 +133,7 @@ class Player : Entity
     Console.WriteLine("The Game has started lol.");
   }
   
-  protected override void OnUpdate()
+  protected override void OnUpdate(float deltaTime)
   {
     Console.WriteLine("The Game has updated lmao.");
   }
@@ -173,7 +173,7 @@ We can then do stuff to this `Entity` by chaining a `World.OnAwake()` or `World.
 var world = new World(window, keyboard, graphics, camera, renderer)
   .Spawn<Enemy>(out var enemy)
   .Spawn<Player>(out var player)
-  .OnAwake() // Called after Enemy.OnAwake() and Player.OnAwake().
+  .OnAwake() =>  // Called after Enemy.OnAwake() and Player.OnAwake().
   {
     enemy.Target = player;
   };
@@ -187,7 +187,7 @@ Sometimes you'll want to pass in a lot of simple values, and something like
 ```cs
 var world = new World(window, keyboard, graphics, camera, renderer)
   .Spawn<Player>(out var player)
-  .OnAwake()
+  .OnAwake() => 
   {
     player.Speed = 1f;
     player.Jump = 5.5f;
