@@ -10,7 +10,7 @@
 
 Support me: https://www.patreon.com/n8dev
 
-Watch the devlog: https://youtube.con/n8dev
+Watch the devlog: https://youtu.be/hysfq_xJAw0
 
 Join my Discord server for help: https://discord.gg/f8B6WW7YrD
 
